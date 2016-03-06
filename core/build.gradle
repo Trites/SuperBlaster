@@ -1,11 +1,14 @@
 apply plugin: "java"
 
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.6
+//noinspection GroovyUntypedAccess,GroovyUntypedAccess
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 
 eclipse.project {
+    //noinspection GroovyResultOfAssignmentUsed
     name = appName + "-core"
 }

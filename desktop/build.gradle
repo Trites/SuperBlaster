@@ -1,23 +1,30 @@
 apply plugin: "java"
 
+//noinspection GroovyUnusedAssignment
 sourceCompatibility = 1.6
 sourceSets.main.java.srcDirs = [ "src/" ]
 
 project.ext.mainClassName = "com.mygdx.game.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../core/assets");
 
+//noinspection GroovyAssignabilityCheck
 task run(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName
-    classpath = sourceSets.main.runtimeClasspath
+  //noinspection GroovyUntypedAccess
+  classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
     workingDir = project.assetsDir
-    ignoreExitValue = true
+  //noinspection GroovyResultOfAssignmentUsed
+  ignoreExitValue = true
 }
 
 task dist(type: Jar) {
-    from files(sourceSets.main.output.classesDir)
-    from files(sourceSets.main.output.resourcesDir)
-    from {configurations.compile.collect {zipTree(it)}}
+    //noinspection GroovyUntypedAccess
+  from files(sourceSets.main.output.classesDir)
+  //noinspection GroovyUntypedAccess
+  from files(sourceSets.main.output.resourcesDir)
+    from {configurations.compile.collect {//noinspection GroovyUntypedAccess
+      zipTree(it)}}
     from files(project.assetsDir);
  
     manifest {
@@ -25,6 +32,7 @@ task dist(type: Jar) {
     }
 }
 
+//noinspection GroovyUntypedAccess
 dist.dependsOn classes
 
 eclipse {
@@ -37,10 +45,15 @@ eclipse {
 task afterEclipseImport(description: "Post processing after project generation", group: "IDE") {
   doLast {
     def classpath = new XmlParser().parse(file(".classpath"))
-    new Node(classpath, "classpathentry", [ kind: 'src', path: 'assets' ]);
+    //noinspection GroovyResultOfObjectAllocationIgnored,GroovyUntypedAccess
+      new Node(classpath, "classpathentry", [ kind: 'src', path: 'assets' ]);
+    //noinspection GroovyAssignabilityCheck
     def writer = new FileWriter(file(".classpath"))
+    //noinspection GroovyAssignabilityCheck
     def printer = new XmlNodePrinter(new PrintWriter(writer))
+    //noinspection GroovyUntypedAccess
     printer.setPreserveWhitespace(true)
+    //noinspection GroovyUntypedAccess,GroovyUntypedAccess
     printer.print(classpath)
   }
 }
