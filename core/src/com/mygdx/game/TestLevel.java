@@ -29,9 +29,9 @@ public class TestLevel extends PlayState
 
 
 
-	entity = new Entity(new Vector2(10, 10), new Vector2(1, 1), 0);
+	entity = new Entity(new Vector2(32, 32), new Vector2(1f, 1f), 0);
 
-	SpriteComponent sp = new SpriteComponent(entity, 0, Vector2.Zero, new Vector2(1, 1), 0, new Sprite(new Texture("badlogic.jpg")));
+	SpriteComponent sp = new SpriteComponent(entity, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("Player.png"));
 
 	renderManager.add(sp);
 	entity.addComponent(sp);

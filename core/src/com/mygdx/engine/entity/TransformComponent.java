@@ -18,9 +18,9 @@ public class TransformComponent
 	return position;
     }
 
-    public float getPositionX() { return position.x; }
+    public float getX() { return position.x; }
 
-    public float getPositionY() { return position.y; }
+    public float getY() { return position.y; }
 
     public void setPosition(final Vector2 position) {
 	this.position = position;

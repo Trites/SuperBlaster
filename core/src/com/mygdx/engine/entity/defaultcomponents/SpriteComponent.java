@@ -1,5 +1,6 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -13,25 +14,35 @@ public class SpriteComponent extends RenderComponent
     private float relativeRotation;
 
     private Sprite sprite;
+    private Vector2 textureSize;
 
     public SpriteComponent(final Entity entity, final int renderLayer, final Vector2 relativePosition,
-                           final Vector2 relativeScale, final float relativeRotation, final Sprite sprite)
+                           final Vector2 relativeScale, final float relativeRotation, final Texture texture)
     {
         super(entity, renderLayer);
         this.relativePosition = relativePosition;
         this.relativeScale = relativeScale;
         this.relativeRotation = relativeRotation;
-        this.sprite = sprite;
+
+
+        this.textureSize = new Vector2(texture.getWidth(), texture.getHeight());
+        this.sprite = new Sprite(texture);
+        this.sprite.setCenter(textureSize.x, textureSize.y);
+        this.sprite.setOriginCenter();
     }
 
     @Override
     public void update(final float deltaTime) {
 
-        sprite.setPosition(getEntity().getTransform().getPositionX() + relativePosition.x,
-                           getEntity().getTransform().getPositionY() + relativePosition.y);
-        sprite.setScale(getEntity().getTransform().getScaleX() + relativeScale.x,
-                        getEntity().getTransform().getScaleY() + relativeScale.y);
+        sprite.setCenter(getEntity().getTransform().getX() + relativePosition.x,
+                         getEntity().getTransform().getY() + relativePosition.y);
+
+        sprite.setScale(getEntity().getTransform().getScaleX() * relativeScale.x,
+                        getEntity().getTransform().getScaleY() * relativeScale.y);
+
         sprite.setRotation(getEntity().getTransform().getRotation() + relativeRotation);
+
+        sprite.setOriginCenter();
     }
 
     @Override
