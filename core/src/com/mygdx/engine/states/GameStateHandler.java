@@ -11,10 +11,12 @@ public class GameStateHandler
 
     public GameStateHandler(){
 
+	stateStack = new Stack<GameState>();
     }
 
     public void pushState(GameState state){
 
+	state.create();
 	stateStack.push(state);
     }
 
@@ -29,7 +31,7 @@ public class GameStateHandler
 	    stateStack.pop();
     }
 
-    public void update(float deltaTime){
+    public void update(final float deltaTime){
 
 	if(!stateStack.empty())
 	    stateStack.peek().update(deltaTime);

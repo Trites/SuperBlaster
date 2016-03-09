@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.engine.states.*;
 
@@ -11,19 +10,19 @@ import com.mygdx.engine.states.*;
  * Handles game loop
  */
 public class MainGame extends ApplicationAdapter {
-    public static final float STEP = 1 / 60f;
+    public static final float STEP = 1 / 60.0f;
    	private float accumulatedDelta = 0;
 
    	private SpriteBatch batch;
 
-   	GameStateHandler gameState;
+   	private GameStateHandler gameState;
 
    	@Override
    	public void create () {
    		batch = new SpriteBatch();
    		gameState = new GameStateHandler();
 
-	    	gameState.pushState(new Play(gameState));
+	    	gameState.pushState(new TestLevel(gameState));
 
    		System.out.println(batch.getBlendSrcFunc());
    		System.out.println(batch.getBlendDstFunc());

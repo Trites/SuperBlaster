@@ -7,7 +7,7 @@ public abstract class GameState {
 
     private GameStateHandler handler;
 
-    public GameState(GameStateHandler handler){
+    protected GameState(GameStateHandler handler){
 
 	this.handler = handler;
     }
@@ -18,6 +18,6 @@ public abstract class GameState {
     }
 
     public abstract void create();
-    public abstract void update(float deltaTime);
+    public abstract void update(final float deltaTime);
     public abstract void render(SpriteBatch batch);
 }

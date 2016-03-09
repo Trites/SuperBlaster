@@ -2,10 +2,10 @@ package com.mygdx.engine.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Play extends GameState
+public class PlayState extends GameState
 {
 
-    public Play(final GameStateHandler handler) {
+    public PlayState(final GameStateHandler handler) {
 	super(handler);
     }
 
@@ -16,7 +16,7 @@ public class Play extends GameState
     }
 
     @Override
-    public void update(float deltaTime) {
+    public void update(final float deltaTime) {
 
 
     }
