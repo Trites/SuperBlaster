@@ -14,7 +14,6 @@ public class SpriteComponent extends RenderComponent
     private float relativeRotation;
 
     private Sprite sprite;
-    private Vector2 textureSize;
 
     public SpriteComponent(final Entity entity, final int renderLayer, final Vector2 relativePosition,
                            final Vector2 relativeScale, final float relativeRotation, final Texture texture)
@@ -25,9 +24,7 @@ public class SpriteComponent extends RenderComponent
         this.relativeRotation = relativeRotation;
 
 
-        this.textureSize = new Vector2(texture.getWidth(), texture.getHeight());
         this.sprite = new Sprite(texture);
-        this.sprite.setCenter(textureSize.x, textureSize.y);
         this.sprite.setOriginCenter();
     }
 
