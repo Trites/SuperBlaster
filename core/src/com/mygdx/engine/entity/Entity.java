@@ -1,6 +1,8 @@
 package com.mygdx.engine.entity;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
+import com.mygdx.engine.events.Event;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +10,15 @@ import java.util.List;
 
 public class Entity
 {
+    public Event<CollisionComponent> collisionEvent;
+
     private Transform transform;
     private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what components exists in the entity
     private List<Component> components;	//ArrayList used for iterating through the components during update, ArrayList is faster for iteration that the valueset of the HashMap
 
     public Entity(Vector2 position, Vector2 scale, float rotation) {
 
+	collisionEvent = new Event<CollisionComponent>();
 	componentMap = new HashMap<Class<? extends Component>, ArrayList<Component>>();
 	components = new ArrayList<Component>();
     	transform = new Transform(position, scale, rotation);
@@ -79,5 +84,10 @@ public class Entity
 
     public Transform getTransform() {
 	return transform;
+    }
+
+    public void notifyCollision(CollisionComponent other){
+
+	collisionEvent.notify(other);
     }
 }

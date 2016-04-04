@@ -1,5 +1,7 @@
 package com.mygdx.engine.entity;
 
+import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
+
 public abstract class Component
 {
     private Entity entity;
@@ -9,6 +11,8 @@ public abstract class Component
     }
 
     public abstract void update(final float deltaTime);
+
+    public void collisionResponse(CollisionComponent other){}
 
     public Entity getEntity() {
         return entity;

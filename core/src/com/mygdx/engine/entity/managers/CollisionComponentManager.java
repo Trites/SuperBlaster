@@ -43,7 +43,10 @@ public class CollisionComponentManager
 
 			for(CollisionComponent other : collisionLayers.get(i) ){
 
-			    component.intersectVisit(other);
+			    if(component.intersectVisit(other)){
+
+				component.collisionResponse(other);
+			    }
 			}
 		    }
 		}

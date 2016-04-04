@@ -18,6 +18,9 @@ public class CircleCollider extends CollisionComponent
     @Override
     public boolean intersectVisit(final CollisionVisitor other) {
 
+	if(other == this)
+	    return false;
+
 	return other.intersects(this);
     }
 

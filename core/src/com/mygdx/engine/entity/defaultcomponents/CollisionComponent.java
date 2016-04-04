@@ -25,6 +25,10 @@ public abstract class CollisionComponent extends Component implements CollisionV
 	return collisionLayer;
     }
 
+    public void notifyCollision(CollisionComponent other){
+	
+    }
+
     public Vector2 getRelativePosition() {
 	return relativePosition;
     }
