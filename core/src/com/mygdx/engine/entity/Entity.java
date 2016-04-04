@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Entity
 {
-    private TransformComponent transform;
+    private Transform transform;
     private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what components exists in the entity
     private List<Component> components;	//ArrayList used for iterating through the components during update, ArrayList is faster for iteration that the valueset of the HashMap
 
@@ -16,7 +16,7 @@ public class Entity
 
 	componentMap = new HashMap<Class<? extends Component>, ArrayList<Component>>();
 	components = new ArrayList<Component>();
-    	transform = new TransformComponent(position, scale, rotation);
+    	transform = new Transform(position, scale, rotation);
     }
 
     public void update(final float deltaTime){
@@ -77,7 +77,7 @@ public class Entity
 	return null;
     }
 
-    public TransformComponent getTransform() {
+    public Transform getTransform() {
 	return transform;
     }
 }
