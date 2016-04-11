@@ -7,9 +7,13 @@ public class CircleCollider extends CollisionComponent
 {
     private float radius;
 
-    public CircleCollider(float radius, final Entity entity, final byte collisionLayer) {
+    public CircleCollider(final Entity entity, float radius, final byte collisionLayer) {
+	this(entity, radius, new Vector2(0,0), collisionLayer);
+    }
 
-	super(entity, collisionLayer);
+    public CircleCollider(final Entity entity, float radius, Vector2 relativePosition, final byte collisionLayer) {
+
+	super(entity, relativePosition, collisionLayer);
 
 	this.radius = radius;
     }
@@ -27,7 +31,7 @@ public class CircleCollider extends CollisionComponent
     @Override
     public boolean intersects(final CircleCollider other) {
 
-	return this.radius + other.radius >= Vector2.dst2(this.getTransform().getX() + this.relativePosition.x,
+	return this.radius + other.radius >= Vector2.dst(this.getTransform().getX() + this.relativePosition.x,
 				   		this.getTransform().getY() + this.relativePosition.y,
 				   		other.getTransform().getX() + other.relativePosition.x,
 				   		other.getTransform().getY() + other.relativePosition.y);

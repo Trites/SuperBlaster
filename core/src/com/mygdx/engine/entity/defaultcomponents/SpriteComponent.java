@@ -32,6 +32,12 @@ public class SpriteComponent extends RenderComponent
     @Override
     public void update(final float deltaTime) {
 
+    }
+
+    @Override
+    public void render(final SpriteBatch batch) {
+
+
         sprite.setCenter(getEntity().getTransform().getX() + relativePosition.x,
                          getEntity().getTransform().getY() + relativePosition.y);
 
@@ -41,11 +47,6 @@ public class SpriteComponent extends RenderComponent
         sprite.setRotation(getEntity().getTransform().getRotation() + relativeRotation);
 
         sprite.setOriginCenter();
-    }
-
-    @Override
-    public void render(final SpriteBatch batch) {
-
         sprite.draw(batch);
     }
 

@@ -45,7 +45,7 @@ public class MainGame extends ApplicationAdapter {
 
    			batch.begin();
    			gameState.render(batch);
-   			batch.end();
+
    		}
 
 

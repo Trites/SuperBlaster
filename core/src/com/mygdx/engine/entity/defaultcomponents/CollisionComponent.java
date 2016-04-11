@@ -10,9 +10,10 @@ public abstract class CollisionComponent extends Component implements CollisionV
 
     protected Vector2 relativePosition;
 
-    public CollisionComponent(final Entity entity, final int collisionLayer) {
+    public CollisionComponent(final Entity entity, Vector2 relativePosition, final int collisionLayer) {
 	super(entity);
 	this.collisionLayer = collisionLayer;
+	this.relativePosition = relativePosition;
     }
 
     @Override
@@ -26,7 +27,8 @@ public abstract class CollisionComponent extends Component implements CollisionV
     }
 
     public void notifyCollision(CollisionComponent other){
-	
+
+	this.getEntity().notifyCollision(other);
     }
 
     public Vector2 getRelativePosition() {
