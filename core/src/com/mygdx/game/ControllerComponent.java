@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
+import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
 public class ControllerComponent extends Behaviour
 {
@@ -21,6 +22,7 @@ public class ControllerComponent extends Behaviour
     public ControllerComponent(final Entity entity) {
 	super(entity);
 
+	requireComponent(RigidBody.class);
 	getEntity().collisionEvent.subscribe((x)->collisionEvent(x));
     }
 

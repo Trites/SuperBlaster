@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
+import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 import com.mygdx.engine.entity.managers.CollisionComponentManager;
 import com.mygdx.engine.entity.managers.RenderComponentManager;
@@ -59,6 +60,7 @@ public class TestLevel extends PlayState
 	entity.addComponent(sp1);
 	entity.addComponent(cc1);
 	entity.addComponent(new ControllerComponent(entity));
+	entity.addComponent(new RigidBody(entity, 10f));
 
 	entity2 = new Entity(new Vector2(300, 300), new Vector2(1f, 1f), 0);
 	SpriteComponent sp2 = new SpriteComponent(entity2, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("Player.png"));
@@ -68,6 +70,9 @@ public class TestLevel extends PlayState
 	collisionManager.add(cc2);
 	entity2.addComponent(sp2);
 	entity2.addComponent(cc2);
+
+	entity.start();
+	entity2.start();
     }
 
     @Override

@@ -24,6 +24,22 @@ public class Entity
     	transform = new Transform(position, scale, rotation);
     }
 
+    public void start(){
+
+	for(ArrayList<Component> components : componentMap.values()){
+	    for(Component component : components){
+
+		if(hasComponents(component.getRequieredComponents())){
+
+		    component.start();
+		}else{
+
+		    System.out.println("ERROR: Missing dependency!");
+		}
+	    }
+	}
+    }
+
     public void update(final float deltaTime){
 
 	for(Behaviour behaviour : behaviours){
@@ -65,6 +81,17 @@ public class Entity
 		componentMap.remove(componentType);
 	    }
 	}
+    }
+
+    public boolean hasComponents(List<Class<? extends Component>> types){
+
+	for(Class<? extends Component> type : types){
+
+	    if(!hasComponent(type))
+		return false;
+	}
+
+	return true;
     }
 
     public boolean hasComponent(Class<? extends Component> type){
