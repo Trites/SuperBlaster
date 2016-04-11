@@ -22,7 +22,7 @@ public class ControllerComponent extends Behaviour
     public ControllerComponent(final Entity entity) {
 	super(entity);
 
-	requireComponent(RigidBody.class);
+	getEntity().requireComponent(RigidBody.class);
 	getEntity().collisionEvent.subscribe((x)->collisionEvent(x));
     }
 
@@ -37,7 +37,6 @@ public class ControllerComponent extends Behaviour
 
     private void collisionEvent(CollisionComponent other){
 
-	System.out.println("Collide!");
     }
 
     protected void lookAt(Vector2 point){

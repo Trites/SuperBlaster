@@ -36,7 +36,7 @@ public class TestLevel extends PlayState
 
 	byte[] collisionMap = {
 
-		Byte.MAX_VALUE,
+		3,
 		Byte.MAX_VALUE,
 		0,
 		0,
@@ -62,7 +62,7 @@ public class TestLevel extends PlayState
 	entity.addComponent(new ControllerComponent(entity));
 	entity.addComponent(new RigidBody(entity, 10f));
 
-	entity2 = new Entity(new Vector2(300, 300), new Vector2(1f, 1f), 0);
+	entity2 = new Entity(new Vector2(300, 300), new Vector2(1f, 1f), 3);
 	SpriteComponent sp2 = new SpriteComponent(entity2, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("Player.png"));
 	CircleCollider cc2 = new CircleCollider(entity2, 30f, (byte)0);
 

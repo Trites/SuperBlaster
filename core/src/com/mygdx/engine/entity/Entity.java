@@ -6,6 +6,7 @@ import com.mygdx.engine.events.Event;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Entity
@@ -15,28 +16,28 @@ public class Entity
     private Transform transform;
     private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
     private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration that the valueset of the HashMap
+    private HashSet<Class<? extends Component>> requieredComponents;
 
     public Entity(Vector2 position, Vector2 scale, float rotation) {
+
+	transform = new Transform(position, scale, rotation);
 
 	collisionEvent = new Event<>();
 	componentMap = new HashMap<>();
 	behaviours = new ArrayList<>();
-    	transform = new Transform(position, scale, rotation);
+	requieredComponents = new HashSet<>();
     }
 
     public void start(){
 
-	for(ArrayList<Component> components : componentMap.values()){
-	    for(Component component : components){
+	if(hasComponents(new ArrayList<>(requieredComponents))){
 
-		if(hasComponents(component.getRequieredComponents())){
-
+	    for(List<Component> components : componentMap.values())
+		for(Component component : components)
 		    component.start();
-		}else{
+	}else{
 
-		    System.out.println("ERROR: Missing dependency!");
-		}
-	    }
+	    System.out.println("ERROR: Missing dependency!");
 	}
     }
 
@@ -126,5 +127,10 @@ public class Entity
     public void notifyCollision(CollisionComponent other){
 
 	collisionEvent.notify(other);
+    }
+
+    public void requireComponent(Class<? extends Component> type){
+
+	requieredComponents.add(type);
     }
 }
