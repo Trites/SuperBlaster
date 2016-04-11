@@ -30,11 +30,6 @@ public class SpriteComponent extends RenderComponent
     }
 
     @Override
-    public void update(final float deltaTime) {
-
-    }
-
-    @Override
     public void render(final SpriteBatch batch) {
 
 

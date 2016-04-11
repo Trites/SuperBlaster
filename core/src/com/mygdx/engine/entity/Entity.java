@@ -13,33 +13,43 @@ public class Entity
     public Event<CollisionComponent> collisionEvent;
 
     private Transform transform;
-    private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what components exists in the entity
-    private List<Component> components;	//ArrayList used for iterating through the components during update, ArrayList is faster for iteration that the valueset of the HashMap
+    private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
+    private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration that the valueset of the HashMap
 
     public Entity(Vector2 position, Vector2 scale, float rotation) {
 
-	collisionEvent = new Event<CollisionComponent>();
-	componentMap = new HashMap<Class<? extends Component>, ArrayList<Component>>();
-	components = new ArrayList<Component>();
+	collisionEvent = new Event<>();
+	componentMap = new HashMap<>();
+	behaviours = new ArrayList<>();
     	transform = new Transform(position, scale, rotation);
     }
 
     public void update(final float deltaTime){
 
-	for(Component component : components){
-	    component.update(deltaTime);
+	for(Behaviour behaviour : behaviours){
+	    behaviour.update(deltaTime);
 	}
+    }
+
+    public <T extends Behaviour> void addComponent(T behaviour){
+
+	behaviours.add(behaviour);
+	registerComponent(behaviour);
     }
 
     public <T extends Component> void addComponent(T component){
 
-	if(!hasComponent(component.getClass())){
+	registerComponent(component);
+    }
 
-	    componentMap.put(component.getClass(), new ArrayList<Component>());
-	}
+    private <T extends Component> void registerComponent(T component){
 
-	componentMap.get(component.getClass()).add(component);
-	components.add(component);
+    if(!hasComponent(component.getClass())){
+
+   	    componentMap.put(component.getClass(), new ArrayList<>());
+   	}
+
+   	componentMap.get(component.getClass()).add(component);
     }
 
     public void removeComponent(Component component){
@@ -72,7 +82,7 @@ public class Entity
 	return null;
     }
 
-    public <T extends Component> ArrayList<T> getComponents(Class<T> type){
+    public <T extends Component> ArrayList<T> getbehaviours(Class<T> type){
 
 	if(hasComponent(type)){
 	    if(!componentMap.get(type).isEmpty())

@@ -10,10 +10,6 @@ public abstract class Component
         this.entity = entity;
     }
 
-    public abstract void update(final float deltaTime);
-
-    public void collisionResponse(CollisionComponent other){}
-
     public Entity getEntity() {
         return entity;
     }

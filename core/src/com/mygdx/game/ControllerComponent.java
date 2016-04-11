@@ -3,12 +3,11 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.engine.entity.Component;
+import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
-import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 
-public class ControllerComponent extends Component
+public class ControllerComponent extends Behaviour
 {
 
     private static final float ACCELERATION = 2000f;

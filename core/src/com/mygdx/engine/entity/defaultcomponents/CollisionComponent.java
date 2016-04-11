@@ -16,12 +16,6 @@ public abstract class CollisionComponent extends Component implements CollisionV
 	this.relativePosition = relativePosition;
     }
 
-    @Override
-    public final void update(final float deltaTime) {
-
-	//TODO: collision handling that makes sense.
-    }
-
     public int getCollisionLayer() {
 	return collisionLayer;
     }
