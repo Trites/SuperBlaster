@@ -11,6 +11,7 @@ import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 import com.mygdx.engine.entity.managers.CollisionComponentManager;
 import com.mygdx.engine.entity.managers.RenderComponentManager;
+import com.mygdx.engine.entity.managers.RigidBodyManager;
 import com.mygdx.engine.states.GameStateHandler;
 import com.mygdx.engine.states.PlayState;
 
@@ -18,6 +19,8 @@ public class TestLevel extends PlayState
 {
     private CollisionComponentManager collisionManager;
     private RenderComponentManager renderManager;
+    private RigidBodyManager bodyManager;
+
     private Entity entity;
     private Entity entity2;
 
@@ -48,19 +51,22 @@ public class TestLevel extends PlayState
 
 	renderManager = new RenderComponentManager();
 	collisionManager = new CollisionComponentManager(collisionMap);
+	bodyManager = new RigidBodyManager();
 
 
 
 	entity = new Entity(new Vector2(32, 32), new Vector2(1f, 1f), 0);
 	SpriteComponent sp1 = new SpriteComponent(entity, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("Player.png"));
 	CircleCollider cc1 = new CircleCollider(entity, 30f, (byte)0);
+	RigidBody rb = new RigidBody(entity, 10f, 0.02f, 0f);
 
 	renderManager.add(sp1);
 	collisionManager.add(cc1);
+	bodyManager.add(rb);
 	entity.addComponent(sp1);
 	entity.addComponent(cc1);
 	entity.addComponent(new ControllerComponent(entity));
-	entity.addComponent(new RigidBody(entity, 10f));
+	entity.addComponent(rb);
 
 	entity2 = new Entity(new Vector2(300, 300), new Vector2(1f, 1f), 3);
 	SpriteComponent sp2 = new SpriteComponent(entity2, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("Player.png"));
@@ -82,6 +88,7 @@ public class TestLevel extends PlayState
 	entity.update(deltaTime);
 	entity2.update(deltaTime);
 
+	bodyManager.update(deltaTime);
 	collisionManager.update();
 
     }

@@ -15,9 +15,9 @@ public class ControllerComponent extends Behaviour
     private static final float MAX_VELOCITY = 400f;
     private static final float FRICTION = 0.02f;
 
-
-    private Vector2 velocity = Vector2.Zero;
     private Vector2 direction = Vector2.Zero;
+
+    private RigidBody body;
 
     public ControllerComponent(final Entity entity) {
 	super(entity);
@@ -27,11 +27,16 @@ public class ControllerComponent extends Behaviour
     }
 
     @Override
+    public void start() {
+	super.start();
+
+	body = getComponent(RigidBody.class);
+    }
+
+    @Override
     public void update(final float deltaTime) {
 
 	handleInput(deltaTime);
-	getTransform().setPosition(getTransform().getPosition().mulAdd(velocity, deltaTime));
-	velocity.lerp(new Vector2(0,0), FRICTION);
 
     }
 
@@ -71,11 +76,7 @@ public class ControllerComponent extends Behaviour
 
     private void accelerate(Vector2 direction, float deltaTime){
 
-        velocity.add(new Vector2(ACCELERATION * direction.x * deltaTime, ACCELERATION * direction.y * deltaTime));
-
-        if(velocity.len() > MAX_VELOCITY)
-            velocity.sub(new Vector2(velocity).nor().scl(velocity.len() - MAX_VELOCITY));
-
-        //System.out.println(velocity.len());
+	body.addVelocity(new Vector2(ACCELERATION * direction.x * deltaTime, ACCELERATION * direction.y * deltaTime));
+	body.limitVelocity(MAX_VELOCITY);
     }
 }

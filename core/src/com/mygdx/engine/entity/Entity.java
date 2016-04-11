@@ -110,7 +110,7 @@ public class Entity
 	return null;
     }
 
-    public <T extends Component> ArrayList<T> getbehaviours(Class<T> type){
+    public <T extends Component> ArrayList<T> getComponents(Class<T> type){
 
 	if(hasComponent(type)){
 	    if(!componentMap.get(type).isEmpty())

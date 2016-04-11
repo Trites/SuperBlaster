@@ -7,6 +7,7 @@ import com.mygdx.engine.entity.Entity;
 
 public class RigidBody extends Component
 {
+
     private float mass;
     private float linearDampening;
     private float angularDampening;
@@ -14,7 +15,7 @@ public class RigidBody extends Component
     private Vector2 velocity;
     private float angularVelocity;
 
-    public RigidBody(final Entity entity, float mass) {
+   public RigidBody(final Entity entity, float mass) {
 	this(entity, mass, 0f, 0f);
     }
 
@@ -22,6 +23,8 @@ public class RigidBody extends Component
 	super(entity);
 
 	this.mass = mass;
+	this.linearDampening = linearDampening;
+	this. angularDampening = angularDampening;
 
 	velocity = new Vector2(0,0);
 	angularVelocity = 0f;
@@ -44,6 +47,12 @@ public class RigidBody extends Component
     public void addVelocity(final Vector2 deltaV){
 
 	velocity.add(deltaV);
+    }
+
+    public void limitVelocity(final float maxVelocity){
+
+	if(velocity.len() > maxVelocity)
+	            velocity.sub(new Vector2(velocity).nor().scl(velocity.len() - maxVelocity));
     }
 
     public float getMass() {
