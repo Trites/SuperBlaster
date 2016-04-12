@@ -2,6 +2,7 @@ package com.mygdx.engine.entity;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
+import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.events.Event;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.List;
 
 public class Entity
 {
+    private World world;
+
     public Event<CollisionComponent> collisionEvent;
 
     private Transform transform;
@@ -18,14 +21,21 @@ public class Entity
     private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration that the valueset of the HashMap
     private HashSet<Class<? extends Component>> requieredComponents;
 
-    public Entity(Vector2 position, Vector2 scale, float rotation) {
+    public Entity(World world, Vector2 position, Vector2 scale, float rotation) {
+	this(world, new Transform(position, scale, rotation));
+    }
 
-	transform = new Transform(position, scale, rotation);
+
+    public Entity(World world, final Transform transform){
+
+	this.world = world;
+	this.transform = transform;
 
 	collisionEvent = new Event<>();
 	componentMap = new HashMap<>();
 	behaviours = new ArrayList<>();
 	requieredComponents = new HashSet<>();
+	world.add(this);
     }
 
     public void start(){
@@ -44,7 +54,10 @@ public class Entity
     public void update(final float deltaTime){
 
 	for(Behaviour behaviour : behaviours){
-	    behaviour.update(deltaTime);
+	    if(behaviour.isActive()){
+
+		behaviour.update(deltaTime);
+	    }
 	}
     }
 
@@ -54,8 +67,9 @@ public class Entity
 	registerComponent(behaviour);
     }
 
-    public <T extends Component> void addComponent(T component){
+    public <T extends ManagedComponent> void addComponent(T component){
 
+	component.register(world);
 	registerComponent(component);
     }
 
@@ -110,7 +124,7 @@ public class Entity
 	return null;
     }
 
-    public <T extends Component> ArrayList<T> getComponents(Class<T> type){
+    public <T extends Component> List<T> getComponents(Class<T> type){
 
 	if(hasComponent(type)){
 	    if(!componentMap.get(type).isEmpty())

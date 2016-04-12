@@ -1,10 +1,11 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.engine.entity.Component;
 import com.mygdx.engine.entity.Entity;
+import com.mygdx.engine.entity.ManagedComponent;
+import com.mygdx.engine.entity.managers.World;
 
-public abstract class CollisionComponent extends Component implements CollisionVisitor, CollisionElement
+public abstract class CollisionComponent extends ManagedComponent implements CollisionVisitor, CollisionElement
 {
     private int collisionLayer;
 
@@ -23,6 +24,12 @@ public abstract class CollisionComponent extends Component implements CollisionV
     public void notifyCollision(CollisionComponent other){
 
 	this.getEntity().notifyCollision(other);
+    }
+
+    @Override
+    public void register(final World world) {
+
+	world.registerComponent(this);
     }
 
     public Vector2 getRelativePosition() {

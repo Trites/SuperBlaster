@@ -7,7 +7,7 @@ import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionComponentManager
+public class CollisionManager
 {
     static final int LAYER_COUNT = 8; //Number of collision layers, tied to bits in a byte
 
@@ -15,7 +15,7 @@ public class CollisionComponentManager
     List<List<CollisionComponent>> collisionLayers;
 
 
-    public CollisionComponentManager(byte[] collisionMap) {
+    public CollisionManager(byte[] collisionMap) {
 
 	this.collisionMap = collisionMap;
 	collisionLayers = new ArrayList<>(LAYER_COUNT);
@@ -29,6 +29,12 @@ public class CollisionComponentManager
 	collisionLayers.get(element.getCollisionLayer()).add(element);
     }
 
+    public void add(List<CollisionComponent> components){
+
+	for(CollisionComponent component : components)
+	    add(component);
+    }
+
     public void remove(CollisionComponent element){
 
 	collisionLayers.get(element.getCollisionLayer()).remove(element);
@@ -39,16 +45,16 @@ public class CollisionComponentManager
 	for(List<CollisionComponent> layer : collisionLayers){
 	    for(CollisionComponent component : layer){
 
-		for(int i = 0; i < LAYER_COUNT; i++){
+		if(component.isActive()){
 
-		    if(((collisionMap[component.getCollisionLayer()] >> i) & 1) == 1){
+		    for(int i = 0; i < LAYER_COUNT; i++){
+			if(((collisionMap[component.getCollisionLayer()] >> i) & 1) == 1){
+			    for(CollisionComponent other : collisionLayers.get(i) ){
 
+				if(component.intersectVisit(other)){
 
-			for(CollisionComponent other : collisionLayers.get(i) ){
-
-			    if(component.intersectVisit(other)){
-
-				component.getEntity().notifyCollision(other);
+				    component.getEntity().notifyCollision(other);
+				}
 			    }
 			}
 		    }

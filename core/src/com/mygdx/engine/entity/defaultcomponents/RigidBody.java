@@ -2,10 +2,11 @@ package com.mygdx.engine.entity.defaultcomponents;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.engine.entity.Component;
 import com.mygdx.engine.entity.Entity;
+import com.mygdx.engine.entity.ManagedComponent;
+import com.mygdx.engine.entity.managers.World;
 
-public class RigidBody extends Component
+public class RigidBody extends ManagedComponent
 {
 
     private float mass;
@@ -53,6 +54,12 @@ public class RigidBody extends Component
 
 	if(velocity.len() > maxVelocity)
 	            velocity.sub(new Vector2(velocity).nor().scl(velocity.len() - maxVelocity));
+    }
+
+    @Override
+    public void register(final World world) {
+
+	world.registerComponent(this);
     }
 
     public float getMass() {

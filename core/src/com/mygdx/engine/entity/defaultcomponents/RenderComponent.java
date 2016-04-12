@@ -1,9 +1,10 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
-import com.mygdx.engine.entity.Component;
 import com.mygdx.engine.entity.Entity;
+import com.mygdx.engine.entity.ManagedComponent;
+import com.mygdx.engine.entity.managers.World;
 
-public abstract class RenderComponent extends Component implements Renderable, Comparable<RenderComponent>
+public abstract class RenderComponent extends ManagedComponent implements Renderable, Comparable<RenderComponent>
 {
 
     private int renderLayer;
@@ -11,6 +12,12 @@ public abstract class RenderComponent extends Component implements Renderable, C
     protected RenderComponent(final Entity entity, final int renderLayer) {
 	super(entity);
 	this.renderLayer = renderLayer;
+    }
+
+    @Override
+    public void register(final World world) {
+
+	world.registerComponent(this);
     }
 
     @Override

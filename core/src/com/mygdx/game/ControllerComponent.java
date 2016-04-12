@@ -37,7 +37,6 @@ public class ControllerComponent extends Behaviour
     public void update(final float deltaTime) {
 
 	handleInput(deltaTime);
-
     }
 
     private void collisionEvent(CollisionComponent other){

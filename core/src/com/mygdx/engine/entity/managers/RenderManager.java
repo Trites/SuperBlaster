@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RenderComponentManager implements Renderable
+public class RenderManager implements Manager<RenderComponent>, Renderable
 {
     private List<RenderComponent> renderables; //Most of the time will be spent iterating, therefor we accept O(n) insertion time.
 
-    public RenderComponentManager() {
+    public RenderManager() {
 
-	renderables = new ArrayList<RenderComponent>();
+	renderables = new ArrayList<>();
     }
 
-    public void add(RenderComponent renderable){
+    @Override
+    public void add(final RenderComponent renderable){
 
 	int index = Collections.binarySearch(renderables, renderable);
 
@@ -30,7 +31,16 @@ public class RenderComponentManager implements Renderable
 	}
     }
 
-    public void remove(RenderComponent renderable){
+    @Override
+    public void add(final List<RenderComponent> renderable){
+
+	for(RenderComponent component : renderable){
+	    add(component);
+	}
+    }
+
+    @Override
+    public void remove(final RenderComponent renderable){
 
 	renderables.remove(renderable);
     }

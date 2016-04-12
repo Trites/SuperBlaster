@@ -1,10 +1,13 @@
 package com.mygdx.engine.entity;
 
-public abstract class Behaviour extends Component
+public abstract class Behaviour extends Component implements Updatable
 {
     public Behaviour(final Entity entity) {
 	super(entity);
     }
 
-    public abstract void update(final float deltaTime);
+    @Override
+    public void destroy() {
+
+    }
 }
