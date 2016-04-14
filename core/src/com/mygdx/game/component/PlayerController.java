@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.component;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,7 +8,7 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
-public class ControllerComponent extends Behaviour
+public class PlayerController extends Behaviour
 {
 
     private static final float ACCELERATION = 2000f;
@@ -19,7 +19,7 @@ public class ControllerComponent extends Behaviour
 
     private RigidBody body;
 
-    public ControllerComponent(final Entity entity) {
+    public PlayerController(final Entity entity) {
 	super(entity);
 
 	getEntity().requireComponent(RigidBody.class);

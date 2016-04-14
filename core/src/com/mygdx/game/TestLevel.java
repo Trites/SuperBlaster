@@ -16,7 +16,7 @@ import com.mygdx.engine.entity.managers.RigidBodyManager;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.states.GameStateHandler;
 import com.mygdx.engine.states.PlayState;
-import com.mygdx.game.EntityBlueprints.PlayerEntity;
+import com.mygdx.game.factory.EntityFactory;
 
 public class TestLevel extends PlayState
 {
@@ -57,10 +57,8 @@ public class TestLevel extends PlayState
 	};
 
 	world = new World(collisionMap);
-	entity = new Entity(world, new Vector2(60,60), new Vector2(1,1), 0f);
-	entity.addComponent(new RigidBody(entity, 10f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Vector2(0,0), new Vector2(1,1), 0, new Texture("Player.png")));
-	entity.addComponent(new ControllerComponent(entity));
+
+	EntityFactory.BuildPlayer(world, new Transform(new Vector2(50,50), new Vector2(1,1), 0));
 
 	world.start();
     }
@@ -78,8 +76,8 @@ public class TestLevel extends PlayState
 
 	super.render(batch);
 	world.render(batch);
-
-
 	batch.end();
+
+	world.debugRender(debugRender);
     }
 }
