@@ -59,6 +59,7 @@ public class TestLevel extends PlayState
 	world = new World(collisionMap);
 
 	EntityFactory.BuildPlayer(world, new Transform(new Vector2(50,50), new Vector2(1,1), 0));
+	EntityFactory.BuildFollower(world, new Transform(new Vector2(300,300), new Vector2(1,1), 0));
 
 	world.start();
     }

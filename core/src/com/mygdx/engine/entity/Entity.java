@@ -16,6 +16,7 @@ public class Entity
 
     public Event<CollisionComponent> collisionEvent;
 
+    private String tag;
     private Transform transform;
     private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
     private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration that the valueset of the HashMap
@@ -30,6 +31,7 @@ public class Entity
 
 	this.world = world;
 	this.transform = transform;
+	this.tag = "";
 
 	collisionEvent = new Event<>();
 	componentMap = new HashMap<>();
@@ -134,6 +136,11 @@ public class Entity
 	return null;
     }
 
+    public List<Entity> findEntity(final String tag){
+
+	return world.findEntity(tag);
+    }
+
     public Transform getTransform() {
 	return transform;
     }
@@ -146,5 +153,15 @@ public class Entity
     public void requireComponent(Class<? extends Component> type){
 
 	requieredComponents.add(type);
+    }
+
+    public String getTag() {
+	return tag;
+    }
+
+    public void setTag(final String tag) {
+
+	world.updateTag(this, this.tag, tag);
+	this.tag = tag;
     }
 }

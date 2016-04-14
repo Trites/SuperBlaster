@@ -1,6 +1,10 @@
 package com.mygdx.engine.entity;
 
 
+import com.mygdx.engine.entity.managers.World;
+
+import java.util.List;
+
 public abstract class Component
 {
 
@@ -25,6 +29,8 @@ public abstract class Component
     public Transform getTransform() { return entity.getTransform(); }
 
     public <T extends Component> T getComponent(Class<T> type) { return entity.getComponent(type); }
+
+    protected List<Entity> findEntity(final String tag){ return entity.findEntity(tag); }
 
     public abstract void destroy();
 
