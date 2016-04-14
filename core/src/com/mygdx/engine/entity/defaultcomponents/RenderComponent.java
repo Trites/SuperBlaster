@@ -2,7 +2,7 @@ package com.mygdx.engine.entity.defaultcomponents;
 
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
-import com.mygdx.engine.entity.managers.World;
+import com.mygdx.engine.entity.managers.ComponentManager;
 
 public abstract class RenderComponent extends ManagedComponent implements Renderable, Comparable<RenderComponent>
 {
@@ -15,9 +15,15 @@ public abstract class RenderComponent extends ManagedComponent implements Render
     }
 
     @Override
-    public void register(final World world) {
+    public void register(final ComponentManager world) {
 
 	world.registerComponent(this);
+    }
+
+    @Override
+    public void deregister(final ComponentManager world) {
+
+	world.deregisterComponent(this);
     }
 
     @Override
@@ -27,16 +33,5 @@ public abstract class RenderComponent extends ManagedComponent implements Render
 	    return 1;
 
 	return -1;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-
-	if(obj.getClass() != this.getClass())
-	    return false;
-
-	RenderComponent other = (RenderComponent)obj;
-
-	return other.renderLayer == this.renderLayer;
     }
 }

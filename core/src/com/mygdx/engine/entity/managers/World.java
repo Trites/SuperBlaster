@@ -7,7 +7,7 @@ import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RenderComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
-public class World extends EntityManager
+public class World extends EntityManager implements ComponentManager
 {
     private CollisionManager collisionManager;
     private RigidBodyManager rigidBodyManager;
@@ -23,8 +23,9 @@ public class World extends EntityManager
 
     public void update(final float deltaTime){
 	super.update(deltaTime);
-	collisionManager.update();
+	collisionManager.update(deltaTime);
 	rigidBodyManager.update(deltaTime);
+	renderManager.update(deltaTime);
     }
 
     public void render(SpriteBatch batch){
@@ -37,18 +38,39 @@ public class World extends EntityManager
 	collisionManager.debugRender(renderer);
     }
 
+    @Override
     public void registerComponent(final RigidBody component){
 
 	rigidBodyManager.add(component);
     }
 
+    @Override
     public void registerComponent(final CollisionComponent component){
 
 	collisionManager.add(component);
     }
 
+    @Override
     public void registerComponent(final RenderComponent component){
 
 	renderManager.add(component);
+    }
+
+    @Override
+    public void deregisterComponent(final RigidBody component) {
+
+	rigidBodyManager.queueRemoval(component);
+    }
+
+    @Override
+    public void deregisterComponent(final CollisionComponent component) {
+
+	collisionManager.queueRemoval(component);
+    }
+
+    @Override
+    public void deregisterComponent(final RenderComponent component) {
+
+	renderManager.queueRemoval(component);
     }
 }

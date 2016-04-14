@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
+import com.mygdx.engine.entity.managers.ComponentManager;
 import com.mygdx.engine.entity.managers.World;
 
 public class RigidBody extends ManagedComponent
@@ -57,10 +58,16 @@ public class RigidBody extends ManagedComponent
     }
 
     @Override
-    public void register(final World world) {
+    public void register(final ComponentManager world) {
 
 	world.registerComponent(this);
     }
+
+    @Override
+     public void deregister(final ComponentManager world) {
+
+ 	world.deregisterComponent(this);
+     }
 
     public float getMass() {
 	return mass;

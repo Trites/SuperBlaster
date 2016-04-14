@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RenderManager implements Manager<RenderComponent>, Renderable
+public class RenderManager extends Manager<RenderComponent> implements Renderable
 {
     private List<RenderComponent> renderables; //Most of the time will be spent iterating, therefor we accept O(n) insertion time.
 

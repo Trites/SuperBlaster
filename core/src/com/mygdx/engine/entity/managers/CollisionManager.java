@@ -7,7 +7,7 @@ import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionManager
+public class CollisionManager extends Manager<CollisionComponent>
 {
     static final int LAYER_COUNT = 8; //Number of collision layers, tied to bits in a byte
 
@@ -24,23 +24,29 @@ public class CollisionManager
 	    collisionLayers.add(new ArrayList<>());
     }
 
+    @Override
     public void add(CollisionComponent element){
 
 	collisionLayers.get(element.getCollisionLayer()).add(element);
     }
 
+    @Override
     public void add(List<CollisionComponent> components){
 
 	for(CollisionComponent component : components)
 	    add(component);
     }
 
+    @Override
     public void remove(CollisionComponent element){
 
 	collisionLayers.get(element.getCollisionLayer()).remove(element);
     }
 
-    public void update(){
+    @Override
+    public void update(final float deltaTime){
+
+	super.update(deltaTime);
 
 	for(List<CollisionComponent> layer : collisionLayers){
 	    for(CollisionComponent component : layer){

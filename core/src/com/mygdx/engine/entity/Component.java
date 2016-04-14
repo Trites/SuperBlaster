@@ -1,6 +1,7 @@
 package com.mygdx.engine.entity;
 
 
+import com.mygdx.engine.entity.managers.ComponentManager;
 import com.mygdx.engine.entity.managers.World;
 
 import java.util.List;

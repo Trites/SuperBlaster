@@ -3,14 +3,16 @@ import com.mygdx.engine.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
+import java.util.Queue;
 
-public class EntityManager implements Manager<Entity>
+public class EntityManager extends Manager<Entity>
 {
     private List<Entity> entities;
     private HashMap<String, List<Entity>> tagMap;
+
+
 
     public EntityManager() {
 
@@ -26,6 +28,8 @@ public class EntityManager implements Manager<Entity>
 
     public void update(final float deltaTime){
 
+	super.update(deltaTime);
+
 	for(Entity entity : entities)
 	    entity.update(deltaTime);
     }
@@ -34,7 +38,7 @@ public class EntityManager implements Manager<Entity>
     public void add(final Entity entity) {
 
 	entities.add(entity);
-	addTag(entity, entity.getTag());
+	addEntityTag(entity, entity.getTag());
     }
 
     @Override
@@ -47,6 +51,7 @@ public class EntityManager implements Manager<Entity>
     @Override
     public void remove(final Entity entity) {
 
+	removeEntityTag(entity);
 	entities.remove(entity);
     }
 
@@ -55,7 +60,7 @@ public class EntityManager implements Manager<Entity>
 	return tagMap.get(tag);
     }
 
-    private void addTag(final Entity entity, final String tag){
+    private void addEntityTag(final Entity entity, final String tag){
 
 	if(tag != ""){
 
@@ -66,13 +71,21 @@ public class EntityManager implements Manager<Entity>
 	}
     }
 
-    public void updateTag(final Entity entity, final String oldTag, final String newTag){
+    private void removeEntityTag(final Entity entity){
+
+	if(tagMap.get(entity.getTag()) != null){
+
+	    tagMap.get(entity.getTag()).remove(entity);
+	}
+    }
+
+    public void updateTag(final Entity entity, final String oldTag){
 
 	if(tagMap.get(oldTag) != null){
 
 	    tagMap.get(oldTag).remove(entity);
 	}
 
-	addTag(entity, newTag);
+	addEntityTag(entity, entity.getTag());
     }
 }

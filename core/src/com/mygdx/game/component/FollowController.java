@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
+import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
 public class FollowController extends Behaviour
@@ -20,6 +21,8 @@ public class FollowController extends Behaviour
 
 	getEntity().requireComponent(RigidBody.class);
 	this.targetTag = targetTag;
+
+	getEntity().collisionEvent.subscribe((x)->collisionEvent(x));
     }
 
     @Override
@@ -46,5 +49,10 @@ public class FollowController extends Behaviour
 
 	body.addVelocity(new Vector2(ACCELERATION * direction.x * deltaTime, ACCELERATION * direction.y * deltaTime));
 	body.limitVelocity(MAX_VELOCITY);
+    }
+
+    public void collisionEvent(final CollisionComponent other){
+
+	getEntity().destroy();
     }
 }

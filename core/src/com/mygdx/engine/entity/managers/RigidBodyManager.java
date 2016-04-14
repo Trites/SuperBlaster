@@ -5,7 +5,7 @@ import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RigidBodyManager implements Manager<RigidBody>
+public class RigidBodyManager extends Manager<RigidBody>
 {
     private List<RigidBody> bodies;
 
@@ -14,7 +14,10 @@ public class RigidBodyManager implements Manager<RigidBody>
 	bodies = new ArrayList<>();
     }
 
+    @Override
     public void update(float deltaTime){
+
+	super.update(deltaTime);
 
 	for(RigidBody body : bodies){
 
