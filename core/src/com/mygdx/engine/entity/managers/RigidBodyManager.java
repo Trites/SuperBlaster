@@ -35,12 +35,6 @@ public class RigidBodyManager extends Manager<RigidBody>
     }
 
     @Override
-    public void add(final List<RigidBody> bodies) {
-
-	bodies.addAll(bodies);
-    }
-
-    @Override
     public void remove(RigidBody body){
 
 	bodies.remove(body);

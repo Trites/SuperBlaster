@@ -37,12 +37,13 @@ public class FollowController extends Behaviour
     public void update(final float deltaTime) {
 
 	lookAt(target.getPosition());
-	accelerate(new Vector2(target.getX() - getTransform().getX(), target.getY() - getTransform().getY()), deltaTime);
+	accelerate(getTransform().getForwardVector(), deltaTime);
+	//accelerate(new Vector2(target.getX() - getTransform().getX(), target.getY() - getTransform().getY()), deltaTime);
     }
 
     protected void lookAt(Vector2 point){
 
-        getEntity().getTransform().setRotation((float)(Math.atan2(getTransform().getPosition().y - point.y, getTransform().getPosition().x - point.x) * 180/Math.PI));
+        getEntity().getTransform().setRotation((float)(Math.atan2(point.y - getTransform().getPosition().y, point.x - getTransform().getPosition().x) * 180/Math.PI));
     }
 
     private void accelerate(Vector2 direction, float deltaTime){

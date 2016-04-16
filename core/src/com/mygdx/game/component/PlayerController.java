@@ -18,11 +18,13 @@ public class PlayerController extends Behaviour
     private Vector2 direction = Vector2.Zero;
 
     private RigidBody body;
+    private Cannon cannon;
 
     public PlayerController(final Entity entity) {
 	super(entity);
 
 	getEntity().requireComponent(RigidBody.class);
+	getEntity().requireComponent(Cannon.class);
 	getEntity().collisionEvent.subscribe((x)->collisionEvent(x));
     }
 
@@ -31,6 +33,8 @@ public class PlayerController extends Behaviour
 	super.start();
 
 	body = getComponent(RigidBody.class);
+	cannon = getComponent(Cannon.class);
+
     }
 
     @Override
@@ -45,7 +49,7 @@ public class PlayerController extends Behaviour
 
     protected void lookAt(Vector2 point){
 
-        getEntity().getTransform().setRotation((float)(Math.atan2(getTransform().getPosition().y - point.y, getTransform().getPosition().x - point.x) * 180/Math.PI));
+        getEntity().getTransform().setRotation((float)(Math.atan2(point.y - getTransform().getPosition().y, point.x - getTransform().getPosition().x) * 180/Math.PI));
     }
 
     private  void handleInput(float deltaTime){
@@ -69,6 +73,11 @@ public class PlayerController extends Behaviour
 
             direction.x = 1;
         }
+
+	if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+
+	    cannon.fire();
+	}
 
 	accelerate(direction.nor(), deltaTime);
     }

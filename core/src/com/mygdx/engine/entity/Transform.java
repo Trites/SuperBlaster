@@ -8,6 +8,10 @@ public class Transform
     private Vector2 scale;
     private float rotation;
 
+    public Transform(final Vector2 position) {
+	this(position, new Vector2(1, 1), 0);
+    }
+
     public Transform(final Vector2 position, final Vector2 scale, final float rotation) {
 	this.position = position;
 	this.rotation = rotation;
@@ -44,5 +48,10 @@ public class Transform
 
     public void setScale(final Vector2 scale) {
 	this.scale = scale;
+    }
+
+    public Vector2 getForwardVector(){
+
+	return new Vector2((float)Math.cos(rotation*(Math.PI/180)), (float)Math.sin(rotation*(Math.PI/180)));
     }
 }

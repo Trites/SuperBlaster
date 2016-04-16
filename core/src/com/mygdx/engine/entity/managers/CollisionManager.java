@@ -31,13 +31,6 @@ public class CollisionManager extends Manager<CollisionComponent>
     }
 
     @Override
-    public void add(List<CollisionComponent> components){
-
-	for(CollisionComponent component : components)
-	    add(component);
-    }
-
-    @Override
     public void remove(CollisionComponent element){
 
 	collisionLayers.get(element.getCollisionLayer()).remove(element);

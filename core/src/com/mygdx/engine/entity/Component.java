@@ -1,9 +1,5 @@
 package com.mygdx.engine.entity;
 
-
-import com.mygdx.engine.entity.managers.ComponentManager;
-import com.mygdx.engine.entity.managers.World;
-
 import java.util.List;
 
 public abstract class Component
@@ -33,7 +29,7 @@ public abstract class Component
 
     protected List<Entity> findEntity(final String tag){ return entity.findEntity(tag); }
 
-    public abstract void destroy();
+    public void destroy(){ active = false; }
 
     public boolean isActive() {
         return active;

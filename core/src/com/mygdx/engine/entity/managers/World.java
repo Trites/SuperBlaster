@@ -2,7 +2,6 @@ package com.mygdx.engine.entity.managers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RenderComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;

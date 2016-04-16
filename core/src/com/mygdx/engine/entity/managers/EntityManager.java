@@ -3,9 +3,7 @@ import com.mygdx.engine.entity.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class EntityManager extends Manager<Entity>
 {
@@ -22,8 +20,8 @@ public class EntityManager extends Manager<Entity>
 
     public void start(){
 
-	for(Entity entity : entities)
-	    entity.start();
+	//for(Entity entity : entities)
+	//    entity.start();
     }
 
     public void update(final float deltaTime){
@@ -35,21 +33,15 @@ public class EntityManager extends Manager<Entity>
     }
 
     @Override
-    public void add(final Entity entity) {
+    protected void add(final Entity entity) {
 
 	entities.add(entity);
 	addEntityTag(entity, entity.getTag());
+	entity.start();
     }
 
     @Override
-    public void add(final List<Entity> entities) {
-
-	for(final Entity entity : entities)
-	    add(entity);
-    }
-
-    @Override
-    public void remove(final Entity entity) {
+    protected void remove(final Entity entity) {
 
 	removeEntityTag(entity);
 	entities.remove(entity);

@@ -14,6 +14,7 @@ import com.mygdx.engine.entity.managers.EntityManager;
 import com.mygdx.engine.entity.managers.RenderManager;
 import com.mygdx.engine.entity.managers.RigidBodyManager;
 import com.mygdx.engine.entity.managers.World;
+import com.mygdx.engine.particle.ParticleSystem;
 import com.mygdx.engine.states.GameStateHandler;
 import com.mygdx.engine.states.PlayState;
 import com.mygdx.game.factory.EntityFactory;
@@ -32,6 +33,7 @@ public class TestLevel extends PlayState
     private EntityManager entityManager;
 
     World world;
+    ParticleSystem particleSystem;
 
     public TestLevel(final GameStateHandler handler) {
 	super(handler);
@@ -57,11 +59,15 @@ public class TestLevel extends PlayState
 	};
 
 	world = new World(collisionMap);
+	particleSystem = ParticleSystem.GetInstance();
+	particleSystem.add(new Vector2(0, 0));
+	particleSystem.add(new Vector2(150, 50));
+	particleSystem.add(new Vector2(250, 50));
 
 	EntityFactory.BuildPlayer(world, new Transform(new Vector2(50,50), new Vector2(1,1), 0));
 	EntityFactory.BuildFollower(world, new Transform(new Vector2(300,300), new Vector2(1,1), 0));
 
-	world.start();
+	//world.start();
     }
 
     @Override
@@ -69,6 +75,7 @@ public class TestLevel extends PlayState
 
 	super.update(deltaTime);
 	world.update(deltaTime);
+	particleSystem.update(deltaTime);
 
     }
 
@@ -77,8 +84,9 @@ public class TestLevel extends PlayState
 
 	super.render(batch);
 	world.render(batch);
+	particleSystem.render(batch);
 	batch.end();
 
-	world.debugRender(debugRender);
+	//world.debugRender(debugRender);
     }
 }

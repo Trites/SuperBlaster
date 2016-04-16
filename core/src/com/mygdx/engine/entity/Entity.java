@@ -38,7 +38,7 @@ public class Entity
 	componentMap = new HashMap<>();
 	behaviours = new ArrayList<>();
 	requieredComponents = new HashSet<>();
-	world.add(this);
+	world.queueAdd(this);
     }
 
     public void start(){
@@ -168,6 +168,11 @@ public class Entity
 
     }
 
+    public World getWorld(){
+
+	return world;
+    }
+
     public ComponentManager getComponentManager(){
 
 	return world;
@@ -182,6 +187,6 @@ public class Entity
 	    }
 	}
 
-	world.remove(this);
+	world.queueRemoval(this);
     }
 }

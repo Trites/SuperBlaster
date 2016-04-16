@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
-import com.mygdx.engine.events.EventListener;
 
 public class SpriteComponent extends RenderComponent
 {
@@ -15,6 +14,10 @@ public class SpriteComponent extends RenderComponent
     private float relativeRotation;
 
     private Sprite sprite;
+
+    public SpriteComponent(final Entity entity, final int renderLayer, Texture texture){
+        this(entity, renderLayer, new Vector2(0,0), new Vector2(1,1), 0, texture);
+    }
 
     public SpriteComponent(final Entity entity, final int renderLayer, final Vector2 relativePosition,
                            final Vector2 relativeScale, final float relativeRotation, final Texture texture)
@@ -31,7 +34,6 @@ public class SpriteComponent extends RenderComponent
 
     @Override
     public void render(final SpriteBatch batch) {
-
 
         sprite.setCenter(getEntity().getTransform().getX() + relativePosition.x,
                          getEntity().getTransform().getY() + relativePosition.y);

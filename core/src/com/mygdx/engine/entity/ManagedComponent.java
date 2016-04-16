@@ -16,6 +16,7 @@ public abstract class ManagedComponent extends Component
     @Override
     public void destroy() {
 
+        super.destroy();
         deregister(getEntity().getComponentManager());
     }
 }

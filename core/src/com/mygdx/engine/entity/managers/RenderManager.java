@@ -32,14 +32,6 @@ public class RenderManager extends Manager<RenderComponent> implements Renderabl
     }
 
     @Override
-    public void add(final List<RenderComponent> renderable){
-
-	for(RenderComponent component : renderable){
-	    add(component);
-	}
-    }
-
-    @Override
     public void remove(final RenderComponent renderable){
 
 	renderables.remove(renderable);
