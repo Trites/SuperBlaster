@@ -1,8 +1,8 @@
 package com.mygdx.engine.particle;
-
-import com.badlogic.gdx.math.Vector2;
+import com.mygdx.engine.entity.Transform;
 
 public interface ParticleBehaviour
 {
-    public boolean update(Vector2 position, Vector2 scale, Float rotation, final float deltaTime);
+    //public void start(final Vector2 spawnPosition);
+    public boolean update(Transform transform, ParticleData particleData, final float deltaTime);
 }

@@ -1,14 +1,10 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
-import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
-import com.mygdx.engine.entity.defaultcomponents.RigidBody;
-import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 import com.mygdx.engine.entity.managers.CollisionManager;
 import com.mygdx.engine.entity.managers.EntityManager;
 import com.mygdx.engine.entity.managers.RenderManager;
@@ -60,9 +56,11 @@ public class TestLevel extends PlayState
 
 	world = new World(collisionMap);
 	particleSystem = ParticleSystem.GetInstance();
-	particleSystem.add(new Vector2(0, 0));
-	particleSystem.add(new Vector2(150, 50));
-	particleSystem.add(new Vector2(250, 50));
+	particleSystem.addTexture("Plasma.png");
+	//particleSystem.spawn(new Vector2(0,0),  (x, y, z)->FragmentParticle.update(x, y, z));
+	//particleSystem.add(new Vector2(0, 0), );
+	//particleSystem.add(new Vector2(150, 50));
+	//particleSystem.add(new Vector2(250, 50));
 
 	EntityFactory.BuildPlayer(world, new Transform(new Vector2(50,50), new Vector2(1,1), 0));
 	EntityFactory.BuildFollower(world, new Transform(new Vector2(300,300), new Vector2(1,1), 0));

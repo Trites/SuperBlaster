@@ -1,8 +1,10 @@
 package com.mygdx.engine.particle;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.Renderable;
 
 public class Particle implements Renderable
@@ -10,23 +12,23 @@ public class Particle implements Renderable
 
     private boolean active;
     private Texture texture;
-    private Vector2 position;
     private Vector2 origin;
-    private Vector2 scale;
-    private Float rotation;
+
+    private Transform transform;
+    private ParticleData particleData;
 
     private ParticleBehaviour behaviour;
 
-    public void create(final Texture texture, final Vector2 position, final ParticleBehaviour behaviour){
-	this.create(texture, position, new Vector2(1, 1), 0f, behaviour);
+
+    public void create(final Texture texture, final Vector2 position, final Vector2 velocity, final float lifeTime, final ParticleBehaviour behaviour){
+	this.create(texture, new Transform(position, new Vector2(1,1), 0f), new ParticleData(velocity, Color.WHITE, lifeTime), behaviour);
     }
 
-    public void create(final Texture texture, final Vector2 position, final Vector2 scale, final float rotation, final ParticleBehaviour behaviour){
+    public void create(final Texture texture, final Transform transform, final ParticleData particleData, final ParticleBehaviour behaviour){
 
 	this.texture = texture;
-	this.position = position;
-	this.scale = scale;
-	this.rotation = rotation;
+	this.transform = transform;
+	this.particleData = particleData;
 	this.behaviour = behaviour;
 
 	this.active = true;
@@ -35,14 +37,15 @@ public class Particle implements Renderable
 
     public void update(final float deltaTime){
 
-	behaviour.update(position, scale, rotation, deltaTime);
+	active = behaviour.update(transform, particleData, deltaTime);
     }
 
     @Override
     public void render(final SpriteBatch batch) {
 
-	batch.draw(texture, position.x - origin.x, position.y - origin.y, origin.x, origin.y, texture.getWidth(), texture.getHeight(),
-		   scale.x, scale.y, rotation, 0, 0, texture.getWidth(), texture.getHeight(), false, false);
+	batch.setColor(particleData.getColor());
+	batch.draw(texture, transform.getX() - origin.x, transform.getY() - origin.y, origin.x, origin.y, texture.getWidth(), texture.getHeight(),
+		   transform.getScaleX(), transform.getScaleY(), transform.getRotation(), 0, 0, texture.getWidth(), texture.getHeight(), false, false);
     }
 
     public boolean isActive() {

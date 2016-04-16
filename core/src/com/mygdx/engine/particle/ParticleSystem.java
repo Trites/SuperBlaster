@@ -3,9 +3,12 @@ package com.mygdx.engine.particle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.generic.ObjectPool;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,10 +17,18 @@ public class ParticleSystem extends ObjectPool<Particle>
     private static ParticleSystem instance = null;
 
     List<Particle> particles;
+    HashMap<String, Texture> textureMap;
+
 
     private ParticleSystem(){
 
 	particles = new ArrayList<>();
+	textureMap = new HashMap<>();
+    }
+
+    public void addTexture(final String texture){
+
+	textureMap.put(texture, new Texture(texture));
     }
 
     public static ParticleSystem GetInstance(){
@@ -30,10 +41,10 @@ public class ParticleSystem extends ObjectPool<Particle>
 	return instance;
     }
 
-    public void add(Vector2 position){
+    public void spawn(String texture, Transform transform, ParticleData data, ParticleBehaviour behaviour){
 
 	Particle particle = Checkout();
-	particle.create(new Texture("Plasma.png"), position);
+	particle.create(textureMap.get(texture), transform, data, behaviour);
 	particles.add(particle);
     }
 

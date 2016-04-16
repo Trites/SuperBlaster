@@ -1,11 +1,15 @@
 package com.mygdx.game.component;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
+import com.mygdx.engine.particle.ParticleData;
+import com.mygdx.engine.particle.ParticleSystem;
+import com.mygdx.game.FragmentParticle;
 
 public class FollowController extends Behaviour
 {
@@ -53,6 +57,17 @@ public class FollowController extends Behaviour
     }
 
     public void collisionEvent(final CollisionComponent other){
+
+	for(int i = 0; i < 100; i++){
+
+	    float angle = (float)Math.random() * 360;
+	    float vel = ((float)Math.random() * 900) + 300;
+
+	    Transform transform = new Transform(new Vector2(getTransform().getPosition()), new Vector2(1, 1), angle);
+	    ParticleData data = new ParticleData(new Vector2(0, 0).mulAdd(transform.getForwardVector(), vel), Color.RED, 0.2f);
+
+	    ParticleSystem.GetInstance().spawn("Plasma.png", transform, data, (x, y, z)-> FragmentParticle.update(x, y, z));
+	}
 
 	getEntity().destroy();
     }
