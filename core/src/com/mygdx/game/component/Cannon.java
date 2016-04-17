@@ -1,10 +1,12 @@
 package com.mygdx.game.component;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
+import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 import com.mygdx.game.factory.EntityFactory;
 
 public class Cannon extends Behaviour
@@ -14,17 +16,17 @@ public class Cannon extends Behaviour
     private int supply = 1;
     private float cooldownTimer = 0;
 
+    private RigidBody body;
 
     public Cannon(final Entity entity) {
 	super(entity);
 
-	getEntity().requireComponent(RigidBody.class);
 	cooldownTimer = COOLDOWN_TIME;
     }
 
-    @Override public void start() {
+    @Override
+    public void start() {
 	super.start();
-
     }
 
     @Override
@@ -48,7 +50,9 @@ public class Cannon extends Behaviour
 	if(supply > 0){
 
 	    RigidBody projBody = EntityFactory.BasicProjectile(getEntity().getWorld(), new Transform(new Vector2(getTransform().getPosition()))).getComponent(RigidBody.class);
-	    projBody.addVelocity(new Vector2(0,0).mulAdd(getTransform().getForwardVector(), 2000));
+
+	    Vector2 forward = getTransform().getForwardVector();
+	    projBody.addVelocity(new Vector2(0,0).mulAdd(forward, 500));
 	    supply--;
 	}
     }

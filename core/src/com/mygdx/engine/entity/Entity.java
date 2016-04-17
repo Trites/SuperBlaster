@@ -17,6 +17,7 @@ public class Entity
 
     public Event<CollisionComponent> collisionEvent;
 
+    private boolean active;
     private String tag;
     private Transform transform;
     private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
@@ -33,6 +34,7 @@ public class Entity
 	this.world = world;
 	this.transform = transform;
 	this.tag = "";
+	this.active = false;
 
 	collisionEvent = new Event<>();
 	componentMap = new HashMap<>();
@@ -52,16 +54,28 @@ public class Entity
 
 	    System.out.println("ERROR: Missing dependency!");
 	}
+
+	active = true;
     }
 
     public void update(final float deltaTime){
 
-	for(Behaviour behaviour : behaviours){
+
+	for(int i = 0; i < behaviours.size(); i++){
+
+	    Behaviour behaviour = behaviours.get(i);
 	    if(behaviour.isActive()){
 
 		behaviour.update(deltaTime);
 	    }
 	}
+
+	/*for(Behaviour behaviour : behaviours){
+	    if(behaviour.isActive()){
+
+		behaviour.update(deltaTime);
+	    }
+	}*/
     }
 
     public <T extends Behaviour> void addComponent(T behaviour){
@@ -77,13 +91,15 @@ public class Entity
     }
 
     private <T extends Component> void registerComponent(T component){
-
     if(!hasComponent(component.getClass())){
 
    	    componentMap.put(component.getClass(), new ArrayList<>());
    	}
 
    	componentMap.get(component.getClass()).add(component);
+
+	if(active)
+	    component.start();
     }
 
     public void removeComponent(Component component){

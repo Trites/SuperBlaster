@@ -36,4 +36,8 @@ public class CircleCollider extends CollisionComponent
 				   		other.getTransform().getX() + other.relativePosition.x,
 				   		other.getTransform().getY() + other.relativePosition.y);
     }
+
+    public float getRadius() {
+	return radius;
+    }
 }

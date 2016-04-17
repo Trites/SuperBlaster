@@ -46,6 +46,7 @@ public class Particle implements Renderable
 	batch.setColor(particleData.getColor());
 	batch.draw(texture, transform.getX() - origin.x, transform.getY() - origin.y, origin.x, origin.y, texture.getWidth(), texture.getHeight(),
 		   transform.getScaleX(), transform.getScaleY(), transform.getRotation(), 0, 0, texture.getWidth(), texture.getHeight(), false, false);
+
     }
 
     public boolean isActive() {

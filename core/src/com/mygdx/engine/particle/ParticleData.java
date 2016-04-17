@@ -31,6 +31,8 @@ public class ParticleData
 	this.color = color;
     }
 
+    public void setAlpha(final float alpha) { this.color.set(color.r, color.g, color.b, alpha); }
+
     public float getLifeTime() {
 	return lifeTime;
     }

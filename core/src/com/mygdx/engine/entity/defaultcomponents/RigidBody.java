@@ -97,6 +97,10 @@ public class RigidBody extends ManagedComponent
 	return velocity;
     }
 
+    public Vector2 getDirection() { return new Vector2(velocity).nor(); }
+
+    public Vector2 getMomentum() { return new Vector2(velocity).scl(mass); }
+
     public void setVelocity(final Vector2 velocity) {
 	this.velocity = velocity;
     }

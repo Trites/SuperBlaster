@@ -23,12 +23,7 @@ public class MainGame extends ApplicationAdapter {
    		gameState = new GameStateHandler();
 
 	    	gameState.pushState(new TestLevel(gameState));
-
-   		System.out.println(batch.getBlendSrcFunc());
-   		System.out.println(batch.getBlendDstFunc());
    		batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-   		System.out.println(batch.getBlendSrcFunc());
-   		System.out.println(batch.getBlendDstFunc());
    	}
 
 

@@ -54,4 +54,9 @@ public class Transform
 
 	return new Vector2((float)Math.cos(rotation*(Math.PI/180)), (float)Math.sin(rotation*(Math.PI/180)));
     }
+
+    public void lookAt(final Vector2 point){
+
+	setRotation((float)(Math.atan2(point.y - getY(), point.x - getX()) * 180/Math.PI));
+    }
 }

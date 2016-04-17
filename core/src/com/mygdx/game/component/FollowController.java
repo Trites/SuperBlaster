@@ -2,14 +2,18 @@ package com.mygdx.game.component;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.kotcrab.vis.ui.widget.color.internal.VerticalChannelBar;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
+import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 import com.mygdx.engine.particle.ParticleData;
 import com.mygdx.engine.particle.ParticleSystem;
+import com.mygdx.engine.util.Util;
 import com.mygdx.game.FragmentParticle;
+import com.mygdx.game.factory.ParticleFactory;
 
 public class FollowController extends Behaviour
 {
@@ -40,14 +44,9 @@ public class FollowController extends Behaviour
     @Override
     public void update(final float deltaTime) {
 
-	lookAt(target.getPosition());
-	accelerate(getTransform().getForwardVector(), deltaTime);
+	getTransform().lookAt(target.getPosition());
+	//accelerate(getTransform().getForwardVector(), deltaTime);
 	//accelerate(new Vector2(target.getX() - getTransform().getX(), target.getY() - getTransform().getY()), deltaTime);
-    }
-
-    protected void lookAt(Vector2 point){
-
-        getEntity().getTransform().setRotation((float)(Math.atan2(point.y - getTransform().getPosition().y, point.x - getTransform().getPosition().x) * 180/Math.PI));
     }
 
     private void accelerate(Vector2 direction, float deltaTime){
@@ -58,17 +57,38 @@ public class FollowController extends Behaviour
 
     public void collisionEvent(final CollisionComponent other){
 
-	for(int i = 0; i < 100; i++){
 
-	    float angle = (float)Math.random() * 360;
-	    float vel = ((float)Math.random() * 900) + 300;
+	RigidBody otherBody = other.getComponent(RigidBody.class);
 
-	    Transform transform = new Transform(new Vector2(getTransform().getPosition()), new Vector2(1, 1), angle);
-	    ParticleData data = new ParticleData(new Vector2(0, 0).mulAdd(transform.getForwardVector(), vel), Color.RED, 0.2f);
+	/*float thisVel = body.getVelocity().len();
+	float otherVel = otherBody.getVelocity().len();
+	Vector2 thisDir = body.getDirection();
+	Vector2 otherDir = otherBody.getDirection();
 
-	    ParticleSystem.GetInstance().spawn("Plasma.png", transform, data, (x, y, z)-> FragmentParticle.update(x, y, z));
-	}
+	Vector2 line = new Vector2(other.getTransform().getPosition()).sub(getTransform().getPosition()).nor();
+
+	float a1 = new Vector2(thisDir).dot(line);
+	float a2 = new Vector2(otherDir).dot(line);
+
+	float p = (2f * (a2-a1))/(body.getMass() + otherBody.getMass());
+
+
+
+	Vector2 dv = new Vector2(line).scl(p*otherBody.getMass());
+
+	System.out.println(dv);
+
+	Vector2 v1 = new Vector2(body.getVelocity()).add(dv);
+
+	System.out.println(v1);
+	//body.setVelocity((new Vector2(body.getVelocity()).nor().add(dv)).scl(thisVel));*/
+
+	//Vector2 v1 = Util.getBounceVelocity(getTransform().getPosition(), other.getTransform().getPosition(),
+	//					body.getVelocity(), otherBody.getVelocity(), body.getMass(), otherBody.getMass());
+
+	ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), body.getVelocity(), otherBody, getComponent(SpriteComponent.class).getColor(), 50);
 
 	getEntity().destroy();
     }
+
 }

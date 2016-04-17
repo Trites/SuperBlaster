@@ -2,17 +2,19 @@ package com.mygdx.game.component;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
+import com.mygdx.game.factory.ParticleFactory;
 
 public class PlayerController extends Behaviour
 {
 
     private static final float ACCELERATION = 2000f;
-    private static final float MAX_VELOCITY = 400f;
+    private static final float MAX_VELOCITY = 600f;
     private static final float FRICTION = 0.02f;
 
     private Vector2 direction = Vector2.Zero;
@@ -45,16 +47,17 @@ public class PlayerController extends Behaviour
 
     private void collisionEvent(CollisionComponent other){
 
-    }
 
-    protected void lookAt(Vector2 point){
+	Vector2 dir = new Vector2(other.getComponent(RigidBody.class).getMomentum()).add(body.getMomentum());
 
-        getEntity().getTransform().setRotation((float)(Math.atan2(point.y - getTransform().getPosition().y, point.x - getTransform().getPosition().x) * 180/Math.PI));
+	//ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), dir, Color.FIREBRICK, 50);
+	//ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), dir, Color.YELLOW, 50);
+	getEntity().destroy();
     }
 
     private  void handleInput(float deltaTime){
 
-        lookAt(new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY()));
+        getTransform().lookAt(new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY()));
 
         direction = new Vector2(0,0);
 

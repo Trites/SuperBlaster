@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -44,9 +45,9 @@ public class TestLevel extends PlayState
 
 	byte[] collisionMap = {
 
-		3,
-		Byte.MAX_VALUE,
-		0,
+		2,
+		5,
+		2,
 		0,
 		0,
 		0,
@@ -68,6 +69,9 @@ public class TestLevel extends PlayState
 	//world.start();
     }
 
+    private static float SPAWN_DELAY = 1f;
+    private float spawnTimer = 0;
+
     @Override
     public void update(final float deltaTime) {
 
@@ -75,6 +79,16 @@ public class TestLevel extends PlayState
 	world.update(deltaTime);
 	particleSystem.update(deltaTime);
 
+	spawnTimer -= deltaTime;
+
+	if(spawnTimer < 0){
+
+	    spawnTimer = SPAWN_DELAY;
+	    float maxW = Gdx.graphics.getWidth() - 100;
+	    float maxH = Gdx.graphics.getHeight() - 100;
+
+	    world.queueAdd(EntityFactory.BuildFollower(world, new Transform(new Vector2((float) Math.random()*maxW + 100, (float) Math.random()*maxH + 100))));
+	}
     }
 
     @Override

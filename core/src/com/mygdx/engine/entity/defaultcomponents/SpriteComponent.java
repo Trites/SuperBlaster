@@ -1,5 +1,6 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -42,7 +43,6 @@ public class SpriteComponent extends RenderComponent
                         getEntity().getTransform().getScaleY() * relativeScale.y);
 
         sprite.setRotation(getEntity().getTransform().getRotation() + relativeRotation);
-
         sprite.setOriginCenter();
         sprite.draw(batch);
     }
@@ -70,4 +70,8 @@ public class SpriteComponent extends RenderComponent
     public void setRelativeRotation(final float relativeRotation) {
         this.relativeRotation = relativeRotation;
     }
+
+    public void setColor(final Color color) { sprite.setColor(color); }
+
+    public Color getColor() { return sprite.getColor(); }
 }
