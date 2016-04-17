@@ -1,6 +1,7 @@
 package com.mygdx.game.component;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.widget.color.internal.VerticalChannelBar;
 import com.mygdx.engine.entity.Behaviour;
@@ -59,16 +60,14 @@ public class FollowController extends Behaviour
     public void collisionEvent(final CollisionComponent other){
 
 
+	CircleCollider thisCircle = getComponent(CircleCollider.class);
 	RigidBody otherBody = other.getComponent(RigidBody.class);
 
 	float overlap = other.edgeDistance(getComponent(CircleCollider.class));
-
-	System.out.println(overlap);
 	Vector2 dirToOther = new Vector2(other.getTransform().getPosition()).sub(getTransform().getPosition()).nor();
-
 	Vector2 colPoint = new Vector2(other.getTransform().getPosition()).add(new Vector2(dirToOther).scl(-overlap));
 
-	ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), body.getVelocity(), colPoint,
+	ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), thisCircle.getRadius(), body.getVelocity(), colPoint,
 						 otherBody.getVelocity(), otherBody.getMass(), 50, 5,
 						 getComponent(SpriteComponent.class).getColor(), 50);
 

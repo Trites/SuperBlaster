@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7eaccb3e-21f1-4648-9df9-535fe35e204a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SuperBlaster.iws" afterPath="$PROJECT_DIR$/SuperBlaster.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/Entity.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/Entity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CircleCollider.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CircleCollider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CollisionVisitor.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CollisionVisitor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/engine/util/Util.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/engine/util/Util.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/component/Cannon.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/component/Cannon.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/component/FollowController.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/component/FollowController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/component/PlayerController.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/component/PlayerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/factory/EntityFactory.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/factory/EntityFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/mygdx/game/factory/ParticleFactory.java" afterPath="$PROJECT_DIR$/core/src/com/mygdx/game/factory/ParticleFactory.java" />
     </list>
     <ignored path="SuperBlaster.iws" />
@@ -79,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/component/FollowController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="66" selection-start-line="61" selection-start-column="66" selection-end-line="61" selection-end-column="66" />
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -125,14 +120,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CircleCollider.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CircleCollider.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CircleCollider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="128" selection-start-line="47" selection-start-column="128" selection-end-line="47" selection-end-column="128" />
+            <state vertical-scroll-proportion="0.31753555">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
-                <element signature="e#1629#1630#0" expanded="true" />
-                <element signature="e#1651#1652#0" expanded="true" />
+                <element signature="e#1368#1369#0" expanded="true" />
+                <element signature="e#1390#1391#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -148,21 +143,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParticleFactory.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/factory/ParticleFactory.java">
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/util/Util.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5165877">
-              <caret line="31" column="49" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CollisionManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/entity/managers/CollisionManager.java">
+      <file leaf-file-name="ParticleFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/factory/ParticleFactory.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="81" selection-start-line="54" selection-start-column="81" selection-end-line="54" selection-end-column="81" />
+              <caret line="29" column="80" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -172,7 +167,7 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/factory/EntityFactory.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <caret line="43" column="72" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -238,18 +233,18 @@
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/component/Projectile.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/RigidBody.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/TestLevel.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/util/Util.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/component/Cannon.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CollisionData.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/Entity.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/factory/EntityFactory.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/util/Circle.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CollisionElement.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CollisionVisitor.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/component/PlayerController.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CircleCollider.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/component/FollowController.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/factory/EntityFactory.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/factory/ParticleFactory.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/util/Util.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CircleCollider.java" />
       </list>
     </option>
   </component>
@@ -1310,14 +1305,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/util/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/component/Cannon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1358,14 +1345,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/factory/EntityFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CollisionComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1398,30 +1377,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CircleCollider.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/factory/EntityFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="128" selection-start-line="47" selection-start-column="128" selection-end-line="47" selection-end-column="128" />
-          <folding>
-            <element signature="e#1629#1630#0" expanded="true" />
-            <element signature="e#1651#1652#0" expanded="true" />
-          </folding>
+          <caret line="43" column="72" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/component/FollowController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="66" selection-start-line="61" selection-start-column="66" selection-end-line="61" selection-end-column="66" />
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/factory/ParticleFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5165877">
-          <caret line="31" column="49" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="80" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/util/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/engine/entity/defaultcomponents/CircleCollider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31753555">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="e#1368#1369#0" expanded="true" />
+            <element signature="e#1390#1391#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

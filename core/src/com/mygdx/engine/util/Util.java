@@ -15,19 +15,18 @@ public class Util
     public static Color shiftColor(final Color color, final float variation){
 
 	Vector3 direction = new Vector3((float)Math.random(), (float)Math.random(), (float)Math.random()).nor();
-
 	return shiftColor(color, direction, variation);
     }
 
     public static Color shiftColor(final Color color, final Vector3 direction, final float variation){
 
-	float colorDistance = (float)Math.random()*variation;
+	float colorDistance = (float)Math.random()*variation - variation/2f;
 	direction.scl(colorDistance);
 
 	Color newColor = new Color(color);
-	newColor.r =  clamp (newColor.r + direction.x, 0f, 1f);
-	newColor.g =  clamp (newColor.g + direction.y, 0f, 1f);
-	newColor.b =  clamp (newColor.b + direction.z, 0f, 1f);
+	newColor.r = clamp (newColor.r + direction.x, 0f, 1f);
+	newColor.g = clamp (newColor.g + direction.y, 0f, 1f);
+	newColor.b = clamp (newColor.b + direction.z, 0f, 1f);
 
 	return newColor;
     }

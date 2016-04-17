@@ -11,7 +11,7 @@ import com.mygdx.game.FragmentParticle;
 public class ParticleFactory
 {
 
-    public static void DirectionalDeathParticle(final Vector2 position, final Vector2 initVel, final Vector2 otherPos,
+    public static void DirectionalDeathParticle(final Vector2 position, final float spawnRadius, final Vector2 initVel, final Vector2 otherPos,
  						Vector2 otherVel, float otherMass, float particleMassSpan, float particleMassAdjust,
  						final Color color, final int count){
 
@@ -21,7 +21,7 @@ public class ParticleFactory
  	for(int i = 0; i < count; i++){
 
  	    float angle = angleStep*i;
- 	    float dist = ((float)Math.random() * 32);
+ 	    float dist = ((float)Math.random() * spawnRadius);
 
  	    Vector2 pos = new Vector2((float)Math.cos(angle)*dist, (float)Math.sin(angle)*dist).add(position);
  	    Vector2 vel = Util.getBounceVelocity(pos, otherPos, initVel, otherVel, (float)Math.random()*particleMassSpan + particleMassAdjust, otherMass);
