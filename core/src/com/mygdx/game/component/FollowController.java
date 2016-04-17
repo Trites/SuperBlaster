@@ -6,6 +6,7 @@ import com.kotcrab.vis.ui.widget.color.internal.VerticalChannelBar;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
+import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
@@ -45,7 +46,7 @@ public class FollowController extends Behaviour
     public void update(final float deltaTime) {
 
 	getTransform().lookAt(target.getPosition());
-	//accelerate(getTransform().getForwardVector(), deltaTime);
+	accelerate(getTransform().getForwardVector(), deltaTime);
 	//accelerate(new Vector2(target.getX() - getTransform().getX(), target.getY() - getTransform().getY()), deltaTime);
     }
 
@@ -60,33 +61,16 @@ public class FollowController extends Behaviour
 
 	RigidBody otherBody = other.getComponent(RigidBody.class);
 
-	/*float thisVel = body.getVelocity().len();
-	float otherVel = otherBody.getVelocity().len();
-	Vector2 thisDir = body.getDirection();
-	Vector2 otherDir = otherBody.getDirection();
+	float overlap = other.edgeDistance(getComponent(CircleCollider.class));
 
-	Vector2 line = new Vector2(other.getTransform().getPosition()).sub(getTransform().getPosition()).nor();
+	System.out.println(overlap);
+	Vector2 dirToOther = new Vector2(other.getTransform().getPosition()).sub(getTransform().getPosition()).nor();
 
-	float a1 = new Vector2(thisDir).dot(line);
-	float a2 = new Vector2(otherDir).dot(line);
+	Vector2 colPoint = new Vector2(other.getTransform().getPosition()).add(new Vector2(dirToOther).scl(-overlap));
 
-	float p = (2f * (a2-a1))/(body.getMass() + otherBody.getMass());
-
-
-
-	Vector2 dv = new Vector2(line).scl(p*otherBody.getMass());
-
-	System.out.println(dv);
-
-	Vector2 v1 = new Vector2(body.getVelocity()).add(dv);
-
-	System.out.println(v1);
-	//body.setVelocity((new Vector2(body.getVelocity()).nor().add(dv)).scl(thisVel));*/
-
-	//Vector2 v1 = Util.getBounceVelocity(getTransform().getPosition(), other.getTransform().getPosition(),
-	//					body.getVelocity(), otherBody.getVelocity(), body.getMass(), otherBody.getMass());
-
-	ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), body.getVelocity(), otherBody, getComponent(SpriteComponent.class).getColor(), 50);
+	ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), body.getVelocity(), colPoint,
+						 otherBody.getVelocity(), otherBody.getMass(), 50, 5,
+						 getComponent(SpriteComponent.class).getColor(), 50);
 
 	getEntity().destroy();
     }

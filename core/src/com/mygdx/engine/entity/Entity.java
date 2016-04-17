@@ -162,9 +162,9 @@ public class Entity
 	return transform;
     }
 
-    public void notifyCollision(CollisionComponent other){
+    public void notifyCollision(CollisionComponent data){
 
-	collisionEvent.notify(other);
+	collisionEvent.notify(data);
     }
 
     public void requireComponent(Class<? extends Component> type){

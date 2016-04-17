@@ -47,10 +47,9 @@ public class PlayerController extends Behaviour
 
     private void collisionEvent(CollisionComponent other){
 
+	RigidBody otherBody = other.getComponent(RigidBody.class);
 
-	Vector2 dir = new Vector2(other.getComponent(RigidBody.class).getMomentum()).add(body.getMomentum());
-
-	//ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), dir, Color.FIREBRICK, 50);
+	//ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), body.getVelocity(), otherBody, Color.FIREBRICK, 50);
 	//ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), dir, Color.YELLOW, 50);
 	getEntity().destroy();
     }

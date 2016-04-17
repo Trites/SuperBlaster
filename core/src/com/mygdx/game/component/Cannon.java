@@ -52,7 +52,7 @@ public class Cannon extends Behaviour
 	    RigidBody projBody = EntityFactory.BasicProjectile(getEntity().getWorld(), new Transform(new Vector2(getTransform().getPosition()))).getComponent(RigidBody.class);
 
 	    Vector2 forward = getTransform().getForwardVector();
-	    projBody.addVelocity(new Vector2(0,0).mulAdd(forward, 500));
+	    projBody.addVelocity(new Vector2(0,0).mulAdd(forward, 1200));
 	    supply--;
 	}
     }

@@ -31,13 +31,25 @@ public class CircleCollider extends CollisionComponent
     @Override
     public boolean intersects(final CircleCollider other) {
 
-	return this.radius + other.radius >= Vector2.dst(this.getTransform().getX() + this.relativePosition.x,
+	return radius + other.radius >= Vector2.dst(this.getTransform().getX() + this.relativePosition.x,
 				   		this.getTransform().getY() + this.relativePosition.y,
 				   		other.getTransform().getX() + other.relativePosition.x,
 				   		other.getTransform().getY() + other.relativePosition.y);
     }
 
+    @Override
+    public float edgeDistance(final CircleCollider other){
+
+	/*return Vector2.dst(this.getTransform().getX() + this.relativePosition.x,
+			   this.getTransform().getY() + this.relativePosition.y,
+			   other.getTransform().getX() + other.relativePosition.x,
+			   other.getTransform().getY() + other.relativePosition.y) - (this.radius + other.radius);*/
+
+	return new Vector2(getTransform().getPosition()).sub(other.getTransform().getPosition()).len() - (radius + other.radius);
+    }
+
     public float getRadius() {
 	return radius;
     }
+
 }

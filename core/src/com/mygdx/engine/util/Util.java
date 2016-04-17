@@ -41,13 +41,13 @@ public class Util
     						final float massA, final float massB){
 
 
-	Vector2 dirA = new Vector2(velA).nor();
-	Vector2 dirB = new Vector2(velB).nor();
+	//Vector2 dirA = new Vector2(velA).nor();
+	//Vector2 dirB = new Vector2(velB).nor();
 
 	Vector2 line = new Vector2(posB).sub(posA).nor();
 
-	float a1 = new Vector2(dirA).dot(line);
-	float a2 = new Vector2(dirB).dot(line);
+	float a1 = new Vector2(velA).dot(line);
+	float a2 = new Vector2(velB).dot(line);
 
 	float p = (2f * (a2-a1))/(massA + massB);
 
