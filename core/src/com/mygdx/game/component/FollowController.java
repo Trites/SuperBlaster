@@ -47,7 +47,7 @@ public class FollowController extends Behaviour
     public void update(final float deltaTime) {
 
 	getTransform().lookAt(target.getPosition());
-	accelerate(getTransform().getForwardVector(), deltaTime);
+	//accelerate(getTransform().getForwardVector(), deltaTime);
 	//accelerate(new Vector2(target.getX() - getTransform().getX(), target.getY() - getTransform().getY()), deltaTime);
     }
 

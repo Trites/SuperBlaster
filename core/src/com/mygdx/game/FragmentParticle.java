@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.particle.ParticleData;
@@ -17,10 +16,11 @@ public class FragmentParticle
 
 	}else{
 
+
+	    //particleData.setAlpha(particleData.getColor().a - 4*deltaTime);
 	    particleData.updateLifeTime(deltaTime);
 	    particleData.setAlpha((float)Math.random());
 	}
-
 
 	particleData.getVelocity().lerp(new Vector2(0,0), 0.08f);
 	return particleData.getLifeTime() > 0;

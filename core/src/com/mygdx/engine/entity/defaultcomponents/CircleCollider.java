@@ -41,8 +41,6 @@ public class CircleCollider extends CollisionComponent
 			   this.getTransform().getY() + this.relativePosition.y,
 			   other.getTransform().getX() + other.relativePosition.x,
 			   other.getTransform().getY() + other.relativePosition.y) - (this.radius + other.radius);
-
-	//return new Vector2(getTransform().getPosition()).sub(other.getTransform().getPosition()).len() - (radius + other.radius);
     }
 
     public float getRadius() {
