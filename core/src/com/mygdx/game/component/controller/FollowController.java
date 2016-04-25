@@ -1,9 +1,6 @@
-package com.mygdx.game.component;
+package com.mygdx.game.component.controller;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
-import com.kotcrab.vis.ui.widget.color.internal.VerticalChannelBar;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
@@ -11,10 +8,8 @@ import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
-import com.mygdx.engine.particle.ParticleData;
-import com.mygdx.engine.particle.ParticleSystem;
-import com.mygdx.engine.util.Util;
-import com.mygdx.game.FragmentParticle;
+import com.mygdx.engine.events.EventListener;
+import com.mygdx.engine.util.CameraEffects;
 import com.mygdx.game.factory.ParticleFactory;
 
 public class FollowController extends Behaviour
@@ -24,6 +19,8 @@ public class FollowController extends Behaviour
 
     private RigidBody body;
     private String targetTag;
+
+    private Entity targetEntity;
     private Transform target;
 
     public FollowController(final Entity entity, String targetTag) {
@@ -40,14 +37,18 @@ public class FollowController extends Behaviour
 	super.start();
 
 	body = getComponent(RigidBody.class);
-	target = findEntity(targetTag).get(0).getTransform();
+
+	targetEntity = findEntity(targetTag).get(0);
+	target = targetEntity.getTransform();
+
+
     }
 
     @Override
     public void update(final float deltaTime) {
 
 	getTransform().lookAt(target.getPosition());
-	//accelerate(getTransform().getForwardVector(), deltaTime);
+	accelerate(getTransform().getForwardVector(), deltaTime);
 	//accelerate(new Vector2(target.getX() - getTransform().getX(), target.getY() - getTransform().getY()), deltaTime);
     }
 
@@ -71,7 +72,7 @@ public class FollowController extends Behaviour
 						 otherBody.getVelocity(), otherBody.getMass(), 50, 5,
 						 getComponent(SpriteComponent.class).getColor(), 50);
 
+	CameraEffects.CameraShake(10f, 0.5f);
 	getEntity().destroy();
     }
-
 }

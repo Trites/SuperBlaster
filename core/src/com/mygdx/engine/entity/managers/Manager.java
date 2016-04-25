@@ -1,12 +1,9 @@
 package com.mygdx.engine.entity.managers;
 
-import com.mygdx.engine.entity.Entity;
-
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
-public abstract class Manager<T>
+public abstract class Manager<T extends Destroyable>
 {
 
     private Queue<T> addQueue;
@@ -45,7 +42,10 @@ public abstract class Manager<T>
 
     private void applyRemoveQueue(){
 
-        while(!removeQueue.isEmpty())
+        while(!removeQueue.isEmpty()){
+
+            removeQueue.peek().destroyImmediate();
             remove(removeQueue.remove());
+        }
     }
 }

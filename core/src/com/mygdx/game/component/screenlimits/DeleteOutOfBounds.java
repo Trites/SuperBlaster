@@ -1,4 +1,4 @@
-package com.mygdx.game.component;
+package com.mygdx.game.component.screenlimits;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.engine.entity.Behaviour;

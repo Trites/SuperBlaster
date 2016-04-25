@@ -1,4 +1,4 @@
-package com.mygdx.game.component;
+package com.mygdx.game.component.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,9 +6,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
+import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
-import com.mygdx.engine.util.Physics;
+import com.mygdx.engine.events.Event;
+import com.mygdx.engine.util.CameraEffects;
 import com.mygdx.game.factory.ParticleFactory;
 
 public class PlayerController extends Behaviour
@@ -16,7 +18,8 @@ public class PlayerController extends Behaviour
 
     private static final float ACCELERATION = 2000f;
     private static final float MAX_VELOCITY = 600f;
-    private static final float FRICTION = 0.02f;
+
+    public Event<Transform> playerDeathEvent;
 
     private Vector2 direction = Vector2.Zero;
 
@@ -25,6 +28,8 @@ public class PlayerController extends Behaviour
 
     public PlayerController(final Entity entity) {
 	super(entity);
+
+	playerDeathEvent = new Event<>();
 
 	getEntity().requireComponent(RigidBody.class);
 	getEntity().requireComponent(Cannon.class);
@@ -51,8 +56,11 @@ public class PlayerController extends Behaviour
 
 	RigidBody otherBody = other.getComponent(RigidBody.class);
 
-	//ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), body.getVelocity(), otherBody, Color.FIREBRICK, 50);
-	//ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), dir, Color.YELLOW, 50);
+	playerDeathEvent.notify(getTransform());
+
+	ParticleFactory.CircularDeathParticle(getTransform().getPosition(), Color.YELLOW, 500);
+
+	CameraEffects.CameraShake(20f, 2f);
 	getEntity().destroy();
     }
 

@@ -6,7 +6,7 @@ import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.particle.ParticleData;
 import com.mygdx.engine.particle.ParticleSystem;
 import com.mygdx.engine.util.Util;
-import com.mygdx.game.FragmentParticle;
+import com.mygdx.game.particlebehaviour.FragmentParticle;
 
 public class ParticleFactory
 {
@@ -43,11 +43,11 @@ public class ParticleFactory
 	for(int i = 0; i < count; i++){
 
 	    float angle = angleStep*i;
-	    float vel = ((float)Math.random() * 600) + 150;
+	    float vel = ((float)Math.random() * 1500) + 150;
 
 	    Transform transform = new Transform(new Vector2(position), new Vector2(1, 1), angle);
 
-	    ParticleData data = new ParticleData(new Vector2(0, 0).mulAdd(transform.getForwardVector(), vel), Util.shiftColor(color, 0.1f), 0.2f);
+	    ParticleData data = new ParticleData(new Vector2(0, 0).mulAdd(transform.getForwardVector(), vel), Util.shiftColor(color, 1f), 2f);
 	    transform.lookAt(new Vector2(position).mulAdd(transform.getForwardVector(), -1));
 	    transform.setRotation(transform.getRotation() + 45);
 

@@ -10,7 +10,6 @@ public class World extends EntityManager implements ComponentManager
 {
     private CollisionManager collisionManager;
     private RigidBodyManager rigidBodyManager;
-
     private RenderManager renderManager;
 
     public World(byte[] collisionMap) {

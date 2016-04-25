@@ -1,17 +1,16 @@
-package com.mygdx.game.component;
+package com.mygdx.game.component.controller;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
-import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 import com.mygdx.game.factory.EntityFactory;
 
 public class Cannon extends Behaviour
 {
     private static float COOLDOWN_TIME = 0.1f;
+    private static float ACCURACY = 0.97f;
 
     private int supply = 1;
     private float cooldownTimer = 0;
@@ -52,6 +51,9 @@ public class Cannon extends Behaviour
 	    RigidBody projBody = EntityFactory.BasicProjectile(getEntity().getWorld(), new Transform(new Vector2(getTransform().getPosition()))).getComponent(RigidBody.class);
 
 	    Vector2 forward = getTransform().getForwardVector();
+	    float angle = (float)(Math.atan2(forward.y, forward.x) + (Math.random() * (1 - ACCURACY) * 2*Math.PI - (1 - ACCURACY) * Math.PI));
+	    forward = new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
+
 	    projBody.addVelocity(new Vector2(0,0).mulAdd(forward, 1200));
 	    supply--;
 	}

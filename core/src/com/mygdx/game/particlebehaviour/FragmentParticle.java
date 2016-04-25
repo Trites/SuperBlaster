@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.particlebehaviour;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
@@ -10,16 +10,17 @@ public class FragmentParticle
 
 	transform.getPosition().mulAdd(particleData.getVelocity(), deltaTime);
 
-	if(particleData.getVelocity().len() > 10){
-
-	    //particleData.setColor(new Color(particleData.getVelocity().len()/100f, 0f, 1f - particleData.getVelocity().len()/100f, 1f));
-
-	}else{
 
 
-	    //particleData.setAlpha(particleData.getColor().a - 4*deltaTime);
+	if(particleData.getVelocity().len() < 10){
+
+
 	    particleData.updateLifeTime(deltaTime);
-	    particleData.setAlpha((float)Math.random());
+
+	    if(particleData.getLifeTime() <= 0.2f){
+
+		particleData.setAlpha((float)Math.random());
+	    }
 	}
 
 	particleData.getVelocity().lerp(new Vector2(0,0), 0.08f);

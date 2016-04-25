@@ -41,7 +41,32 @@ public class CollisionManager extends Manager<CollisionComponent>
 
 	super.update(deltaTime);
 
-	for(List<CollisionComponent> layer : collisionLayers){
+	for(int i = 0; i < LAYER_COUNT; i++){
+
+	    for(CollisionComponent component : collisionLayers.get(i)){
+
+		if(component.isActive()){
+
+		    for(int j = i; j < LAYER_COUNT; j++){
+
+			if(((collisionMap[component.getCollisionLayer()] >> j) & 1) == 1){ //If component collides with layer j
+
+			    for(CollisionComponent other : collisionLayers.get(j) ){
+
+				if(other.isActive() && component.intersectVisit(other)){
+
+				    component.getEntity().notifyCollision(other);
+				    other.getEntity().notifyCollision(component);
+				}
+			    }
+			}
+		    }
+
+		}
+	    }
+	}
+
+	/*for(List<CollisionComponent> layer : collisionLayers){
 	    for(CollisionComponent component : layer){
 
 		if(component.isActive()){
@@ -59,7 +84,7 @@ public class CollisionManager extends Manager<CollisionComponent>
 		    }
 		}
 	    }
-	}
+	}*/
     }
 
     public void debugRender(ShapeRenderer renderer){

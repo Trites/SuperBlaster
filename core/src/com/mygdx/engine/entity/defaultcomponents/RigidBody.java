@@ -7,6 +7,8 @@ import com.mygdx.engine.entity.ManagedComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
 import com.mygdx.engine.entity.managers.World;
 
+import java.util.List;
+
 public class RigidBody extends ManagedComponent
 {
 
@@ -55,6 +57,14 @@ public class RigidBody extends ManagedComponent
 
 	if(velocity.len() > maxVelocity)
 	            velocity.sub(new Vector2(velocity).nor().scl(velocity.len() - maxVelocity));
+    }
+
+    public void limitVelocityX(final float maxVelocity){
+
+	if(Math.abs(velocity.x) > maxVelocity){
+
+	    velocity.x = maxVelocity * Math.signum(velocity.x);
+	}
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.mygdx.game.component;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Circle;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
+import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
+import com.mygdx.game.component.controller.FollowController;
 
-public class SpawnEnemy extends Behaviour
+public class SpawnAnimation extends Behaviour
 {
     private static float SPAWN_DELAY = 2f;
 
@@ -13,7 +16,7 @@ public class SpawnEnemy extends Behaviour
     private float spawnTimer;
     private Color oc;
 
-    public SpawnEnemy(final Entity entity) {
+    public SpawnAnimation(final Entity entity) {
 	super(entity);
 
 	getEntity().requireComponent(SpriteComponent.class);
@@ -25,6 +28,9 @@ public class SpawnEnemy extends Behaviour
 	super.start();
 	spriteComponent = getComponent(SpriteComponent.class);
 	oc = spriteComponent.getColor();
+
+	getComponent(FollowController.class).setActive(false);
+	getComponent(CircleCollider.class).setActive(false);
     }
 
     @Override
@@ -36,7 +42,8 @@ public class SpawnEnemy extends Behaviour
 	if(spawnTimer < 0){
 
 	    spriteComponent.setColor(oc);
-	    getEntity().addComponent(new FollowController(getEntity(), "Player"));
+	    getComponent(FollowController.class).setActive(true);
+	    getComponent(CircleCollider.class).setActive(true);
 	    destroy();
 	}
 

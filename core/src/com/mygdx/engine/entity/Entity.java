@@ -3,6 +3,7 @@ package com.mygdx.engine.entity;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
+import com.mygdx.engine.entity.managers.Destroyable;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.events.Event;
 
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class Entity
+public class Entity implements Destroyable
 {
     private World world;
 
@@ -128,7 +129,7 @@ public class Entity
 	return true;
     }
 
-    public boolean hasComponent(Class<? extends Component> type){
+    public <T extends Component> boolean hasComponent(Class<T> type){
 
 	return componentMap.containsKey(type);
     }
@@ -194,7 +195,22 @@ public class Entity
 	return world;
     }
 
+    @Override
     public void destroy(){
+
+	for(final List<Component> components : componentMap.values()){
+	    for(final Component component : components){
+
+		component.setActive(false);
+	    }
+	}
+
+	world.queueRemoval(this);
+    }
+
+    @Override
+    public void destroyImmediate(){
+
 
 	for(final List<Component> components : componentMap.values()){
 	    for(final Component component : components){
@@ -202,7 +218,5 @@ public class Entity
 		component.destroy();
 	    }
 	}
-
-	world.queueRemoval(this);
     }
 }

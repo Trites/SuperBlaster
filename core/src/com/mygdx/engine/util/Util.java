@@ -3,7 +3,6 @@ package com.mygdx.engine.util;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
 public class Util
 {
@@ -33,15 +32,13 @@ public class Util
 
     public static float vectorAngle(final Vector2 a, final Vector2 b){
 
-	return (float)(Math.atan2(b.y - a.y, b.x - a.x) * 180/Math.PI);
+	//return a.nor().dot(b.nor());
+
+	return (float)(Math.atan2(b.y - a.y, b.x - a.x));// * 180/Math.PI);
     }
 
     public static Vector2 getBounceVelocity(final Vector2 posA, final Vector2 posB, final Vector2 velA, final Vector2 velB,
     						final float massA, final float massB){
-
-
-	//Vector2 dirA = new Vector2(velA).nor();
-	//Vector2 dirB = new Vector2(velB).nor();
 
 	Vector2 line = new Vector2(posB).sub(posA).nor();
 
