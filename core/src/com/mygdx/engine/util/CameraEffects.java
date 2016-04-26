@@ -39,6 +39,7 @@ public class CameraEffects
 
 		shakeTimer = 0f;
 		isShaking = false;
+		shakeMagnitude = 0f;
 	    }
 	}
 

@@ -80,4 +80,10 @@ public class EntityManager extends Manager<Entity>
 
 	addEntityTag(entity, entity.getTag());
     }
+
+    @Override public void clear() {
+	super.clear();
+    	entities.clear();
+	tagMap.clear();
+    }
 }

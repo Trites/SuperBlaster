@@ -1,6 +1,7 @@
 package com.mygdx.engine.entity;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.engine.util.Util;
 
 public class Transform
 {
@@ -52,11 +53,19 @@ public class Transform
 
     public Vector2 getForwardVector(){
 
-	return new Vector2((float)Math.cos(rotation*(Math.PI/180)), (float)Math.sin(rotation*(Math.PI/180)));
+	return new Vector2((float)Math.cos(rotation*(Math.PI/180)), (float)Math.sin(rotation*(Math.PI/180))).nor();
     }
 
     public void lookAt(final Vector2 point){
 
 	setRotation((float)(Math.atan2(point.y - getY(), point.x - getX()) * 180/Math.PI));
+    }
+
+    public void turnTowards(final Vector2 point, final float step){
+
+	Vector2 target = new Vector2(point).sub(getPosition()).nor();
+	float diffAngle = new Vector2(getForwardVector()).nor().dot(target);
+
+	rotation += Math.acos(diffAngle) * 180/Math.PI * Math.signum(Util.crossScalar(getForwardVector(), target)) * step;
     }
 }

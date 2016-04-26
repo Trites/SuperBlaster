@@ -39,4 +39,9 @@ public class RigidBodyManager extends Manager<RigidBody>
 
 	bodies.remove(body);
     }
+
+    @Override public void clear() {
+	super.clear();
+    	bodies.clear();
+    }
 }

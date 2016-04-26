@@ -1,22 +1,22 @@
 package com.mygdx.engine.entity.managers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.RenderComponent;
+import com.mygdx.engine.entity.defaultcomponents.Renderable;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
-public class World extends EntityManager implements ComponentManager
+public class World<T extends Manager<RenderComponent> & Renderable> extends EntityManager implements ComponentManager
 {
-    private CollisionManager collisionManager;
-    private RigidBodyManager rigidBodyManager;
-    private RenderManager renderManager;
+    private Manager<CollisionComponent> collisionManager;
+    private Manager<RigidBody> rigidBodyManager;
+    private T renderManager;
 
-    public World(byte[] collisionMap) {
+    public World(Manager<CollisionComponent> collisionManager, Manager<RigidBody> rigidBodyManager, T renderManager) {
 
-	collisionManager = new CollisionManager(collisionMap);
-	renderManager = new RenderManager();
-	rigidBodyManager = new RigidBodyManager();
+	this.collisionManager = collisionManager;
+	this.rigidBodyManager = rigidBodyManager;
+	this.renderManager = renderManager;
     }
 
     public void update(final float deltaTime){
@@ -29,11 +29,6 @@ public class World extends EntityManager implements ComponentManager
     public void render(SpriteBatch batch){
 
 	renderManager.render(batch);
-    }
-
-    public void debugRender(ShapeRenderer renderer){
-
-	collisionManager.debugRender(renderer);
     }
 
     @Override
@@ -70,5 +65,12 @@ public class World extends EntityManager implements ComponentManager
     public void deregisterComponent(final RenderComponent component) {
 
 	renderManager.queueRemoval(component);
+    }
+
+    @Override public void clear() {
+	super.clear();
+    	collisionManager.clear();
+	renderManager.clear();
+	rigidBodyManager.clear();
     }
 }

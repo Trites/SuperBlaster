@@ -45,4 +45,9 @@ public class RenderManager extends Manager<RenderComponent> implements Renderabl
 	    renderable.render(batch);
 	}
     }
+
+    @Override public void clear() {
+	super.clear();
+    	renderables.clear();
+    }
 }

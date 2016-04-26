@@ -38,6 +38,8 @@ public class FollowController extends Behaviour
 
 	body = getComponent(RigidBody.class);
 
+	if(body == null) System.out.println("Failed to get body!");
+
 	targetEntity = findEntity(targetTag).get(0);
 	target = targetEntity.getTransform();
 
@@ -47,7 +49,8 @@ public class FollowController extends Behaviour
     @Override
     public void update(final float deltaTime) {
 
-	getTransform().lookAt(target.getPosition());
+	//getTransform().lookAt(target.getPosition());
+	getTransform().turnTowards(target.getPosition(), 1f * deltaTime);
 	accelerate(getTransform().getForwardVector(), deltaTime);
 	//accelerate(new Vector2(target.getX() - getTransform().getX(), target.getY() - getTransform().getY()), deltaTime);
     }

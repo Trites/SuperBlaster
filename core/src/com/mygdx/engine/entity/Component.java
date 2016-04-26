@@ -13,10 +13,10 @@ public abstract class Component implements Destroyable
     protected Component(final Entity entity) {
 
         this.entity = entity;
-        this.active = true;
+        this.active = false;
     }
 
-    public void start(){}
+    public void start(){ this.setActive(true);}
 
     public Entity getEntity() {
         return entity;

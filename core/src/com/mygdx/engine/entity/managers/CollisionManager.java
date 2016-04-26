@@ -53,7 +53,7 @@ public class CollisionManager extends Manager<CollisionComponent>
 
 			    for(CollisionComponent other : collisionLayers.get(j) ){
 
-				if(other.isActive() && component.intersectVisit(other)){
+				if(component.intersectVisit(other)){
 
 				    component.getEntity().notifyCollision(other);
 				    other.getEntity().notifyCollision(component);
@@ -65,26 +65,6 @@ public class CollisionManager extends Manager<CollisionComponent>
 		}
 	    }
 	}
-
-	/*for(List<CollisionComponent> layer : collisionLayers){
-	    for(CollisionComponent component : layer){
-
-		if(component.isActive()){
-
-		    for(int i = 0; i < LAYER_COUNT; i++){
-			if(((collisionMap[component.getCollisionLayer()] >> i) & 1) == 1){
-			    for(CollisionComponent other : collisionLayers.get(i) ){
-
-				if(component.intersectVisit(other)){
-
-				    component.getEntity().notifyCollision(other);
-				}
-			    }
-			}
-		    }
-		}
-	    }
-	}*/
     }
 
     public void debugRender(ShapeRenderer renderer){
@@ -98,5 +78,13 @@ public class CollisionManager extends Manager<CollisionComponent>
 	    }
 	}
 	renderer.end();
+    }
+
+    @Override public void clear() {
+	super.clear();
+    	collisionLayers.clear();
+
+	for(int i = 0; i < LAYER_COUNT; i++)
+	    collisionLayers.add(new ArrayList<>());
     }
 }

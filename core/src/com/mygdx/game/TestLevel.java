@@ -4,21 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
+import com.mygdx.engine.entity.instantiate.EntityBlueprint;
+import com.mygdx.engine.entity.managers.CollisionManager;
+import com.mygdx.engine.entity.managers.RenderManager;
+import com.mygdx.engine.entity.managers.RigidBodyManager;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.particle.ParticleSystem;
 import com.mygdx.engine.states.GameStateHandler;
 import com.mygdx.engine.states.PlayState;
 import com.mygdx.engine.util.CameraEffects;
-import com.mygdx.game.factory.EntityFactory;
+import com.mygdx.game.component.controller.PlayerController;
+import com.mygdx.game.factory.EntityBlueprints;
 
 public class TestLevel extends PlayState
 {
+
+    private static final float RESET_TIME = 3f;
 
     private ShapeRenderer debugRender;
 
     World world;
     ParticleSystem particleSystem;
+
+    float resetTimer;
+    boolean reset;
 
     public TestLevel(final GameStateHandler handler) {
 	super(handler);
@@ -45,15 +56,27 @@ public class TestLevel extends PlayState
 		0
 	};
 
-	world = new World(collisionMap);
 	particleSystem = ParticleSystem.GetInstance();
 	particleSystem.addTexture("Plasma.png");
 
-	EntityFactory.BuildPlayerShip(world, new Transform(new Vector2(50,50), new Vector2(1,1), 0));
+	world = new World(new CollisionManager(collisionMap), new RigidBodyManager(), new RenderManager());
+	buildLevel();
     }
 
-    private static float SPAWN_DELAY = 1f;
-    private float spawnTimer = 0;
+    private void resetLevel(Transform transform){
+
+	world.clear();
+	reset = true;
+	resetTimer = RESET_TIME;
+    }
+
+    private void buildLevel(){
+
+	EntityBlueprints.instantiatePlayer(world, new Transform(new Vector2(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f), new Vector2(1, 1), 0));
+	EntityBlueprints.instantiateFollowerSpawner(world, new Transform(new Vector2(0,0)));
+	world.findEntity("Player").get(0).getComponent(PlayerController.class).playerDeathEvent.subscribe((x)->resetLevel(x));
+	reset = false;
+    }
 
     @Override
     public void update(final float deltaTime) {
@@ -64,15 +87,13 @@ public class TestLevel extends PlayState
 	world.update(deltaTime);
 	particleSystem.update(deltaTime);
 
-	spawnTimer -= deltaTime;
+	if(reset){
 
-	if(spawnTimer < 0){
+	    resetTimer -= deltaTime;
 
-	    spawnTimer = SPAWN_DELAY;
-	    float maxW = Gdx.graphics.getWidth() - 100;
-	    float maxH = Gdx.graphics.getHeight() - 100;
-
-	    world.queueAdd(EntityFactory.BuildFollower(world, new Transform(new Vector2((float) Math.random()*maxW + 100, (float) Math.random()*maxH + 100))));
+	    if(resetTimer <= 0) {
+		buildLevel();
+	    }
 	}
 
 	CameraEffects.update(deltaTime);

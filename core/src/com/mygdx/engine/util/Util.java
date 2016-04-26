@@ -30,6 +30,16 @@ public class Util
 	return newColor;
     }
 
+    public static Color randomColor(final float saturation){
+
+	float colorDistance = saturation;
+	Vector3 direction = new Vector3((float)Math.random(), (float)Math.random(), (float)Math.random()).nor();
+	direction.scl(colorDistance);
+
+
+	return new Color(direction.x, direction.y, direction.z, 1f);
+    }
+
     public static float vectorAngle(final Vector2 a, final Vector2 b){
 
 	//return a.nor().dot(b.nor());
@@ -52,5 +62,10 @@ public class Util
 	Vector2 dv = new Vector2(line).scl(p*massB);
 
 	return new Vector2(velA).add(dv);
+    }
+
+    public static float crossScalar(final Vector2 a, final Vector2 b){
+
+	return a.x*b.y - a.y*b.x;
     }
 }

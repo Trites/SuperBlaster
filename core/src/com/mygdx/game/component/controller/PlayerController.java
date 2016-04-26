@@ -24,7 +24,7 @@ public class PlayerController extends Behaviour
     private Vector2 direction = Vector2.Zero;
 
     private RigidBody body;
-    private Cannon cannon;
+    private BeamCannon cannon;
 
     public PlayerController(final Entity entity) {
 	super(entity);
@@ -32,7 +32,7 @@ public class PlayerController extends Behaviour
 	playerDeathEvent = new Event<>();
 
 	getEntity().requireComponent(RigidBody.class);
-	getEntity().requireComponent(Cannon.class);
+	getEntity().requireComponent(BeamCannon.class);
 	getEntity().collisionEvent.subscribe((x)->collisionEvent(x));
     }
 
@@ -41,7 +41,7 @@ public class PlayerController extends Behaviour
 	super.start();
 
 	body = getComponent(RigidBody.class);
-	cannon = getComponent(Cannon.class);
+	cannon = getComponent(BeamCannon.class);
 
 
     }
@@ -54,13 +54,11 @@ public class PlayerController extends Behaviour
 
     private void collisionEvent(CollisionComponent other){
 
-	RigidBody otherBody = other.getComponent(RigidBody.class);
-
 	playerDeathEvent.notify(getTransform());
 
-	ParticleFactory.CircularDeathParticle(getTransform().getPosition(), Color.YELLOW, 500);
+	ParticleFactory.CircularDeathParticle(getTransform().getPosition(), Color.ORANGE, 500);
 
-	CameraEffects.CameraShake(20f, 2f);
+	CameraEffects.CameraShake(20f, 1.5f);
 	getEntity().destroy();
     }
 

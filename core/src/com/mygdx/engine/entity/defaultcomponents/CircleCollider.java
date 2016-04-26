@@ -31,6 +31,9 @@ public class CircleCollider extends CollisionComponent
     @Override
     public boolean intersects(final CircleCollider other) {
 
+	if(!this.isActive() || !other.isActive())
+	    return false;
+
 	return edgeDistance(other) <= 0;
     }
 

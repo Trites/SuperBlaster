@@ -2,25 +2,26 @@ package com.mygdx.game.component;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
+import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 import com.mygdx.game.component.controller.FollowController;
 
 public class SpawnAnimation extends Behaviour
 {
-    private static float SPAWN_DELAY = 2f;
 
     private SpriteComponent spriteComponent;
     private float spawnTimer;
     private Color oc;
 
-    public SpawnAnimation(final Entity entity) {
+    public SpawnAnimation(final Entity entity, final float spawnDelay) {
 	super(entity);
 
 	getEntity().requireComponent(SpriteComponent.class);
-	spawnTimer = SPAWN_DELAY;
+	spawnTimer = spawnDelay;
     }
 
     @Override
@@ -29,8 +30,7 @@ public class SpawnAnimation extends Behaviour
 	spriteComponent = getComponent(SpriteComponent.class);
 	oc = spriteComponent.getColor();
 
-	getComponent(FollowController.class).setActive(false);
-	getComponent(CircleCollider.class).setActive(false);
+
     }
 
     @Override
@@ -42,9 +42,14 @@ public class SpawnAnimation extends Behaviour
 	if(spawnTimer < 0){
 
 	    spriteComponent.setColor(oc);
-	    getComponent(FollowController.class).setActive(true);
+	    getComponent(RigidBody.class).setActive(true);
+	    getComponent(RigidBody.class).setVelocity(new Vector2(0,0));
 	    getComponent(CircleCollider.class).setActive(true);
 	    destroy();
+	}else{
+
+	    getComponent(RigidBody.class).setActive(false);
+	    getComponent(CircleCollider.class).setActive(false);
 	}
 
     }

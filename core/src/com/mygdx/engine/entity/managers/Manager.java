@@ -48,4 +48,10 @@ public abstract class Manager<T extends Destroyable>
             remove(removeQueue.remove());
         }
     }
+
+    public void clear(){
+
+        addQueue.clear();
+        removeQueue.clear();
+    }
 }

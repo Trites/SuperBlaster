@@ -44,12 +44,16 @@ public class KillOnTargetDeath extends Behaviour
 
     private void onTargetDeath(final Transform targetTransform){
 
-	Vector2 diffVector = new Vector2(getTransform().getPosition()).sub(targetTransform.getPosition());
-	float distance = new Vector2(diffVector).len();
-	Vector2 direction = new Vector2(diffVector).nor();
+	if(getEntity().hasComponent(SpriteComponent.class)){
 
-	ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), 30f, new Vector2(0,0), targetTransform.getPosition(),
-						 direction.scl(9000f/((float)Math.sqrt(distance/10f) + 1)), 200f, 400f, 5f, getComponent(SpriteComponent.class).getColor(), 100);
+	    Vector2 diffVector = new Vector2(getTransform().getPosition()).sub(targetTransform.getPosition());
+	    float distance = new Vector2(diffVector).len();
+	    Vector2 direction = new Vector2(diffVector).nor();
+
+	    ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), 30f, new Vector2(0,0), targetTransform.getPosition(),
+						     direction.scl(9000f/((float)Math.sqrt(distance/10f) + 1)), 200f, 400f, 5f, getComponent(SpriteComponent.class).getColor(), 100);
+	}
+
 
 	getEntity().destroy();
     }
