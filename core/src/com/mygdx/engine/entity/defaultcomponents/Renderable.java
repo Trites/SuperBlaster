@@ -1,8 +1,6 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-public interface Renderable
+public interface Renderable<T>
 {
-    void render(SpriteBatch batch);
+    void render(T renderer);
 }

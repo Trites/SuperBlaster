@@ -1,5 +1,6 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
@@ -46,4 +47,7 @@ public abstract class CollisionComponent extends ManagedComponent implements Col
     public void setRelativePosition(final Vector2 relativePosition) {
 	this.relativePosition = relativePosition;
     }
+
+    public abstract void render(final ShapeRenderer renderer);
+
 }

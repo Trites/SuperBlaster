@@ -85,6 +85,6 @@ public class BeamCannon extends Behaviour
  	forward = new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
 
 	projBody.getComponent(SpriteComponent.class).setColor(Util.randomColor(1f));
- 	projBody.addVelocity(new Vector2(0,0).mulAdd(forward, (float)Math.random()*200 + 2000));
+ 	projBody.addVelocity(new Vector2(0,0).mulAdd(forward, (float)Math.random()*600 + 1800));
     }
 }

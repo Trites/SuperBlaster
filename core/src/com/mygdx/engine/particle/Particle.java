@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.Renderable;
 
-public class Particle implements Renderable
+public class Particle implements Renderable<SpriteBatch>
 {
 
     private boolean active;

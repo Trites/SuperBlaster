@@ -68,7 +68,7 @@ public class ParticleFactory
 
 	    Transform transform = new Transform(new Vector2(position), new Vector2(1, 1), angle);
 
-	    ParticleData data = new ParticleData(new Vector2(0, 0).mulAdd(transform.getForwardVector(), vel), Util.shiftColor(color, 1f), 5f);
+	    ParticleData data = new ParticleData(new Vector2(0, 0).mulAdd(transform.getForwardVector(), vel), Util.shiftColor(color, 2f), 5f);
 	    transform.lookAt(new Vector2(position).mulAdd(transform.getForwardVector(), -1));
 	    transform.setRotation(transform.getRotation());
 

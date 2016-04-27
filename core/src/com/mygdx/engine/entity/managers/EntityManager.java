@@ -28,8 +28,11 @@ public class EntityManager extends Manager<Entity>
 
 	super.update(deltaTime);
 
-	for(Entity entity : entities)
-	    entity.update(deltaTime);
+	for(Entity entity : entities){
+
+	    if(entity.isActive())
+	    	entity.update(deltaTime);
+	}
     }
 
     @Override
@@ -81,7 +84,8 @@ public class EntityManager extends Manager<Entity>
 	addEntityTag(entity, entity.getTag());
     }
 
-    @Override public void clear() {
+    @Override
+    public void clear() {
 	super.clear();
     	entities.clear();
 	tagMap.clear();

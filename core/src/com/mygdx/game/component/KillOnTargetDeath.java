@@ -17,7 +17,7 @@ public class KillOnTargetDeath extends Behaviour
 
     public KillOnTargetDeath(final Entity entity, final String targetTag) {
 	super(entity);
-
+	//getEntity().requireComponent(SpriteComponent.class);
 	this.targetTag = targetTag;
 	targetDeathHandler = (x)->onTargetDeath(x);
     }
@@ -31,6 +31,9 @@ public class KillOnTargetDeath extends Behaviour
 	if(targetEntity.hasComponent(NotifyDeath.class)){
 	    target = targetEntity.getComponent(NotifyDeath.class);
 	    target.deathEvent.subscribe(targetDeathHandler);
+	}else{
+
+	    System.out.println("NO TARGET!");
 	}
 
     }
@@ -61,6 +64,12 @@ public class KillOnTargetDeath extends Behaviour
     @Override
     public void destroy() {
 	super.destroy();
+
+
+    }
+
+    @Override public void destroyImmediate() {
+	super.destroyImmediate();
 
 	if(target != null){
 

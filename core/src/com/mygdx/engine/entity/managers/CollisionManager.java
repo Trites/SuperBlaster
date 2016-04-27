@@ -3,11 +3,12 @@ package com.mygdx.engine.entity.managers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
+import com.mygdx.engine.entity.defaultcomponents.Renderable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionManager extends Manager<CollisionComponent>
+public class CollisionManager extends Manager<CollisionComponent> implements Renderable<ShapeRenderer>
 {
     static final int LAYER_COUNT = 8; //Number of collision layers, tied to bits in a byte
 
@@ -67,24 +68,25 @@ public class CollisionManager extends Manager<CollisionComponent>
 	}
     }
 
-    public void debugRender(ShapeRenderer renderer){
+    @Override
+    public void clear() {
+	super.clear();
+    	collisionLayers.clear();
+
+	for(int i = 0; i < LAYER_COUNT; i++)
+	    collisionLayers.add(new ArrayList<>());
+    }
+
+    public void render(final ShapeRenderer renderer){
 
 	renderer.setColor(Color.YELLOW);
 	renderer.begin(ShapeRenderer.ShapeType.Line);
 	for(List<CollisionComponent> layer : collisionLayers){
 	    for(CollisionComponent component : layer){
 
-		renderer.circle(component.getTransform().getX(), component.getTransform().getY(), 30f);
+		component.render(renderer);
 	    }
 	}
 	renderer.end();
-    }
-
-    @Override public void clear() {
-	super.clear();
-    	collisionLayers.clear();
-
-	for(int i = 0; i < LAYER_COUNT; i++)
-	    collisionLayers.add(new ArrayList<>());
     }
 }

@@ -3,7 +3,7 @@ package com.mygdx.engine.entity.managers;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public abstract class Manager<T extends Destroyable>
+public abstract class Manager<T extends Destroyable & Startable> implements Startable
 {
 
     private Queue<T> addQueue;
@@ -13,6 +13,13 @@ public abstract class Manager<T extends Destroyable>
 
         addQueue = new LinkedList<>();
         removeQueue = new LinkedList<>();
+    }
+
+    @Override
+    public void start() {
+
+        applyRemoveQueue();
+        applyAddQueue();
     }
 
     protected abstract void add(T object);
@@ -36,8 +43,9 @@ public abstract class Manager<T extends Destroyable>
 
     private void applyAddQueue(){
 
-        while(!addQueue.isEmpty())
+        while(!addQueue.isEmpty()){
             add(addQueue.remove());
+        }
     }
 
     private void applyRemoveQueue(){

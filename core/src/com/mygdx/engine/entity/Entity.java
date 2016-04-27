@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
 import com.mygdx.engine.entity.managers.Destroyable;
+import com.mygdx.engine.entity.managers.Startable;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.events.Event;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class Entity implements Destroyable
+public class Entity implements Destroyable, Startable
 {
     private World world;
 
@@ -44,7 +45,12 @@ public class Entity implements Destroyable
 	world.queueAdd(this);
     }
 
+    @Override
     public void start(){
+
+	/*System.out.println("KeySet:");
+	System.out.println(componentMap.keySet());
+	System.out.println("");*/
 
 	if(hasComponents(new ArrayList<>(requieredComponents))){
 
@@ -190,6 +196,10 @@ public class Entity implements Destroyable
 	return world;
     }
 
+    public boolean isActive() {
+	return active;
+    }
+
     public ComponentManager getComponentManager(){
 
 	return world;
@@ -201,7 +211,8 @@ public class Entity implements Destroyable
 	for(final List<Component> components : componentMap.values()){
 	    for(final Component component : components){
 
-		component.setActive(false);
+		//component.setActive(false);
+		component.destroy();
 	    }
 	}
 
@@ -215,7 +226,7 @@ public class Entity implements Destroyable
 	for(final List<Component> components : componentMap.values()){
 	    for(final Component component : components){
 
-		component.destroy();
+		component.destroyImmediate();
 	    }
 	}
     }

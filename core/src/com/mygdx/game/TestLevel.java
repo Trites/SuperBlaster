@@ -65,16 +65,22 @@ public class TestLevel extends PlayState
 
     private void resetLevel(Transform transform){
 
+	System.out.println("Reset...");
 	world.clear();
 	reset = true;
 	resetTimer = RESET_TIME;
+
+	System.out.println("Done");
     }
 
     private void buildLevel(){
 
+	System.out.println("New world...");
 	EntityBlueprints.instantiatePlayer(world, new Transform(new Vector2(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f), new Vector2(1, 1), 0));
 	EntityBlueprints.instantiateFollowerSpawner(world, new Transform(new Vector2(0,0)));
+	EntityBlueprints.instantiateStarFragmentSpawner(world, new Transform(new Vector2(0,0)));
 	world.findEntity("Player").get(0).getComponent(PlayerController.class).playerDeathEvent.subscribe((x)->resetLevel(x));
+	System.out.println("Done");
 	reset = false;
     }
 
@@ -109,6 +115,6 @@ public class TestLevel extends PlayState
 	particleSystem.render(batch);
 	batch.end();
 
-	//world.debugRender(debugRender);
+	//sworld.renderCollisionComponents(debugRender);
     }
 }

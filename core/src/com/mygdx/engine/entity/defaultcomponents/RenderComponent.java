@@ -1,10 +1,11 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
 
-public abstract class RenderComponent extends ManagedComponent implements Renderable, Comparable<RenderComponent>
+public abstract class RenderComponent extends ManagedComponent implements Renderable<SpriteBatch>, Comparable<RenderComponent>
 {
 
     private int renderLayer;

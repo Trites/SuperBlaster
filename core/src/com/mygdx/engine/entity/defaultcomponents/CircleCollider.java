@@ -1,5 +1,7 @@
 package com.mygdx.engine.entity.defaultcomponents;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 
@@ -50,4 +52,9 @@ public class CircleCollider extends CollisionComponent
 	return radius;
     }
 
+    @Override
+    public void render(final ShapeRenderer renderer) {
+
+	renderer.circle(getTransform().getPosition().x, getTransform().getPosition().y, radius);
+    }
 }
