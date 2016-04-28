@@ -7,15 +7,15 @@ import com.mygdx.engine.entity.defaultcomponents.RenderComponent;
 import com.mygdx.engine.entity.defaultcomponents.Renderable;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
-public class World<CM extends Manager<CollisionComponent> & Renderable<ShapeRenderer>, RM extends Manager<RenderComponent> & Renderable<SpriteBatch>> extends EntityManager implements ComponentManager
+public class World<C extends Manager<CollisionComponent> & Renderable<ShapeRenderer>, R extends Manager<RenderComponent> & Renderable<SpriteBatch>> extends EntityManager implements ComponentManager
 {
-    private CM collisionManager;
+    private C collisionManager;
     private Manager<RigidBody> rigidBodyManager;
-    private RM renderManager;
+    private R renderManager;
 
     private boolean clear = false;
 
-    public World(CM collisionManager, Manager<RigidBody> rigidBodyManager, RM renderManager) {
+    public World(C collisionManager, Manager<RigidBody> rigidBodyManager, R renderManager) {
 
 	this.collisionManager = collisionManager;
 	this.rigidBodyManager = rigidBodyManager;

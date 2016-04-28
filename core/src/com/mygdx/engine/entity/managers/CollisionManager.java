@@ -2,6 +2,7 @@ package com.mygdx.engine.entity.managers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.entity.defaultcomponents.Renderable;
 
@@ -80,7 +81,7 @@ public class CollisionManager extends Manager<CollisionComponent> implements Ren
     public void render(final ShapeRenderer renderer){
 
 	renderer.setColor(Color.YELLOW);
-	renderer.begin(ShapeRenderer.ShapeType.Line);
+	renderer.begin(ShapeType.Line);
 	for(List<CollisionComponent> layer : collisionLayers){
 	    for(CollisionComponent component : layer){
 

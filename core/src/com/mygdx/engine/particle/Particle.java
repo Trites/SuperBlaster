@@ -11,17 +11,17 @@ public class Particle implements Renderable<SpriteBatch>
 {
 
     private boolean active;
-    private Texture texture;
-    private Vector2 origin;
+    private Texture texture = null;
+    private Vector2 origin = null;
 
-    private Transform transform;
-    private ParticleData particleData;
+    private Transform transform = null;
+    private ParticleData particleData = null;
 
-    private ParticleBehaviour behaviour;
+    private ParticleBehaviour behaviour = null;
 
 
     public void create(final Texture texture, final Vector2 position, final Vector2 velocity, final float lifeTime, final ParticleBehaviour behaviour){
-	this.create(texture, new Transform(position, new Vector2(1,1), 0f), new ParticleData(velocity, Color.WHITE, lifeTime), behaviour);
+	this.create(texture, new Transform(position, new Vector2(1,1), 0.0f), new ParticleData(velocity, Color.WHITE, lifeTime), behaviour);
     }
 
     public void create(final Texture texture, final Transform transform, final ParticleData particleData, final ParticleBehaviour behaviour){
@@ -32,7 +32,7 @@ public class Particle implements Renderable<SpriteBatch>
 	this.behaviour = behaviour;
 
 	this.active = true;
-	this.origin =  new Vector2(texture.getWidth()/2f, texture.getHeight()/2f);
+	this.origin =  new Vector2(texture.getWidth() / 2.0f, texture.getHeight() / 2.0f);
     }
 
     public void update(final float deltaTime){
@@ -41,11 +41,11 @@ public class Particle implements Renderable<SpriteBatch>
     }
 
     @Override
-    public void render(final SpriteBatch batch) {
+    public void render(final SpriteBatch renderer) {
 
-	batch.setColor(particleData.getColor());
-	batch.draw(texture, transform.getX() - origin.x, transform.getY() - origin.y, origin.x, origin.y, texture.getWidth(), texture.getHeight(),
-		   transform.getScaleX(), transform.getScaleY(), transform.getRotation(), 0, 0, texture.getWidth(), texture.getHeight(), false, false);
+	renderer.setColor(particleData.getColor());
+	renderer.draw(texture, transform.getX() - origin.x, transform.getY() - origin.y, origin.x, origin.y, texture.getWidth(), texture.getHeight(),
+		      transform.getScaleX(), transform.getScaleY(), transform.getRotation(), 0, 0, texture.getWidth(), texture.getHeight(), false, false);
 
     }
 

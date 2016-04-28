@@ -16,7 +16,7 @@ public class StarBursterDeath extends SpawnOnCollision
     protected void instantiate() {
 
 	float baseRotation = getTransform().getRotation();
-	float angleStep = 360f/4f;
+	float angleStep = 360.0f / 4.0f;
 
 	for(int i = 0; i < 4; i++){
 	    float nextRotation = baseRotation + angleStep * i;

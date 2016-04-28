@@ -9,7 +9,7 @@ public abstract class Manager<T extends Destroyable & Startable> implements Star
     private Queue<T> addQueue;
     private Queue<T> removeQueue;
 
-    public Manager(){
+    protected Manager(){
 
         addQueue = new LinkedList<>();
         removeQueue = new LinkedList<>();
@@ -22,17 +22,17 @@ public abstract class Manager<T extends Destroyable & Startable> implements Star
         applyAddQueue();
     }
 
-    protected abstract void add(T object);
-    protected abstract void remove(T object);
+    protected abstract void add(T element);
+    protected abstract void remove(T element);
 
-    public void queueAdd(T object){
+    public void queueAdd(T element){
 
-        addQueue.add(object);
+        addQueue.add(element);
     }
 
-    public void queueRemoval(T object){
+    public void queueRemoval(T element){
 
-        removeQueue.add(object);
+        removeQueue.add(element);
     }
 
     public void update(final float deltaTime){

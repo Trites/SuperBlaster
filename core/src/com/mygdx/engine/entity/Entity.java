@@ -124,7 +124,7 @@ public class Entity implements Destroyable, Startable
 	}
     }
 
-    public boolean hasComponents(List<Class<? extends Component>> types){
+    public boolean hasComponents(Iterable<Class<? extends Component>> types){
 
 	for(Class<? extends Component> type : types){
 
@@ -145,16 +145,6 @@ public class Entity implements Destroyable, Startable
 	if(hasComponent(type)){
 
 	    return (T)(componentMap.get(type).get(0));
-	}
-
-	return null;
-    }
-
-    public <T extends Component> List<T> getComponents(Class<T> type){
-
-	if(hasComponent(type)){
-	    if(!componentMap.get(type).isEmpty())
-		return (ArrayList<T>)componentMap.get(type);
 	}
 
 	return null;

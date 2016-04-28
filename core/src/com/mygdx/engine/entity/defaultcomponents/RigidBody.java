@@ -5,9 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
-import com.mygdx.engine.entity.managers.World;
-
-import java.util.List;
 
 public class RigidBody extends ManagedComponent
 {
@@ -20,7 +17,7 @@ public class RigidBody extends ManagedComponent
     private float angularVelocity;
 
    public RigidBody(final Entity entity, float mass) {
-	this(entity, mass, 0f, 0f);
+	this(entity, mass, 0.0f, 0.0f);
     }
 
     public RigidBody(final Entity entity, float mass, float linearDampening, float angularDampening) {
@@ -31,7 +28,7 @@ public class RigidBody extends ManagedComponent
 	this. angularDampening = angularDampening;
 
 	velocity = new Vector2(0,0);
-	angularVelocity = 0f;
+	angularVelocity = 0.0f;
     }
 
     public void update(float deltaTime){
@@ -40,12 +37,7 @@ public class RigidBody extends ManagedComponent
 	getTransform().setRotation(getTransform().getRotation() + angularVelocity * deltaTime);
 
 	velocity.lerp(new Vector2(0,0), linearDampening);
-	MathUtils.lerp(angularVelocity, 0f, angularDampening);
-    }
-
-    public void applyForce(final Vector2 force){
-
-	addVelocity(force.scl(1/mass));
+	MathUtils.lerp(angularVelocity, 0.0f, angularDampening);
     }
 
     public void addVelocity(final Vector2 deltaV){
@@ -57,14 +49,6 @@ public class RigidBody extends ManagedComponent
 
 	if(velocity.len() > maxVelocity)
 	            velocity.sub(new Vector2(velocity).nor().scl(velocity.len() - maxVelocity));
-    }
-
-    public void limitVelocityX(final float maxVelocity){
-
-	if(Math.abs(velocity.x) > maxVelocity){
-
-	    velocity.x = maxVelocity * Math.signum(velocity.x);
-	}
     }
 
     @Override

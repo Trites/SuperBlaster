@@ -9,7 +9,7 @@ import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
 public class BounceOnBounds extends Behaviour
 {
-    RigidBody body;
+    RigidBody body = null;
     float padding;
 
     public BounceOnBounds(final Entity entity) {

@@ -18,6 +18,11 @@ public class DeathParticleEffectOnCollision extends OnCollision
     }
 
     @Override
+    public void update(final float deltaTime) {
+
+    }
+
+    @Override
     protected void collisionResponse(final CollisionComponent other) {
 
 	if(!isActive())
@@ -31,11 +36,11 @@ public class DeathParticleEffectOnCollision extends OnCollision
 	Vector2 colPoint = new Vector2(other.getTransform().getPosition()).add(new Vector2(dirToOther).scl(-overlap));
 
 	ParticleFactory
-		.DirectionalDeathParticle(getTransform().getPosition(), thisCircle.getRadius(), getComponent(RigidBody.class).getVelocity(), colPoint,
+		.directionalDeathParticle(getTransform().getPosition(), thisCircle.getRadius(), getComponent(RigidBody.class).getVelocity(), colPoint,
 					  otherBody.getVelocity(), otherBody.getMass(), 50, 5,
 					  getComponent(SpriteComponent.class).getColor(), 50);
 
-	CameraEffects.CameraShake(10f, 0.5f);
+	CameraEffects.cameraShake(10.0f, 0.5f);
 	getEntity().destroy();
     }
 }

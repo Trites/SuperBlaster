@@ -12,14 +12,14 @@ public class KillOnTargetDeath extends Behaviour
 {
 
     private String targetTag;
-    private NotifyDeath target;
+    private NotifyDeath target = null;
     private EventListener<Transform> targetDeathHandler;
 
     public KillOnTargetDeath(final Entity entity, final String targetTag) {
 	super(entity);
 	//getEntity().requireComponent(SpriteComponent.class);
 	this.targetTag = targetTag;
-	targetDeathHandler = (x)->onTargetDeath(x);
+	targetDeathHandler = this::onTargetDeath;
     }
 
     @Override
@@ -53,19 +53,13 @@ public class KillOnTargetDeath extends Behaviour
 	    float distance = new Vector2(diffVector).len();
 	    Vector2 direction = new Vector2(diffVector).nor();
 
-	    ParticleFactory.DirectionalDeathParticle(getTransform().getPosition(), 30f, new Vector2(0,0), targetTransform.getPosition(),
-						     direction.scl(9000f/((float)Math.sqrt(distance/10f) + 1)), 200f, 400f, 5f, getComponent(SpriteComponent.class).getColor(), 100);
+	    ParticleFactory.directionalDeathParticle(getTransform().getPosition(), 30.0f, new Vector2(0, 0), targetTransform.getPosition(),
+						     direction.scl(9000.0f / ((float)Math.sqrt(distance / 10.0f) + 1)), 200.0f, 400.0f,
+						     5.0f, getComponent(SpriteComponent.class).getColor(), 100);
 	}
 
 
 	getEntity().destroy();
-    }
-
-    @Override
-    public void destroy() {
-	super.destroy();
-
-
     }
 
     @Override public void destroyImmediate() {

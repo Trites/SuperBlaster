@@ -58,14 +58,15 @@ public class Transform
 
     public void lookAt(final Vector2 point){
 
-	setRotation((float)(Math.atan2(point.y - getY(), point.x - getX()) * 180/Math.PI));
+	this.rotation = (float)(Math.atan2(point.y - getY(), point.x - getX()) * 180 / Math.PI);
     }
 
     public void turnTowards(final Vector2 point, final float step){
 
-	Vector2 target = new Vector2(point).sub(getPosition()).nor();
+	Vector2 target = new Vector2(point).sub(position).nor();
 	float diffAngle = new Vector2(getForwardVector()).nor().dot(target);
 
-	rotation += Math.acos(diffAngle) * 180/Math.PI * Math.signum(Util.crossScalar(getForwardVector(), target)) * step;
+	rotation += (float) (Math.acos(diffAngle) * 180 / Math.PI * Math.signum(Util.crossScalar(getForwardVector(), target)) *
+			     step);
     }
 }

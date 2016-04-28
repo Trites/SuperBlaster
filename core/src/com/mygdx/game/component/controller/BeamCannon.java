@@ -1,27 +1,25 @@
 package com.mygdx.game.component.controller;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
-import com.mygdx.engine.entity.instantiate.EntityBlueprint;
 import com.mygdx.engine.util.CameraEffects;
 import com.mygdx.engine.util.Util;
 import com.mygdx.game.factory.EntityBlueprints;
 
 public class BeamCannon extends Behaviour
 {
-    private static float COOLDOWN_TIME = 1f;
-    private static float ACCURACY = 0.99f;
+    private static final float COOLDOWN_TIME = 1.0f;
+    private static final float ACCURACY = 0.99f;
 
     private  boolean fired;
     private int supply = 100;
     private float cooldownTimer = 0;
 
-    private RigidBody body;
+    private RigidBody body = null;
 
     public BeamCannon(final Entity entity) {
 	super(entity);
@@ -72,7 +70,7 @@ public class BeamCannon extends Behaviour
 
 	    //supply--;
 	    fired = true;
-	    CameraEffects.CameraShake(8f, 0.5f);
+	    CameraEffects.cameraShake(8.00f, 0.5f);
 	}
     }
 
@@ -82,9 +80,9 @@ public class BeamCannon extends Behaviour
 
  	Vector2 forward = getTransform().getForwardVector();
  	float angle = (float)(Math.atan2(forward.y, forward.x) + (Math.random() * (1 - ACCURACY) * 2*Math.PI - (1 - ACCURACY) * Math.PI));
- 	forward = new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
+ 	Vector2 direction = new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
 
-	projBody.getComponent(SpriteComponent.class).setColor(Util.randomColor(1f));
- 	projBody.addVelocity(new Vector2(0,0).mulAdd(forward, (float)Math.random()*600 + 1800));
+	projBody.getComponent(SpriteComponent.class).setColor(Util.randomColor(1.00f));
+ 	projBody.addVelocity(new Vector2(0,0).mulAdd(direction, (float)Math.random()*600 + 1800));
     }
 }

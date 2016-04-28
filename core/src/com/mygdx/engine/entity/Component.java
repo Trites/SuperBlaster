@@ -24,7 +24,9 @@ public abstract class Component implements Destroyable, Startable
         this.startActive = startActive;
     }
 
-    public void start(){ this.setActive(startActive); }
+    public void start(){
+        this.active = startActive;
+    }
 
     public Entity getEntity() {
         return entity;
@@ -40,7 +42,9 @@ public abstract class Component implements Destroyable, Startable
     public void destroy(){ active = false; }
 
     @Override
-    public void destroyImmediate() { }
+    public void destroyImmediate() {
+
+    }
 
     public boolean isActive() {
         return active;

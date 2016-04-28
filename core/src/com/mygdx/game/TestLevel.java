@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
-import com.mygdx.engine.entity.instantiate.EntityBlueprint;
 import com.mygdx.engine.entity.managers.CollisionManager;
 import com.mygdx.engine.entity.managers.RenderManager;
 import com.mygdx.engine.entity.managers.RigidBodyManager;
@@ -21,12 +19,12 @@ import com.mygdx.game.factory.EntityBlueprints;
 public class TestLevel extends PlayState
 {
 
-    private static final float RESET_TIME = 3f;
+    private static final float RESET_TIME = 3.0f;
 
-    private ShapeRenderer debugRender;
+    private ShapeRenderer debugRender = null;
 
-    World world;
-    ParticleSystem particleSystem;
+    World world = null;
+    ParticleSystem particleSystem = null;
 
     float resetTimer;
     boolean reset;
@@ -76,10 +74,11 @@ public class TestLevel extends PlayState
     private void buildLevel(){
 
 	System.out.println("New world...");
-	EntityBlueprints.instantiatePlayer(world, new Transform(new Vector2(Gdx.graphics.getWidth()/2f, Gdx.graphics.getHeight()/2f), new Vector2(1, 1), 0));
+	EntityBlueprints.instantiatePlayer(world, new Transform(new Vector2(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() /
+													    2.0f), new Vector2(1, 1), 0));
 	EntityBlueprints.instantiateFollowerSpawner(world, new Transform(new Vector2(0,0)));
 	EntityBlueprints.instantiateStarFragmentSpawner(world, new Transform(new Vector2(0,0)));
-	world.findEntity("Player").get(0).getComponent(PlayerController.class).playerDeathEvent.subscribe((x)->resetLevel(x));
+	world.findEntity("Player").get(0).getComponent(PlayerController.class).playerDeathEvent.subscribe(this::resetLevel);
 	System.out.println("Done");
 	reset = false;
     }

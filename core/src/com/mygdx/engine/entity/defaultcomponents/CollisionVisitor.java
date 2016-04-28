@@ -2,6 +2,6 @@ package com.mygdx.engine.entity.defaultcomponents;
 
 public interface CollisionVisitor
 {
-    boolean intersects(CircleCollider collider);
-    float edgeDistance(CircleCollider collider);
+    boolean intersects(CircleCollider other);
+    float edgeDistance(CircleCollider other);
 }

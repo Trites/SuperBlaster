@@ -7,9 +7,9 @@ import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
 public abstract class Controller extends Behaviour
 {
-    protected RigidBody body;
+    protected RigidBody body = null;
 
-    public Controller(final Entity entity) {
+    protected Controller(final Entity entity) {
 	super(entity);
 
 	getEntity().requireComponent(RigidBody.class);

@@ -6,9 +6,9 @@ import com.mygdx.engine.entity.Transform;
 public abstract class EnemyController extends Controller
 {
     private String targetTag;
-    protected Transform target;
+    protected Transform target = null;
 
-    public EnemyController(final Entity entity, final String targetTag) {
+    protected EnemyController(final Entity entity, final String targetTag) {
 	super(entity);
 
 	this.targetTag = targetTag;

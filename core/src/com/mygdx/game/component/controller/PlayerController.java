@@ -1,7 +1,8 @@
 package com.mygdx.game.component.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Behaviour;
@@ -16,15 +17,13 @@ import com.mygdx.game.factory.ParticleFactory;
 public class PlayerController extends Behaviour
 {
 
-    private static final float ACCELERATION = 2000f;
-    private static final float MAX_VELOCITY = 600f;
+    private static final float ACCELERATION = 2000.0f;
+    private static final float MAX_VELOCITY = 600.0f;
 
     public Event<Transform> playerDeathEvent;
 
-    private Vector2 direction = Vector2.Zero;
-
-    private RigidBody body;
-    private BeamCannon cannon;
+    private RigidBody body = null;
+    private BeamCannon cannon = null;
 
     public PlayerController(final Entity entity) {
 	super(entity);
@@ -33,7 +32,7 @@ public class PlayerController extends Behaviour
 
 	getEntity().requireComponent(RigidBody.class);
 	getEntity().requireComponent(BeamCannon.class);
-	getEntity().collisionEvent.subscribe((x)->collisionEvent(x));
+	getEntity().collisionEvent.subscribe(this::collisionEvent);
     }
 
     @Override
@@ -56,9 +55,9 @@ public class PlayerController extends Behaviour
 
 	playerDeathEvent.notify(getTransform());
 
-	ParticleFactory.CircularDeathParticle(getTransform().getPosition(), Color.ORANGE, 500);
+	ParticleFactory.circularDeathParticle(getTransform().getPosition(), Color.ORANGE, 500);
 
-	CameraEffects.CameraShake(20f, 1.5f);
+	CameraEffects.cameraShake(20.0f, 1.5f);
 	getEntity().destroy();
     }
 
@@ -66,26 +65,25 @@ public class PlayerController extends Behaviour
 
         getTransform().lookAt(new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY()));
 
-        direction = new Vector2(0,0);
+	final Vector2 direction = new Vector2(0, 0);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        if(Gdx.input.isKeyPressed(Keys.W)){
 
-            direction.y = 1;
-        }else if(Gdx.input.isKeyPressed(Input.Keys.S)){
+	    direction.y = 1;
+        }else if(Gdx.input.isKeyPressed(Keys.S)){
 
-            direction.y = -1;
+	    direction.y = -1;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        if(Gdx.input.isKeyPressed(Keys.A)){
 
-            direction.x = -1;
-        }else if(Gdx.input.isKeyPressed(Input.Keys.D)){
+	    direction.x = -1;
+        }else if(Gdx.input.isKeyPressed(Keys.D)){
 
-            direction.x = 1;
+	    direction.x = 1;
         }
 
-	if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-
+	if(Gdx.input.isButtonPressed(Buttons.LEFT)){
 	    cannon.fire();
 	}
 

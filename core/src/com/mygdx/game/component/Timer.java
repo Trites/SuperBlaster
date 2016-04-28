@@ -8,7 +8,7 @@ public abstract class Timer extends Behaviour
     private boolean tick;
     private float timer;
 
-    public Timer(final Entity entity, final float time) {
+    protected Timer(final Entity entity, final float time) {
 	super(entity);
 	tick = true;
 	timer = time;
@@ -40,7 +40,7 @@ public abstract class Timer extends Behaviour
     public void setTimer(final float timer) {
 	this.timer = timer;
 
-	tick = timer > 0f;
+	tick = timer > 0.0f;
     }
 
     public boolean isTick() {
@@ -51,7 +51,7 @@ public abstract class Timer extends Behaviour
 
 	this.tick = tick;
 
-	if(timer <= 0f)
+	if(timer <= 0.0f)
 	    this.tick = false;
     }
 }

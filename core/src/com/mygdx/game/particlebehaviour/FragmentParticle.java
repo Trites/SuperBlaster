@@ -5,8 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.particle.ParticleData;
 
-public class FragmentParticle
+public final class FragmentParticle
 {
+    private FragmentParticle() {}
+
     public static boolean update(Transform transform, ParticleData particleData, final float deltaTime) {
 
 	transform.getPosition().mulAdd(particleData.getVelocity(), deltaTime);

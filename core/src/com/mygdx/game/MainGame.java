@@ -16,10 +16,10 @@ public class MainGame extends ApplicationAdapter {
    	private float accumulatedDelta = 0;
 
 
-    	private OrthographicCamera camera;
-   	private SpriteBatch batch;
+    	private OrthographicCamera camera = null;
+   	private SpriteBatch batch = null;
 
-   	private GameStateHandler gameState;
+   	private GameStateHandler gameState = null;
 
    	@Override
    	public void create () {
@@ -32,7 +32,7 @@ public class MainGame extends ApplicationAdapter {
 
 	    camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	    camera.setToOrtho(false);
-	    camera.translate(0f, 0f);
+	    camera.translate(0.0f, 0.0f);
 	    camera.update();
 	    CameraEffects.setCamera(camera);
    	}

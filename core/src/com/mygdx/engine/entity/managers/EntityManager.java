@@ -4,11 +4,12 @@ import com.mygdx.engine.entity.Entity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EntityManager extends Manager<Entity>
 {
     private List<Entity> entities;
-    private HashMap<String, List<Entity>> tagMap;
+    private Map<String, List<Entity>> tagMap;
 
 
 
@@ -36,18 +37,18 @@ public class EntityManager extends Manager<Entity>
     }
 
     @Override
-    protected void add(final Entity entity) {
+    protected void add(final Entity element) {
 
-	entities.add(entity);
-	addEntityTag(entity, entity.getTag());
-	entity.start();
+	entities.add(element);
+	addEntityTag(element, element.getTag());
+	element.start();
     }
 
     @Override
-    protected void remove(final Entity entity) {
+    protected void remove(final Entity element) {
 
-	removeEntityTag(entity);
-	entities.remove(entity);
+	removeEntityTag(element);
+	entities.remove(element);
     }
 
     public List<Entity> findEntity(final String tag){
@@ -57,7 +58,7 @@ public class EntityManager extends Manager<Entity>
 
     private void addEntityTag(final Entity entity, final String tag){
 
-	if(tag != ""){
+	if(!tag.equals("")){
 
 	    if(tagMap.get(tag) == null)
 	   	    tagMap.put(tag, new ArrayList<>());

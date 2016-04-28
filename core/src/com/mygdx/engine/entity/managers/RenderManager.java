@@ -18,31 +18,31 @@ public class RenderManager extends Manager<RenderComponent> implements Renderabl
     }
 
     @Override
-    public void add(final RenderComponent renderable){
+    public void add(final RenderComponent element){
 
-	int index = Collections.binarySearch(renderables, renderable);
+	int index = Collections.binarySearch(renderables, element);
 
 	if(index > 0){
 
-	    renderables.add(index, renderable);
+	    renderables.add(index, element);
 	}else{
 
-	    renderables.add(renderable);
+	    renderables.add(element);
 	}
     }
 
     @Override
-    public void remove(final RenderComponent renderable){
+    public void remove(final RenderComponent element){
 
-	renderables.remove(renderable);
+	renderables.remove(element);
     }
 
     @Override
-    public void render(final SpriteBatch batch) {
+    public void render(final SpriteBatch renderer) {
 
-	for(Renderable renderable : renderables){
+	for(final Renderable renderable : renderables){
 
-	    renderable.render(batch);
+	    renderable.render(renderer);
 	}
     }
 

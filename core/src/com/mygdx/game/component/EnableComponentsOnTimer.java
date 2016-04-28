@@ -15,7 +15,6 @@ public class EnableComponentsOnTimer extends Timer
     @Override
     protected void invoke() {
 
-	for(int i = 0; i < components.length; i++)
-	    getComponent(components[i]).setActive(true);
+	for (final Class<? extends Component> component : components) getComponent(component).setActive(true);
     }
 }

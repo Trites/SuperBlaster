@@ -2,22 +2,21 @@ package com.mygdx.engine.particle;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.generic.ObjectPool;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-public class ParticleSystem extends ObjectPool<Particle>
+public final class ParticleSystem extends ObjectPool<Particle>
 {
     private static ParticleSystem instance = null;
 
     List<Particle> particles;
-    HashMap<String, Texture> textureMap;
+    Map<String, Texture> textureMap;
 
 
     private ParticleSystem(){
@@ -43,7 +42,7 @@ public class ParticleSystem extends ObjectPool<Particle>
 
     public void spawn(String texture, Transform transform, ParticleData data, ParticleBehaviour behaviour){
 
-	Particle particle = Checkout();
+	Particle particle = checkOut();
 	particle.create(textureMap.get(texture), transform, data, behaviour);
 	particles.add(particle);
     }
@@ -60,7 +59,7 @@ public class ParticleSystem extends ObjectPool<Particle>
 	    if(!particle.isActive()){
 
 		iterator.remove();
-		Checkin(particle);
+		checkIn(particle);
 	    }
 	}
     }

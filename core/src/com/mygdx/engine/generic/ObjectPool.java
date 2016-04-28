@@ -6,17 +6,17 @@ public abstract class ObjectPool<T>
 {
     Stack<T> pool;
 
-    public ObjectPool(){
+    protected ObjectPool(){
 
     	pool = new Stack<>();
     }
 
-    public void Checkin(T item){
+    public void checkIn(T item){
 
 	pool.push(item);
     }
 
-    public T Checkout(){
+    public T checkOut(){
 
 	if(!pool.empty()){
 

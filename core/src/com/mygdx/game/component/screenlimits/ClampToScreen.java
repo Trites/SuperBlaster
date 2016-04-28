@@ -9,7 +9,7 @@ import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
 public class ClampToScreen extends Behaviour
 {
-    RigidBody body;
+    RigidBody body = null;
     float padding;
 
     public ClampToScreen(final Entity entity) {

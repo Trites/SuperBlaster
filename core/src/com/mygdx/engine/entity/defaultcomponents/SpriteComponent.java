@@ -34,7 +34,7 @@ public class SpriteComponent extends RenderComponent
     }
 
     @Override
-    public void render(final SpriteBatch batch) {
+    public void render(final SpriteBatch renderer) {
 
         sprite.setCenter(getEntity().getTransform().getX() + relativePosition.x,
                          getEntity().getTransform().getY() + relativePosition.y);
@@ -44,7 +44,7 @@ public class SpriteComponent extends RenderComponent
 
         sprite.setRotation(getEntity().getTransform().getRotation() + relativeRotation);
         sprite.setOriginCenter();
-        sprite.draw(batch);
+        sprite.draw(renderer);
     }
 
     public Vector2 getRelativePosition() {

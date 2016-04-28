@@ -2,12 +2,14 @@ package com.mygdx.engine.util;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Physics
+public final class Physics
 {
 
 
+    private Physics() {}
+
     public static Vector2 rayCast(final Vector2 rayStart, final Vector2 direction, float distance, final Vector2 center,
-    						 final float radius){
+				  final float radius){
 
 	return rayCast(rayStart, new Vector2(rayStart).mulAdd(direction, distance), center, radius);
 

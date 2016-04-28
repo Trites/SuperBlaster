@@ -9,16 +9,11 @@ public abstract class OnCollision extends Behaviour
 {
     private EventListener<CollisionComponent> collisionResponseHandler;
 
-    public OnCollision(final Entity entity, final boolean startActive) {
+    protected OnCollision(final Entity entity, final boolean startActive) {
 	super(entity, startActive);
 
-	collisionResponseHandler = (x)->collisionResponse(x);
+	collisionResponseHandler = this::collisionResponse;
 	getEntity().collisionEvent.subscribe(collisionResponseHandler);
-    }
-
-    @Override
-    public void update(final float deltaTime) {
-
     }
 
     protected abstract void collisionResponse(CollisionComponent other);

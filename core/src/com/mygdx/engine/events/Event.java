@@ -1,10 +1,11 @@
 package com.mygdx.engine.events;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Event<T>
 {
-    HashSet<EventListener<T>> listeners;
+    Set<EventListener<T>> listeners;
 
     public Event() {
 	this.listeners = new HashSet<>();

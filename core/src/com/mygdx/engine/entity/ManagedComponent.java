@@ -5,7 +5,7 @@ import com.mygdx.engine.entity.managers.ComponentManager;
 public abstract class ManagedComponent extends Component
 {
 
-    public ManagedComponent(final Entity entity) {
+    protected ManagedComponent(final Entity entity) {
 	super(entity);
     }
 

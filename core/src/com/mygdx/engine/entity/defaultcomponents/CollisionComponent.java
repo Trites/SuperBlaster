@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
-import com.mygdx.engine.entity.managers.World;
 
 public abstract class CollisionComponent extends ManagedComponent implements CollisionVisitor, CollisionElement
 {
@@ -13,7 +12,7 @@ public abstract class CollisionComponent extends ManagedComponent implements Col
 
     protected Vector2 relativePosition;
 
-    public CollisionComponent(final Entity entity, Vector2 relativePosition, final int collisionLayer) {
+    protected CollisionComponent(final Entity entity, Vector2 relativePosition, final int collisionLayer) {
 	super(entity);
 	this.collisionLayer = collisionLayer;
 	this.relativePosition = relativePosition;
@@ -21,11 +20,6 @@ public abstract class CollisionComponent extends ManagedComponent implements Col
 
     public int getCollisionLayer() {
 	return collisionLayer;
-    }
-
-    public void notifyCollision(CollisionComponent other){
-
-	this.getEntity().notifyCollision(other);
     }
 
     @Override

@@ -5,18 +5,17 @@ import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
-import com.mygdx.engine.entity.instantiate.EntityBlueprint;
 import com.mygdx.game.factory.EntityBlueprints;
 
 public class Cannon extends Behaviour
 {
-    private static float COOLDOWN_TIME = 0.1f;
-    private static float ACCURACY = 0.97f;
+    private static final float COOLDOWN_TIME = 0.1f;
+    private static final float ACCURACY = 0.97f;
 
     private int supply = 1;
     private float cooldownTimer = 0;
 
-    private RigidBody body;
+    private RigidBody body = null;
 
     public Cannon(final Entity entity) {
 	super(entity);
@@ -57,10 +56,10 @@ public class Cannon extends Behaviour
 
 	    Vector2 forward = getTransform().getForwardVector();
 	    float angle = (float)(Math.atan2(forward.y, forward.x) + (Math.random() * (1 - ACCURACY) * 2*Math.PI - (1 - ACCURACY) * Math.PI));
-	    forward = new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
+	    Vector2 direction = new Vector2((float) Math.cos(angle), (float) Math.sin(angle));
 
-	    projBody.addVelocity(new Vector2(0,0).mulAdd(forward, 1200));
-	    body.addVelocity(new Vector2(0,0).mulAdd(forward, -20));
+	    projBody.addVelocity(new Vector2(0,0).mulAdd(direction, 1200));
+	    body.addVelocity(new Vector2(0,0).mulAdd(direction, -20));
 	    supply--;
 	}
     }

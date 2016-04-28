@@ -1,11 +1,10 @@
 package com.mygdx.game.component.controller;
 
 import com.mygdx.engine.entity.Entity;
-import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 
 public class FollowController extends EnemyController
 {
-    private static final float ACCELERATION = 2000f;
+    private static final float ACCELERATION = 2000.0f;
 
     private final float maxVelocity;
 
@@ -13,7 +12,6 @@ public class FollowController extends EnemyController
 	super(entity, targetTag);
 
 	this.maxVelocity = maxVelocity;
-	getEntity().collisionEvent.subscribe((x)->collisionEvent(x));
     }
 
     @Override
@@ -27,12 +25,5 @@ public class FollowController extends EnemyController
 
 	getTransform().lookAt(target.getPosition());
 	accelerate(getTransform().getForwardVector(), ACCELERATION, maxVelocity, deltaTime);
-    }
-
-    public void collisionEvent(final CollisionComponent other){
-
-
-
-	//getEntity().destroy();
     }
 }
