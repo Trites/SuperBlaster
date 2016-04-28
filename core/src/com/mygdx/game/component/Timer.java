@@ -3,6 +3,10 @@ package com.mygdx.game.component;
 import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 
+/**
+ * Base for a behaviour that invokes a method after a certain time.
+ * Can easily be extended to reset or delete after invoke.
+ */
 public abstract class Timer extends Behaviour
 {
     private boolean tick;

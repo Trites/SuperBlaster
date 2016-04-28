@@ -5,8 +5,23 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.particle.ParticleData;
 
+/**
+ * An implementation of a particle behaviour.
+ * This particle will slow down using lerp. Once almost standing still it will then modulate its alpha for the duration of its lifetime.
+ */
 public final class FragmentParticle
 {
+
+    /**
+     * Minumum velocity the particle can travel at before lifetime starts decaying.
+     */
+    public static final float DECAY_VELOCITY = 0.2f;
+
+    /**
+     * Dampening factor of particle velocity.
+     */
+    public static final float LINEAR_DAMPENING = 0.08f;
+
     private FragmentParticle() {}
 
     public static boolean update(Transform transform, ParticleData particleData, final float deltaTime) {
@@ -20,13 +35,13 @@ public final class FragmentParticle
 
 	    particleData.updateLifeTime(deltaTime);
 
-	    if(particleData.getLifeTime() <= 0.2f){
+	    if(particleData.getLifeTime() <= DECAY_VELOCITY){
 
 		particleData.setAlpha((float)Math.random());
 	    }
 	}
 
-	particleData.getVelocity().lerp(new Vector2(0,0), 0.08f);
+	particleData.getVelocity().lerp(new Vector2(0,0), LINEAR_DAMPENING);
 
 	if(transform.getX() < 0){
 

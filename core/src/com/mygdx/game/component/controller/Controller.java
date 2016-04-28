@@ -5,6 +5,9 @@ import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
+/**
+ * Base for ControllerComponents which can be used by Player or AI to controll Entities.
+ */
 public abstract class Controller extends Behaviour
 {
     protected RigidBody body = null;

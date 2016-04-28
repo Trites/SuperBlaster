@@ -3,6 +3,9 @@ package com.mygdx.game.component;
 import com.mygdx.engine.entity.Component;
 import com.mygdx.engine.entity.Entity;
 
+/**
+ * Behaviour that will enable any components of the given type after a certain time.
+ */
 public class EnableComponentsOnTimer extends Timer
 {
     Class<? extends Component>[] components;

@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Manager that handles RenderComponent. Supports render based rendering.
+ */
 public class RenderManager extends Manager<RenderComponent> implements Renderable<SpriteBatch>
 {
     private List<RenderComponent> renderables; //Most of the time will be spent iterating, therefor we accept O(n) insertion time.

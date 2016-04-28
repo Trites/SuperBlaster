@@ -5,6 +5,9 @@ import com.mygdx.engine.entity.managers.Startable;
 
 import java.util.List;
 
+/**
+ * Base component. Is derived into ManagedComponnt and Behaviour.
+ */
 public abstract class Component implements Destroyable, Startable
 {
 

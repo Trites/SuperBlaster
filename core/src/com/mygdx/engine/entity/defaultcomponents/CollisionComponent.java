@@ -6,6 +6,10 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
 
+/**
+ * Base for a ManagedComponent that can collide with other components derived from this class.
+ * Has support for collision layers.
+ */
 public abstract class CollisionComponent extends ManagedComponent implements CollisionVisitor, CollisionElement
 {
     private int collisionLayer;

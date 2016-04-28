@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
 
+/**
+ * Handles different gamestates, like menues and actual gameplay.
+ */
 public class GameStateHandler
 {
 

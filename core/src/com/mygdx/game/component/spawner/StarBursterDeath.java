@@ -5,6 +5,10 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.instantiate.EntityBlueprint;
 
+/**
+ * Defines collision behaviour of a StarBurster.
+ * It spawns four StarFragments.
+ */
 public class StarBursterDeath extends SpawnOnCollision
 {
     public StarBursterDeath(final Entity entity, final EntityBlueprint blueprint)

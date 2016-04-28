@@ -7,6 +7,12 @@ import com.mygdx.engine.entity.defaultcomponents.RenderComponent;
 import com.mygdx.engine.entity.defaultcomponents.Renderable;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
+/**
+ * World contains all systems requiered to manage Entities.
+ * It assumes three types of ManagedComponents, the managers for these can be injected by the user.
+ * @param <C> CollisionManager
+ * @param <R> RenderManager
+ */
 public class World<C extends Manager<CollisionComponent> & Renderable<ShapeRenderer>, R extends Manager<RenderComponent> & Renderable<SpriteBatch>> extends EntityManager implements ComponentManager
 {
     private C collisionManager;

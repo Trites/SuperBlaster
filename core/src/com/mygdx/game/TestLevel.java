@@ -16,6 +16,9 @@ import com.mygdx.engine.util.CameraEffects;
 import com.mygdx.game.component.controller.PlayerController;
 import com.mygdx.game.factory.EntityBlueprints;
 
+/**
+ * Basic demo of the engines capabilities in the form of a bullet-hell space game.
+ */
 public class TestLevel extends PlayState
 {
 

@@ -5,8 +5,15 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.events.Event;
 
+/**
+ * Behaviour that invokes an event when destroyed.
+ */
 public class NotifyDeath extends Behaviour
 {
+    /**
+     * Event is invoked when component is destroyed.
+     * Sends the Transform of the destroyed component.
+     */
     public Event<Transform> deathEvent;
 
     public NotifyDeath(final Entity entity) {

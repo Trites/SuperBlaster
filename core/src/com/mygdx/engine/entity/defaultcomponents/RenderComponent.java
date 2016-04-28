@@ -5,6 +5,9 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
 
+/**
+ * ManagedComponent that can be rendered. Can be sorted after renderLayer.
+ */
 public abstract class RenderComponent extends ManagedComponent implements Renderable<SpriteBatch>, Comparable<RenderComponent>
 {
 

@@ -7,10 +7,14 @@ import com.mygdx.engine.particle.ParticleData;
 import com.mygdx.engine.particle.ParticleSystem;
 import com.mygdx.engine.util.Util;
 import com.mygdx.game.particlebehaviour.FragmentParticle;
-import com.mygdx.game.particlebehaviour.GravitatingParticle;
 
+/**
+ * Class containing som basic particle effect blueprints.
+ */
 public final class ParticleFactory
 {
+
+    public static final float TWO_PI_DEG = 360.0f;
 
     private ParticleFactory() {}
 
@@ -19,7 +23,7 @@ public final class ParticleFactory
 						final Color color, final int count){
 
 
- 	float angleStep = 360.0f / count;
+ 	float angleStep = TWO_PI_DEG / count;
 
  	for(int i = 0; i < count; i++){
 

@@ -2,6 +2,10 @@ package com.mygdx.engine.generic;
 
 import java.util.Stack;
 
+/**
+ * Class that pools objects until they are needed again, resulting in a theoretical performance gain compared to creating and destroying the same object many times.
+ * @param <T> Type of object to be pooled.
+ */
 public abstract class ObjectPool<T>
 {
     Stack<T> pool;

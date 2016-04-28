@@ -7,6 +7,9 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 
+/**
+ * Behaviour that will make the entity bounce of the screen edges.
+ */
 public class BounceOnBounds extends Behaviour
 {
     RigidBody body = null;

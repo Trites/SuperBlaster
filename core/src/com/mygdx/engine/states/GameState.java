@@ -3,6 +3,9 @@ package com.mygdx.engine.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * A GameState that can be handled by GameStateHandler.
+ */
 public abstract class GameState {
 
     private GameStateHandler handler;

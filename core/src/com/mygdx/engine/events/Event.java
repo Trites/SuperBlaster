@@ -3,6 +3,10 @@ package com.mygdx.engine.events;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Event that can pass one parameter to its listener.
+ * @param <T> Type of parameter to be passed.
+ */
 public class Event<T>
 {
     Set<EventListener<T>> listeners;

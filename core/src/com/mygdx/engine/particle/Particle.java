@@ -7,9 +7,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.defaultcomponents.Renderable;
 
+/**
+ * A particle that can change behaviour depending on what ParticleBehaviour is passed to it.
+ */
 public class Particle implements Renderable<SpriteBatch>
 {
-
+    /**
+     * The number two, used for dividing by two.
+     */
+    public static final float TWO = 2.0f;
     private boolean active;
     private Texture texture = null;
     private Vector2 origin = null;
@@ -32,7 +38,7 @@ public class Particle implements Renderable<SpriteBatch>
 	this.behaviour = behaviour;
 
 	this.active = true;
-	this.origin =  new Vector2(texture.getWidth() / 2.0f, texture.getHeight() / 2.0f);
+	this.origin =  new Vector2(texture.getWidth() / TWO, texture.getHeight() / TWO);
     }
 
     public void update(final float deltaTime){

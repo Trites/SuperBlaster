@@ -10,10 +10,40 @@ import com.mygdx.engine.util.CameraEffects;
 import com.mygdx.engine.util.Util;
 import com.mygdx.game.factory.EntityBlueprints;
 
+/**
+ * A cannon that will fire 100 colorfull projectiles and produce a powerfull kickback.
+ */
 public class BeamCannon extends Behaviour
 {
+    /**
+     * Cooldown in seconds during which the cannon cannot be fired again.
+     */
     private static final float COOLDOWN_TIME = 1.0f;
+
+    /**
+     * Accuracy of cannon. Value of 1 gives perfect accuracy while 0 will cause the cannon to fire in 360 degrees randomly.
+     */
     private static final float ACCURACY = 0.99f;
+    /**
+     * Force applied to the RigidBody of the owner entity when the cannon is fired.
+     */
+    public static final float KICKBACK = -80.0f;
+    /**
+     * Magnitude of camera shake produces.
+     */
+    public static final float CAMERA_SHAKE_MAGNITUDE = 8.0f;
+    /**
+     * Duration of camera shake produces.
+     */
+    public static final float CAMERA_SHAKE_DURATION = 0.5f;
+    /**
+     * Variation of projectile velocity (0 - PROJECTILE_VEL_VARIATION)
+     */
+    public static final float PROJECTILE_VEL_VARIATION = 600.0f;
+    /**
+     * Projectile base velocity.
+     */
+    public static final float PROJECTILE_VEL_BASE = 1800.0f;
 
     private  boolean fired;
     private int supply = 100;
@@ -43,7 +73,7 @@ public class BeamCannon extends Behaviour
 	if(fired && supply > 0){
 
 
-	    body.addVelocity(new Vector2(0,0).mulAdd(getTransform().getForwardVector(), -80));
+	    body.addVelocity(new Vector2(0,0).mulAdd(getTransform().getForwardVector(), KICKBACK));
 	    for(int i = 0; i < 5; i++){
 
 		spawnProjectile();
@@ -70,7 +100,7 @@ public class BeamCannon extends Behaviour
 
 	    //supply--;
 	    fired = true;
-	    CameraEffects.cameraShake(8.00f, 0.5f);
+	    CameraEffects.cameraShake(CAMERA_SHAKE_MAGNITUDE, CAMERA_SHAKE_DURATION);
 	}
     }
 
@@ -83,6 +113,7 @@ public class BeamCannon extends Behaviour
  	Vector2 direction = new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
 
 	projBody.getComponent(SpriteComponent.class).setColor(Util.randomColor(1.00f));
- 	projBody.addVelocity(new Vector2(0,0).mulAdd(direction, (float)Math.random()*600 + 1800));
+ 	projBody.addVelocity(new Vector2(0,0).mulAdd(direction, (float)Math.random() * PROJECTILE_VEL_VARIATION +
+								PROJECTILE_VEL_BASE));
     }
 }

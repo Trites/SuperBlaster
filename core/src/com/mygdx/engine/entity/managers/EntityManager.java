@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Manages entities.
+ */
 public class EntityManager extends Manager<Entity>
 {
     private List<Entity> entities;

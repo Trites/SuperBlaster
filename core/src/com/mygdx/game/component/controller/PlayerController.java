@@ -14,11 +14,32 @@ import com.mygdx.engine.events.Event;
 import com.mygdx.engine.util.CameraEffects;
 import com.mygdx.game.factory.ParticleFactory;
 
+/**
+ * Basic implementation of a PlayerController that acts like a 2D top-dows spaceship.
+ */
 public class PlayerController extends Behaviour
 {
 
+    /**
+     * Acceleration per second.
+     */
     private static final float ACCELERATION = 2000.0f;
+    /**
+     * Macimum velocity
+     */
     private static final float MAX_VELOCITY = 600.0f;
+    /**
+     * Number of particles spawned on death.
+     */
+    private static final int DEATH_PARTICLE_COUNT = 500;
+    /**
+     * Magnitude of screen shake produced on death.
+     */
+    private static final float DEATH_SHAKE_MAGNITUDE = 20.0f;
+    /**
+     * Duration of screen shake produced on death.
+     */
+    private static final float DEATH_SHAKE_DURATION = 1.5f;
 
     public Event<Transform> playerDeathEvent;
 
@@ -55,9 +76,9 @@ public class PlayerController extends Behaviour
 
 	playerDeathEvent.notify(getTransform());
 
-	ParticleFactory.circularDeathParticle(getTransform().getPosition(), Color.ORANGE, 500);
+	ParticleFactory.circularDeathParticle(getTransform().getPosition(), Color.ORANGE, DEATH_PARTICLE_COUNT);
 
-	CameraEffects.cameraShake(20.0f, 1.5f);
+	CameraEffects.cameraShake(DEATH_SHAKE_MAGNITUDE, DEATH_SHAKE_DURATION);
 	getEntity().destroy();
     }
 

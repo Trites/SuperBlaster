@@ -3,6 +3,10 @@ package com.mygdx.engine.particle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Class that contains particle information.
+ * Contains: velocity, color, lifetime.
+ */
 public class ParticleData
 {
     private Vector2 velocity;

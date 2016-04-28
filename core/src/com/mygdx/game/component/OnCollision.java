@@ -5,6 +5,9 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
 import com.mygdx.engine.events.EventListener;
 
+/**
+ * Base for a behaviour that invokes a collision response.
+ */
 public abstract class OnCollision extends Behaviour
 {
     private EventListener<CollisionComponent> collisionResponseHandler;

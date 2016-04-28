@@ -6,6 +6,9 @@ import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.ManagedComponent;
 import com.mygdx.engine.entity.managers.ComponentManager;
 
+/**
+ * ManagedComponent that deals with velocity and movement.
+ */
 public class RigidBody extends ManagedComponent
 {
 

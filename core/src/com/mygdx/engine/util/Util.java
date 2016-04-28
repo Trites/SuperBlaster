@@ -4,8 +4,25 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * Class containing usefull utility methods and constants.
+ */
 public final class Util
 {
+
+    /**
+     * PI in degrees.
+     */
+    public static final float PI_DEG = 180.0f;
+    /**
+     * Constant that converts radians to degrees.
+     */
+    public static float RAD_TO_DEG = PI_DEG / (float)Math.PI;
+    /**
+     * Constant that converts degrees to radians.
+     */
+    public static float DEG_TO_RAD = (float)Math.PI / PI_DEG;
+
     private Util() {}
 
     public static float clamp(final float value, final float min, final float max){
@@ -62,4 +79,6 @@ public final class Util
 
 	return a.x*b.y - a.y*b.x;
     }
+
+
 }

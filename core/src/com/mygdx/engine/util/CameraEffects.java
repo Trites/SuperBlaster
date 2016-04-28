@@ -3,8 +3,12 @@ package com.mygdx.engine.util;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * Utility class that allows user to invoke camera effects.
+ */
 public final class CameraEffects
 {
+    public static final float ONE_HALF = 0.5f;
     private static OrthographicCamera camera = null;
     private static Vector3 cameraOrigin = null;
 
@@ -34,9 +38,9 @@ public final class CameraEffects
 
 
 
-		Vector3 targetdirection = new Vector3((float)Math.random() - 0.5f, (float)Math.random() - 0.5f, 0.0f).nor();
+		Vector3 targetdirection = new Vector3((float)Math.random() - ONE_HALF, (float)Math.random() - ONE_HALF, 0.0f).nor();
   		Vector3 positionDelta = targetdirection.scl((float)Math.random()*shakeMagnitude);
-  		camera.position.lerp(new Vector3(cameraOrigin).add(positionDelta), 0.5f);
+  		camera.position.lerp(new Vector3(cameraOrigin).add(positionDelta), ONE_HALF);
 	    }else{
 
 		shakeTimer = 0.0f;

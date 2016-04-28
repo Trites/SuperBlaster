@@ -11,6 +11,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Singleton system that manages particles.
+ * Makes use of an ObjectPool to reuse objects.
+ */
 public final class ParticleSystem extends ObjectPool<Particle>
 {
     private static ParticleSystem instance = null;

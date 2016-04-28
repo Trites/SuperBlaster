@@ -5,6 +5,9 @@ import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manager for RigidBody. The main purpuse of this manager is to ensure that physics updates at the end of each frame.
+ */
 public class RigidBodyManager extends Manager<RigidBody>
 {
     private List<RigidBody> bodies;

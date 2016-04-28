@@ -12,8 +12,12 @@ import com.mygdx.engine.util.CameraEffects;
  * Handles game loop
  */
 public class MainGame extends ApplicationAdapter {
+
+    /**
+     * Time step size.
+     */
     public static final float STEP = 1 / 60.0f;
-   	private float accumulatedDelta = 0;
+    private float accumulatedDelta = 0;
 
 
     	private OrthographicCamera camera = null;

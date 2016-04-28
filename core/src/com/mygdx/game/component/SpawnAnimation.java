@@ -8,6 +8,10 @@ import com.mygdx.engine.entity.defaultcomponents.CircleCollider;
 import com.mygdx.engine.entity.defaultcomponents.RigidBody;
 import com.mygdx.engine.entity.defaultcomponents.SpriteComponent;
 
+/**
+ * Behaviour that modulates the alpha value of a SpriteComponent attached to the Entity.
+ * Removes itself when time is over.
+ */
 public class SpawnAnimation extends Behaviour
 {
 

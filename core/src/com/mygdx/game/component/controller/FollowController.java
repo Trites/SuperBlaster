@@ -2,6 +2,9 @@ package com.mygdx.game.component.controller;
 
 import com.mygdx.engine.entity.Entity;
 
+/**
+ * A basic controller that accelerates towards the given target.
+ */
 public class FollowController extends EnemyController
 {
     private static final float ACCELERATION = 2000.0f;
@@ -12,12 +15,6 @@ public class FollowController extends EnemyController
 	super(entity, targetTag);
 
 	this.maxVelocity = maxVelocity;
-    }
-
-    @Override
-    public void start() {
-	super.start();
-
     }
 
     @Override

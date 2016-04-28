@@ -12,17 +12,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Base for entity composition. An Entity can contain several components, which defines its behaviour.
+ */
 public class Entity implements Destroyable, Startable
 {
     private World world;
 
+    /**
+     * Invoked when a CollisionComponent reports a collision.
+     */
     public Event<CollisionComponent> collisionEvent;
 
     private boolean active;
     private String tag;
     private Transform transform;
-    private HashMap<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
+    private Map<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
     private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration than the valueset of the HashMap
     private HashSet<Class<? extends Component>> requieredComponents;
 

@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 
+/**
+ * Derived from CollisionComponent. This class specifies the collision behaviour of a circle.
+ */
 public class CircleCollider extends CollisionComponent
 {
     private float radius;
