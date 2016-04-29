@@ -38,6 +38,7 @@ public final class ParticleSystem extends ObjectPool<Particle>
 
 	if(instance == null){
 
+	    //noinspection NonThreadSafeLazyInitialization
 	    instance = new ParticleSystem();
 	}
 

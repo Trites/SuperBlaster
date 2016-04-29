@@ -8,6 +8,7 @@ import com.mygdx.engine.entity.managers.ComponentManager;
 /**
  * ManagedComponent that can be rendered. Can be sorted after renderLayer.
  */
+@SuppressWarnings("ComparableImplementedButEqualsNotOverridden")
 public abstract class RenderComponent extends ManagedComponent implements Renderable<SpriteBatch>, Comparable<RenderComponent>
 {
 

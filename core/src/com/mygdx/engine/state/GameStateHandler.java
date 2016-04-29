@@ -1,5 +1,6 @@
 package com.mygdx.engine.state;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
@@ -30,19 +31,33 @@ public class GameStateHandler
 
     public void popState(GameState state){
 
+	//noinspection ObjectEquality
 	if(stateStack.peek() == state)
-	    stateStack.pop();
+	    popState();
     }
 
     public void update(final float deltaTime){
 
-	if(!stateStack.empty())
+	if(!stateStack.empty()){
+
 	    stateStack.peek().update(deltaTime);
+	}else{
+
+	    Gdx.app.exit();
+	}
     }
 
     public void render(SpriteBatch batch){
 
-	if(!stateStack.empty())
+
+	if(!stateStack.empty()){
+
+	    batch.begin();
 	    stateStack.peek().render(batch);
+	    batch.end();
+
+	    if(stateStack.peek().isDebug())
+		stateStack.peek().debugRender();
+	}
     }
 }

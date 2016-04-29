@@ -26,6 +26,7 @@ public final class DesktopLauncher {
 	    config.width = WIDTH;
 	    config.height = HEIGHT;
 
+	    //noinspection ResultOfObjectAllocationIgnored
 	    new LwjglApplication(new MainGame(), config);
 	}
 }

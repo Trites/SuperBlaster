@@ -60,7 +60,6 @@ public abstract class Manager<T extends Startable & Destroyable> implements Star
 
         while(!removeQueue.isEmpty()){
 
-            removeQueue.peek().destroyImmediate();
             remove(removeQueue.remove());
         }
     }

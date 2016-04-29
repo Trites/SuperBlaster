@@ -22,8 +22,8 @@ public abstract class OnCollision extends Behaviour
     protected abstract void collisionResponse(CollisionComponent other);
 
     @Override
-    public void destroyImmediate() {
-	super.destroyImmediate();
+    public void dispose() {
+	super.dispose();
     	getEntity().collisionEvent.unsubscribe(collisionResponseHandler);
     }
 }

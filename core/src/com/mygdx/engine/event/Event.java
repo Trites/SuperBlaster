@@ -30,9 +30,4 @@ public class Event<T>
 	for(EventListener<T> listener : listeners)
 	    listener.invoke(param);
     }
-
-    public void clear(){
-
-	listeners.clear();
-    }
 }

@@ -98,8 +98,8 @@ public class KillOnTargetDeath extends Behaviour
 	getEntity().destroy();
     }
 
-    @Override public void destroyImmediate() {
-	super.destroyImmediate();
+    @Override public void dispose() {
+	super.dispose();
 
 	if(target != null){
 

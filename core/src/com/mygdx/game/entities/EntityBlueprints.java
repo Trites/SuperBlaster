@@ -2,7 +2,6 @@ package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.component.defaultcomponent.CircleCollider;
@@ -29,9 +28,10 @@ import com.mygdx.game.entities.component.spawner.TimedSpawner;
  * Util class containing blueprints for all Entities in the demo.
  * Ideally this would be handled by a scripting language or GUI.
  */
-@SuppressWarnings("OverlyCoupledMethod")
+@SuppressWarnings({ "OverlyCoupledMethod", "UnusedReturnValue" })
 //Class should idealy be replaced by scripting language support that allows user to construct entities.
 //Until then this will have to do.
+//Methods should return the entities they create, even though I don't use this functionallity in the demo.
 public final class EntityBlueprints
 {
 
@@ -39,21 +39,26 @@ public final class EntityBlueprints
     private static final float PLAYER_LINEAR_DAMPENING = 0.008f;
     private static final float PLAYER_RADIUS = 30.0f;
     private static final float PLAYER_SPAWN_DELAY = 0.5f;
+
     private static final float ENEMY_MASS = 10.0f;
     private static final float ENEMY_LINEAR_DAMPENING = 0.008f;
+    private static final float ENEMY_SPAWN_DELAY = 2.0f;
+
     private static final float FOLLOWER_RADIUS = 30.0f;
     private static final float FOLLOWER_MAX_VELOCITY = 200.0f;
-    private static final float ENEMY_SPAWN_DELAY = 2.0f;
-    private static final float STARBURSTER_RADIUS = 30.0f;
-    private static final float STARBURSTER_MAX_VELOCITY = 150.0f;
-    private static final float STARFRAGMENT_RADIUS = 15.0f;
-    private static final float STARFRAGMENT_INVINSIBLE_TIME = 1.0f;
-    private static final float PROJECTILE_MASS = 10.0f;
-    private static final float PROJECTILE_RADIUS = 7.0f;
     private static final float FOLLOWER_SPAWN_MIN_TIME = 6.0f;
     private static final float FOLLOWER_SPAWN_MAX_TIME = 6.0f;
+
+    private static final float STARBURSTER_RADIUS = 30.0f;
+    private static final float STARBURSTER_MAX_VELOCITY = 150.0f;
     private static final float STARBURSTER_SPAWN_MIN_TIME = 5.0f;
     private static final float STARBURSTER_SPAWN_MAX_TIME = 5.0f;
+
+    private static final float STARFRAGMENT_RADIUS = 12.0f;
+    private static final float STARFRAGMENT_INVINSIBLE_TIME = 1.0f;
+
+    private static final float PROJECTILE_MASS = 10.0f;
+    private static final float PROJECTILE_RADIUS = 7.0f;
 
     private EntityBlueprints() {}
 
@@ -130,7 +135,7 @@ public final class EntityBlueprints
 
     public static Entity instantiateFollowerSpawner(World<CollisionManager, RenderManager> world, Transform transform){
 
-	Entity entity = new Entity(world, new Transform(new Vector2(0,0)));
+	Entity entity = new Entity(world, transform);
 	entity.addComponent(new TimedSpawner(entity, EntityBlueprints::instantiateFollower, FOLLOWER_SPAWN_MIN_TIME,
 					     FOLLOWER_SPAWN_MAX_TIME));
 	entity.addComponent(new KillOnTargetDeath(entity, "Player"));
@@ -139,7 +144,7 @@ public final class EntityBlueprints
 
     public static Entity instantiateStarFragmentSpawner(World<CollisionManager, RenderManager> world, Transform transform){
 
- 	Entity entity = new Entity(world, new Transform(new Vector2(0,0)));
+ 	Entity entity = new Entity(world, transform);
  	entity.addComponent(new TimedSpawner(entity, EntityBlueprints::instantiateStarBurster, STARBURSTER_SPAWN_MIN_TIME,
 					     STARBURSTER_SPAWN_MAX_TIME));
  	entity.addComponent(new KillOnTargetDeath(entity, "Player"));

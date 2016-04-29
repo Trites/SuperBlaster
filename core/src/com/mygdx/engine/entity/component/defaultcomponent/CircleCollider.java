@@ -22,6 +22,7 @@ public class CircleCollider extends CollisionComponent
     @Override
     public boolean intersectVisit(final CollisionVisitor other) {
 
+	//noinspection ObjectEquality
 	if(other == this)
 	    return false;
 

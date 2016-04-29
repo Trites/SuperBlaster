@@ -21,12 +21,12 @@ public abstract class Timer extends Behaviour
     @Override
     public void update(final float deltaTime) {
 
+
 	if(tick){
 
 	    timer -= deltaTime;
 
-	    if(timer <= 0){
-
+	    if(timer <= 0.0f){
 		timer = 0;
 		tick = false;
 		invoke();

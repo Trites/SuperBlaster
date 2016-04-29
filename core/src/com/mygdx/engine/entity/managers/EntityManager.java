@@ -52,6 +52,7 @@ public class EntityManager extends Manager<Entity>
 
 	removeEntityTag(element);
 	entities.remove(element);
+	element.dispose();
     }
 
     public List<Entity> findEntity(final String tag){
@@ -91,6 +92,10 @@ public class EntityManager extends Manager<Entity>
     @Override
     public void clear() {
 	super.clear();
+
+	for(Entity entity : entities)
+	    entity.dispose();
+
     	entities.clear();
 	tagMap.clear();
     }

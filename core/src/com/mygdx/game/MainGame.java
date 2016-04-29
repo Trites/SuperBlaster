@@ -55,9 +55,7 @@ public class MainGame extends ApplicationAdapter {
 
 		    	camera.update();
 		   	batch.setProjectionMatrix(camera.combined);
-   			batch.begin();
    			gameState.render(batch);
-
    		}
 
 

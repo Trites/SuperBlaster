@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Base component. Is derived into ManagedComponnt and Behaviour.
  */
-public abstract class Component implements Destroyable, Startable
+public class Component implements Destroyable, Startable
 {
 
     private boolean startActive;
@@ -49,11 +49,14 @@ public abstract class Component implements Destroyable, Startable
     public void destroy(){
         active = false;
         alive = false;
+        entity.removeComponent(this);
     }
 
     @Override
-    public void destroyImmediate() {
+    public void dispose() {
 
+        active = false;
+        alive = false;
     }
 
     public boolean isActive() {

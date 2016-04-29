@@ -19,7 +19,7 @@ public abstract class SpawnOnCollision extends Behaviour
 	getEntity().collisionEvent.subscribe(this::collisionResponse);
     }
 
-    private void collisionResponse(final CollisionComponent other){
+    @SuppressWarnings("UnusedParameters") private void collisionResponse(final CollisionComponent other){
 
 	instantiate();
     }

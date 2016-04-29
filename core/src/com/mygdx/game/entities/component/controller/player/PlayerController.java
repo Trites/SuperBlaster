@@ -75,7 +75,7 @@ public class PlayerController extends Behaviour
 	handleInput(deltaTime);
     }
 
-    private void collisionEvent(CollisionComponent other){
+    @SuppressWarnings("UnusedParameters") private void collisionEvent(CollisionComponent other){
 
 	playerDeathEvent.notify(getTransform());
 
@@ -107,9 +107,8 @@ public class PlayerController extends Behaviour
 	    direction.x = 1;
         }
 
-	if(Gdx.input.isButtonPressed(Buttons.LEFT)){
+	if(Gdx.input.isButtonPressed(Buttons.LEFT))
 	    cannon.fire();
-	}
 
 	accelerate(direction.nor(), deltaTime);
     }
@@ -118,5 +117,11 @@ public class PlayerController extends Behaviour
 
 	body.addVelocity(new Vector2(ACCELERATION * direction.x * deltaTime, ACCELERATION * direction.y * deltaTime));
 	body.limitVelocity(MAX_VELOCITY);
+    }
+
+    @Override
+    public void dispose() {
+	super.dispose();
+    	getEntity().collisionEvent.unsubscribe(this::collisionEvent);
     }
 }

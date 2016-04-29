@@ -56,6 +56,7 @@ public class BeamCannon extends Behaviour
 
 	cooldownTimer = COOLDOWN_TIME;
 	getEntity().requireComponent(RigidBody.class);
+	getEntity().requireComponent(SpriteComponent.class);
     }
 
     @Override

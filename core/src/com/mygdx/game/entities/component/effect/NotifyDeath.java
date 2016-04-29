@@ -27,8 +27,10 @@ public class NotifyDeath extends Behaviour
     }
 
     @Override
-    public void destroy() {
-	super.destroy();
-    	deathEvent.notify(getTransform());
+    public void dispose() {
+	super.dispose();
+	deathEvent.notify(getTransform());
     }
+
+
 }

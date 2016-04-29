@@ -1,6 +1,5 @@
 package com.mygdx.engine.entity;
 
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.component.Behaviour;
 import com.mygdx.engine.entity.component.Component;
 import com.mygdx.engine.entity.component.ManagedComponent;
@@ -10,6 +9,7 @@ import com.mygdx.engine.entity.managers.ComponentManager;
 import com.mygdx.engine.entity.managers.RenderManager;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.event.Event;
+import com.mygdx.engine.exception.MissingDependencyException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * Base for entity composition. An Entity can contain several components, which defines its behaviour.
  */
-public class Entity implements Startable, Destroyable
+public final class Entity implements Startable, Destroyable
 {
     private World<CollisionManager, RenderManager> world;
 
@@ -36,11 +36,6 @@ public class Entity implements Startable, Destroyable
     private Map<Class<? extends Component> , Component> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
     private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration than the valueset of the HashMap
     private HashSet<Class<? extends Component>> requieredComponents;
-
-    public Entity(World<CollisionManager, RenderManager> world, Vector2 position, Vector2 scale, float rotation) {
-	this(world, new Transform(position, scale, rotation));
-    }
-
 
     public Entity(World<CollisionManager, RenderManager> world, final Transform transform){
 
@@ -66,7 +61,7 @@ public class Entity implements Startable, Destroyable
 
 	}else{
 
-	    System.out.println("ERROR: Missing dependency!");
+	    new MissingDependencyException("Entity is missing a component that is requiered by another component.").printStackTrace();
 	}
 
 	active = true;
@@ -88,16 +83,6 @@ public class Entity implements Startable, Destroyable
 		iterator.remove();
 	    }
  	}
-
-
-	for(int i = 0; i < behaviours.size(); i++){
-
-	    Behaviour behaviour = behaviours.get(i);
-	    if(behaviour.isActive()){
-
-		behaviour.update(deltaTime);
-	    }
-	}
     }
 
     public <T extends Behaviour> void addComponent(T behaviour){
@@ -126,6 +111,8 @@ public class Entity implements Startable, Destroyable
 	    component.start();
     }
 
+    //Needed for class check.
+    @SuppressWarnings("TypeMayBeWeakened")
     public void removeComponent(Component component){
 
 	Class<? extends Component> componentType = component.getClass();
@@ -133,6 +120,7 @@ public class Entity implements Startable, Destroyable
 	if(hasComponent(componentType)){
 
 	    componentMap.remove(componentType);
+	    component.dispose();
 	}
     }
 
@@ -156,6 +144,8 @@ public class Entity implements Startable, Destroyable
 
 	if(hasComponent(type)){
 
+	    //Type can be guarateed from the way it is added.
+	    //noinspection unchecked
 	    return (T)(componentMap.get(type));
 	}
 
@@ -211,18 +201,18 @@ public class Entity implements Startable, Destroyable
     public void destroy(){
 
 	for(Component component : componentMap.values()){
-	    component.destroy();
+	    component.setActive(false);
  	}
 
 	world.queueRemoval(this);
     }
 
     @Override
-    public void destroyImmediate(){
+    public void dispose(){
 
 	for(final Component component : componentMap.values()){
 
-	    component.destroyImmediate();
+	    component.dispose();
  	}
     }
 }
