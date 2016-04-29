@@ -1,14 +1,15 @@
 package com.mygdx.engine.entity;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
+import com.mygdx.engine.entity.component.Behaviour;
+import com.mygdx.engine.entity.component.Component;
+import com.mygdx.engine.entity.component.ManagedComponent;
+import com.mygdx.engine.entity.component.defaultcomponent.CollisionComponent;
 import com.mygdx.engine.entity.managers.CollisionManager;
 import com.mygdx.engine.entity.managers.ComponentManager;
-import com.mygdx.engine.entity.managers.Destroyable;
 import com.mygdx.engine.entity.managers.RenderManager;
-import com.mygdx.engine.entity.managers.Startable;
 import com.mygdx.engine.entity.managers.World;
-import com.mygdx.engine.events.Event;
+import com.mygdx.engine.event.Event;
 
 import java.util.ArrayList;
 import java.util.HashMap;

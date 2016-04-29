@@ -1,5 +1,8 @@
 package com.mygdx.engine.entity.managers;
 
+import com.mygdx.engine.entity.Destroyable;
+import com.mygdx.engine.entity.Startable;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -8,7 +11,7 @@ import java.util.Queue;
  * Base for manager classes. Contains add and remove functionallity.
  * @param <T> Type of object this manager will handle.
  */
-public abstract class Manager<T extends Destroyable & Startable> implements Startable
+public abstract class Manager<T extends Startable & Destroyable> implements Startable
 {
 
     private Queue<T> addQueue;

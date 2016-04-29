@@ -10,11 +10,11 @@ import com.mygdx.engine.entity.managers.RenderManager;
 import com.mygdx.engine.entity.managers.RigidBodyManager;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.particle.ParticleSystem;
-import com.mygdx.engine.states.GameStateHandler;
-import com.mygdx.engine.states.PlayState;
+import com.mygdx.engine.state.GameStateHandler;
+import com.mygdx.engine.state.PlayState;
 import com.mygdx.engine.util.CameraEffects;
-import com.mygdx.game.component.controller.PlayerController;
-import com.mygdx.game.factory.EntityBlueprints;
+import com.mygdx.game.entities.component.controller.player.PlayerController;
+import com.mygdx.game.entities.EntityBlueprints;
 
 /**
  * Basic demo of the engines capabilities in the form of a bullet-hell space game.

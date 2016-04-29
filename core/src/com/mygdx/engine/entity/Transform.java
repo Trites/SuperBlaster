@@ -6,6 +6,7 @@ import com.mygdx.engine.util.Util;
 /**
  * Convinience class containing position, scale and rotation.
  */
+@SuppressWarnings("unused")
 public class Transform
 {
     private Vector2 position;

@@ -1,8 +1,8 @@
 package com.mygdx.engine.entity.managers;
 
-import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
-import com.mygdx.engine.entity.defaultcomponents.RenderComponent;
-import com.mygdx.engine.entity.defaultcomponents.RigidBody;
+import com.mygdx.engine.entity.component.defaultcomponent.CollisionComponent;
+import com.mygdx.engine.entity.component.defaultcomponent.RenderComponent;
+import com.mygdx.engine.entity.component.defaultcomponent.RigidBody;
 
 /**
  * Interface that can be implemented to allow entities to register their managed components.

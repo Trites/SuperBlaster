@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
  * Class that contains particle information.
  * Contains: velocity, color, lifetime.
  */
+@SuppressWarnings("unused")
 public class ParticleData
 {
     private Vector2 velocity;

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.Transform;
-import com.mygdx.engine.entity.defaultcomponents.Renderable;
+import com.mygdx.engine.entity.component.defaultcomponent.Renderable;
 
 /**
  * A particle that can change behaviour depending on what ParticleBehaviour is passed to it.

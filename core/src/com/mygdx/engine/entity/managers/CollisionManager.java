@@ -3,15 +3,15 @@ package com.mygdx.engine.entity.managers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
-import com.mygdx.engine.entity.defaultcomponents.Renderable;
+import com.mygdx.engine.entity.component.defaultcomponent.CollisionComponent;
+import com.mygdx.engine.entity.component.defaultcomponent.Renderable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Managed the interaction between CollisionComponents. It makes use of 8 collision layers to optimize collision checks.
- * A map of which layers collides with each other is supplied as a byte array with 8 elements where each elements represents a layer.
+ * A map of what layers collides is supplied as a byte array with 8 elements where each elements represents a layer.
  */
 public class CollisionManager extends Manager<CollisionComponent> implements Renderable<ShapeRenderer>
 {

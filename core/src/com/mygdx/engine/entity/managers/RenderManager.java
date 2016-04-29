@@ -1,8 +1,8 @@
 package com.mygdx.engine.entity.managers;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.engine.entity.defaultcomponents.RenderComponent;
-import com.mygdx.engine.entity.defaultcomponents.Renderable;
+import com.mygdx.engine.entity.component.defaultcomponent.RenderComponent;
+import com.mygdx.engine.entity.component.defaultcomponent.Renderable;
 
 import java.util.ArrayList;
 import java.util.Collections;

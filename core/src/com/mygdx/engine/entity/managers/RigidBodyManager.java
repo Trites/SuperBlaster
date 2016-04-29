@@ -1,6 +1,6 @@
 package com.mygdx.engine.entity.managers;
 
-import com.mygdx.engine.entity.defaultcomponents.RigidBody;
+import com.mygdx.engine.entity.component.defaultcomponent.RigidBody;
 
 import java.util.ArrayList;
 import java.util.List;

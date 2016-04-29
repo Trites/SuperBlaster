@@ -1,0 +1,10 @@
+package com.mygdx.engine.entity.component.defaultcomponent;
+
+/**
+ * Interface for classes that can be rendered.
+ * @param <T> Type of renderer
+ */
+public interface Renderable<T>
+{
+    void render(T renderer);
+}
