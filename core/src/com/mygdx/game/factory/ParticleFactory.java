@@ -15,6 +15,12 @@ public final class ParticleFactory
 {
 
     private static final float TWO_PI_DEG = 360.0f;
+    private static final int PARTICLE_VEL_VARIATION = 1500;
+    private static final int PARTICLE_VEL_BASE = 150;
+    private static final float DIRECTIONAL_COLOR_VARIATION = 0.8f;
+    private static final float PARTICLE_LIFE_TIME = 0.2f;
+    private static final float CIRCULAR_COLOR_VARIATION = 1.0f;
+    private static final float CIRCULAR_PARTICLE_LIFE_TIME = 2.0f;
 
     private ParticleFactory() {}
 
@@ -34,9 +40,11 @@ public final class ParticleFactory
  	    Vector2 vel = Util.getBounceVelocity(pos, otherPos, initVel, otherVel, (float)Math.random()*particleMassSpan + particleMassAdjust, otherMass);
 
  	    Transform transform = new Transform(new Vector2(pos), new Vector2(1, 1), 0);
- 	    ParticleData data = new ParticleData(vel, Util.shiftColor(color, 0.8f), 0.2f);
+ 	    ParticleData data = new ParticleData(vel, Util.shiftColor(color, DIRECTIONAL_COLOR_VARIATION), PARTICLE_LIFE_TIME);
  	    transform.lookAt(new Vector2(position).mulAdd(transform.getForwardVector(), -1));
- 	    transform.setRotation(transform.getRotation() + 45);
+
+	    //noinspection MagicNumber
+	    transform.setRotation(transform.getRotation() + 45);
 
 
 
@@ -46,18 +54,21 @@ public final class ParticleFactory
 
     public static void circularDeathParticle(final Vector2 position, final Color color, final int count){
 
-	float angleStep = 360.0f / count;
+	float angleStep = TWO_PI_DEG / count;
 	for(int i = 0; i < count; i++){
 
 	    float angle = angleStep*i;
-	    float vel = ((float)Math.random() * 1500) + 150;
+	    float vel = ((float)Math.random() * PARTICLE_VEL_VARIATION) + PARTICLE_VEL_BASE;
 
 	    Transform transform = new Transform(new Vector2(position), new Vector2(1, 1), angle);
 
-	    ParticleData data = new ParticleData(new Vector2(0, 0).mulAdd(transform.getForwardVector(), vel), Util.shiftColor(color,
-															      1.0f),
-						 2.0f);
+	    ParticleData data = new ParticleData(new Vector2(transform.getForwardVector()).scl(vel),
+						 Util.shiftColor(color, CIRCULAR_COLOR_VARIATION),
+						 CIRCULAR_PARTICLE_LIFE_TIME);
+
 	    transform.lookAt(new Vector2(position).mulAdd(transform.getForwardVector(), -1));
+
+	    //noinspection MagicNumber
 	    transform.setRotation(transform.getRotation() + 45);
 
 

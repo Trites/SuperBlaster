@@ -15,6 +15,7 @@ public abstract class Component implements Destroyable, Startable
 
     private Entity entity;
     private boolean active;
+    private boolean alive;
 
     protected Component(final Entity entity) {
         this(entity, true);
@@ -24,6 +25,7 @@ public abstract class Component implements Destroyable, Startable
 
         this.entity = entity;
         this.active = false;
+        this.alive = true;
         this.startActive = startActive;
     }
 
@@ -42,7 +44,10 @@ public abstract class Component implements Destroyable, Startable
     protected List<Entity> findEntity(final String tag){ return entity.findEntity(tag); }
 
     @Override
-    public void destroy(){ active = false; }
+    public void destroy(){
+        active = false;
+        alive = false;
+    }
 
     @Override
     public void destroyImmediate() {
@@ -55,5 +60,9 @@ public abstract class Component implements Destroyable, Startable
 
     public void setActive(final boolean active) {
         this.active = active;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

@@ -13,13 +13,14 @@ import com.mygdx.engine.events.Event;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Base for entity composition. An Entity can contain several components, which defines its behaviour.
  */
-public class Entity implements Destroyable, Startable
+public class Entity implements Startable, Destroyable
 {
     private World<CollisionManager, RenderManager> world;
 
@@ -31,7 +32,7 @@ public class Entity implements Destroyable, Startable
     private boolean active;
     private String tag;
     private Transform transform;
-    private Map<Class<? extends Component> , ArrayList<Component>> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
+    private Map<Class<? extends Component> , Component> componentMap;	//Hashmap used for fast lookup of what behaviours exists in the entity
     private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration than the valueset of the HashMap
     private HashSet<Class<? extends Component>> requieredComponents;
 
@@ -57,15 +58,11 @@ public class Entity implements Destroyable, Startable
     @Override
     public void start(){
 
-	/*System.out.println("KeySet:");
-	System.out.println(componentMap.keySet());
-	System.out.println("");*/
-
 	if(hasComponents(new ArrayList<>(requieredComponents))){
 
-	    for(List<Component> components : componentMap.values())
-		for(Component component : components)
-		    component.start();
+	    for(Component component : componentMap.values())
+		component.start();
+
 	}else{
 
 	    System.out.println("ERROR: Missing dependency!");
@@ -77,6 +74,21 @@ public class Entity implements Destroyable, Startable
     public void update(final float deltaTime){
 
 
+	for(Iterator<Behaviour> iterator = behaviours.iterator(); iterator.hasNext();){
+
+	    Behaviour behaviour = iterator.next();
+
+	    if(behaviour.isActive())
+	    	behaviour.update(deltaTime);
+
+	    if(!behaviour.isAlive()){
+
+		removeComponent(behaviour);
+		iterator.remove();
+	    }
+ 	}
+
+
 	for(int i = 0; i < behaviours.size(); i++){
 
 	    Behaviour behaviour = behaviours.get(i);
@@ -85,13 +97,6 @@ public class Entity implements Destroyable, Startable
 		behaviour.update(deltaTime);
 	    }
 	}
-
-	/*for(Behaviour behaviour : behaviours){
-	    if(behaviour.isActive()){
-
-		behaviour.update(deltaTime);
-	    }
-	}*/
     }
 
     public <T extends Behaviour> void addComponent(T behaviour){
@@ -107,12 +112,14 @@ public class Entity implements Destroyable, Startable
     }
 
     private <T extends Component> void registerComponent(T component){
-    if(!hasComponent(component.getClass())){
 
-   	    componentMap.put(component.getClass(), new ArrayList<>());
-   	}
+	if(!hasComponent(component.getClass())){
 
-   	componentMap.get(component.getClass()).add(component);
+	    componentMap.put(component.getClass(), component);
+	}else{
+
+	    System.out.println("DUPLICATE COMPONENT!");
+	}
 
 	if(active)
 	    component.start();
@@ -124,12 +131,7 @@ public class Entity implements Destroyable, Startable
 
 	if(hasComponent(componentType)){
 
-	    componentMap.get(componentType).remove(component);
-
-	    if(!componentMap.get(componentType).isEmpty()){
-
-		componentMap.remove(componentType);
-	    }
+	    componentMap.remove(componentType);
 	}
     }
 
@@ -153,7 +155,7 @@ public class Entity implements Destroyable, Startable
 
 	if(hasComponent(type)){
 
-	    return (T)(componentMap.get(type).get(0));
+	    return (T)(componentMap.get(type));
 	}
 
 	return null;
@@ -207,13 +209,9 @@ public class Entity implements Destroyable, Startable
     @Override
     public void destroy(){
 
-	for(final List<Component> components : componentMap.values()){
-	    for(final Component component : components){
-
-		//component.setActive(false);
-		component.destroy();
-	    }
-	}
+	for(Component component : componentMap.values()){
+	    component.destroy();
+ 	}
 
 	world.queueRemoval(this);
     }
@@ -221,12 +219,9 @@ public class Entity implements Destroyable, Startable
     @Override
     public void destroyImmediate(){
 
+	for(final Component component : componentMap.values()){
 
-	for(final List<Component> components : componentMap.values()){
-	    for(final Component component : components){
-
-		component.destroyImmediate();
-	    }
-	}
+	    component.destroyImmediate();
+ 	}
     }
 }

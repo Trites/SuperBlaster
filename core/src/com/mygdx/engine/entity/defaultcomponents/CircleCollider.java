@@ -12,12 +12,8 @@ public class CircleCollider extends CollisionComponent
     private float radius;
 
     public CircleCollider(final Entity entity, float radius, final byte collisionLayer) {
-	this(entity, radius, new Vector2(0,0), collisionLayer);
-    }
 
-    public CircleCollider(final Entity entity, float radius, Vector2 relativePosition, final byte collisionLayer) {
-
-	super(entity, relativePosition, collisionLayer);
+	super(entity, collisionLayer);
 
 	this.radius = radius;
     }
@@ -44,10 +40,10 @@ public class CircleCollider extends CollisionComponent
     @Override
     public float edgeDistance(final CircleCollider other){
 
-	return Vector2.dst(this.getTransform().getX() + this.relativePosition.x,
-			   this.getTransform().getY() + this.relativePosition.y,
-			   other.getTransform().getX() + other.relativePosition.x,
-			   other.getTransform().getY() + other.relativePosition.y) - (this.radius + other.radius);
+	return Vector2.dst(this.getTransform().getX(),
+			   this.getTransform().getY(),
+			   other.getTransform().getX(),
+			   other.getTransform().getY()) - (this.radius + other.radius);
     }
 
     public float getRadius() {

@@ -14,12 +14,9 @@ public abstract class CollisionComponent extends ManagedComponent implements Col
 {
     private int collisionLayer;
 
-    protected Vector2 relativePosition;
-
-    protected CollisionComponent(final Entity entity, Vector2 relativePosition, final int collisionLayer) {
+    protected CollisionComponent(final Entity entity, final int collisionLayer) {
 	super(entity);
 	this.collisionLayer = collisionLayer;
-	this.relativePosition = relativePosition;
     }
 
     public int getCollisionLayer() {
@@ -36,14 +33,6 @@ public abstract class CollisionComponent extends ManagedComponent implements Col
     public void deregister(final ComponentManager world) {
 
 	world.deregisterComponent(this);
-    }
-
-    public Vector2 getRelativePosition() {
-	return relativePosition;
-    }
-
-    public void setRelativePosition(final Vector2 relativePosition) {
-	this.relativePosition = relativePosition;
     }
 
     public abstract void render(final ShapeRenderer renderer);

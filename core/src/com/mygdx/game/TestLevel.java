@@ -26,11 +26,11 @@ public class TestLevel extends PlayState
 
     private ShapeRenderer debugRender = null;
 
-    World<CollisionManager, RenderManager> world = null;
-    ParticleSystem particleSystem = null;
+    private World<CollisionManager, RenderManager> world = null;
+    private ParticleSystem particleSystem = null;
 
-    float resetTimer;
-    boolean reset;
+    private float resetTimer;
+    private boolean reset;
 
     public TestLevel(final GameStateHandler handler) {
 	super(handler);
