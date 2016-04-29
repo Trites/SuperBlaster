@@ -22,7 +22,6 @@ public final class DesktopLauncher {
 
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-	    //noinspection ResultOfObjectAllocationIgnored
 	    config.width = WIDTH;
 	    config.height = HEIGHT;
 

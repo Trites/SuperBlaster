@@ -10,6 +10,7 @@ import com.mygdx.engine.entity.component.defaultcomponent.SpriteComponent;
 import com.mygdx.engine.entity.managers.CollisionManager;
 import com.mygdx.engine.entity.managers.RenderManager;
 import com.mygdx.engine.entity.managers.World;
+import com.mygdx.engine.util.Util;
 import com.mygdx.game.entities.component.effect.DeathParticleEffectOnCollision;
 import com.mygdx.game.entities.component.effect.EnableComponentsOnTimer;
 import com.mygdx.game.entities.component.effect.KillOnTargetDeath;
@@ -66,7 +67,7 @@ public final class EntityBlueprints
 
  	Entity entity = new Entity(world, transform);
  	entity.addComponent(new RigidBody(entity, PLAYER_MASS, PLAYER_LINEAR_DAMPENING, 0.0f));
- 	entity.addComponent(new SpriteComponent(entity, 0, new Texture("Player.png")));
+ 	entity.addComponent(new SpriteComponent(entity, 0, new Texture("Player.png"), Color.YELLOW));
  	entity.addComponent(new PlayerController(entity));
  	entity.addComponent(new CircleCollider(entity, PLAYER_RADIUS, (byte)0));
  	entity.addComponent(new BeamCannon(entity));
@@ -74,7 +75,6 @@ public final class EntityBlueprints
  	entity.addComponent(new NotifyDeath(entity));
 	entity.addComponent(new SpawnAnimation(entity, PLAYER_SPAWN_DELAY));
  	entity.setTag("Player");
-	entity.getComponent(SpriteComponent.class).setColor(Color.YELLOW);
  	return entity;
      }
 
@@ -82,13 +82,12 @@ public final class EntityBlueprints
 
 	Entity entity = new Entity(world, transform);
 	entity.addComponent(new RigidBody(entity, ENEMY_MASS, ENEMY_LINEAR_DAMPENING, 0.0f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Texture("GammaSmasher.png")));
+	entity.addComponent(new SpriteComponent(entity, 0, new Texture("GammaSmasher.png"), Color.PURPLE));
 	entity.addComponent(new CircleCollider(entity, FOLLOWER_RADIUS, (byte)1));
 	entity.addComponent(new KillOnTargetDeath(entity, "Player"));
 	entity.addComponent(new FollowController(entity, "Player", FOLLOWER_MAX_VELOCITY));
 	entity.addComponent(new DeathParticleEffectOnCollision(entity, true));
 	entity.addComponent(new SpawnAnimation(entity, ENEMY_SPAWN_DELAY));
-	entity.getComponent(SpriteComponent.class).setColor(Color.PURPLE);
 	return entity;
     }
 
@@ -96,14 +95,13 @@ public final class EntityBlueprints
 
 	Entity entity = new Entity(world, transform);
 	entity.addComponent(new RigidBody(entity, ENEMY_MASS, ENEMY_LINEAR_DAMPENING, 0.0f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Texture("StarBurster.png")));
+	entity.addComponent(new SpriteComponent(entity, 0, new Texture("StarBurster.png"), Color.CYAN));
 	entity.addComponent(new CircleCollider(entity, STARBURSTER_RADIUS, (byte)1));
 	entity.addComponent(new KillOnTargetDeath(entity, "Player"));
 	entity.addComponent(new FollowController(entity, "Player", STARBURSTER_MAX_VELOCITY));
 	entity.addComponent(new SpawnAnimation(entity, ENEMY_SPAWN_DELAY));
 	entity.addComponent(new DeathParticleEffectOnCollision(entity, true));
 	entity.addComponent(new StarBursterDeath(entity, EntityBlueprints::instantiateStarFragment));
-	entity.getComponent(SpriteComponent.class).setColor(Color.CYAN);
 	return entity;
     }
 
@@ -111,14 +109,14 @@ public final class EntityBlueprints
 
 	Entity entity = new Entity(world, transform);
 	entity.addComponent(new RigidBody(entity, ENEMY_MASS, ENEMY_LINEAR_DAMPENING, 0.0f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Texture("StarFragment.png")));
+	entity.addComponent(new SpriteComponent(entity, 0, new Texture("StarFragment.png"), Color.FIREBRICK));
 	entity.addComponent(new CircleCollider(entity, STARFRAGMENT_RADIUS, (byte)1));
 	entity.addComponent(new KillOnTargetDeath(entity, "Player"));
 	entity.addComponent(new MissileController(entity, "Player"));
 	entity.addComponent(new DeathParticleEffectOnCollision(entity, false));
 
-	entity.addComponent(new EnableComponentsOnTimer(entity, STARFRAGMENT_INVINSIBLE_TIME, new Class[] {DeathParticleEffectOnCollision.class}));
-	entity.getComponent(SpriteComponent.class).setColor(Color.FIREBRICK);
+	//noinspection unchecked
+	entity.addComponent(new EnableComponentsOnTimer(entity, STARFRAGMENT_INVINSIBLE_TIME, DeathParticleEffectOnCollision.class));
 	return entity;
     }
 
@@ -126,7 +124,7 @@ public final class EntityBlueprints
 
 	Entity entity = new Entity(world, transform);
 	entity.addComponent(new RigidBody(entity, PROJECTILE_MASS, 0.0f, 0.0f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Texture("Plasma.png")));
+	entity.addComponent(new SpriteComponent(entity, 0, new Texture("Plasma.png"), Util.randomColor(1.00f)));
 	entity.addComponent(new CircleCollider(entity, PROJECTILE_RADIUS, (byte)2));
 	entity.addComponent(new DeleteOutOfBounds(entity));
 	entity.setTag("Projectile");

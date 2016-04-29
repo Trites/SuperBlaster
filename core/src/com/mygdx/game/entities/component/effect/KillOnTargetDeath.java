@@ -64,7 +64,9 @@ public class KillOnTargetDeath extends Behaviour
 
 	if(targetEntity.hasComponent(NotifyDeath.class)){
 	    target = targetEntity.getComponent(NotifyDeath.class);
-	    target.deathEvent.subscribe(targetDeathHandler);
+
+	    if(target != null)
+	    	target.deathEvent.subscribe(targetDeathHandler);
 	}else{
 
 	    System.out.println("NO TARGET!");

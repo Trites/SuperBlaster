@@ -11,7 +11,8 @@ public class EnableComponentsOnTimer extends Timer
 {
     private Class<? extends Component>[] components;
 
-    public EnableComponentsOnTimer(final Entity entity, final float time, final Class<? extends Component>[] components) {
+    @SafeVarargs
+    public EnableComponentsOnTimer(final Entity entity, final float time, final Class<? extends Component> ... components) {
 	super(entity, time);
 	this.components = components;
     }

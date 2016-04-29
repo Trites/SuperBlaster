@@ -69,6 +69,7 @@ public class TestLevel extends GameState
 													    2.0f), new Vector2(1, 1), 0));
 	EntityBlueprints.instantiateFollowerSpawner(world, new Transform(new Vector2(0,0)));
 	EntityBlueprints.instantiateStarFragmentSpawner(world, new Transform(new Vector2(0,0)));
+	//noinspection ConstantConditions
 	world.findEntity("Player").get(0).getComponent(PlayerController.class).playerDeathEvent.subscribe(this::resetLevel);
 	reset = false;
     }

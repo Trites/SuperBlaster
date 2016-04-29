@@ -7,7 +7,6 @@ import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.component.defaultcomponent.RigidBody;
 import com.mygdx.engine.entity.component.defaultcomponent.SpriteComponent;
 import com.mygdx.engine.util.CameraEffects;
-import com.mygdx.engine.util.Util;
 import com.mygdx.game.entities.EntityBlueprints;
 
 /**
@@ -99,7 +98,6 @@ public class BeamCannon extends Behaviour
 
 	if(supply > 0){
 
-	    //supply--;
 	    fired = true;
 	    CameraEffects.cameraShake(CAMERA_SHAKE_MAGNITUDE, CAMERA_SHAKE_DURATION);
 	}
@@ -113,8 +111,8 @@ public class BeamCannon extends Behaviour
  	float angle = (float)(Math.atan2(forward.y, forward.x) + (Math.random() * (1 - ACCURACY) * 2*Math.PI - (1 - ACCURACY) * Math.PI));
  	Vector2 direction = new Vector2((float)Math.cos(angle), (float)Math.sin(angle));
 
-	projBody.getComponent(SpriteComponent.class).setColor(Util.randomColor(1.00f));
- 	projBody.addVelocity(new Vector2(0,0).mulAdd(direction, (float)Math.random() * PROJECTILE_VEL_VARIATION +
+	if(projBody != null)
+ 		projBody.addVelocity(new Vector2(0,0).mulAdd(direction, (float)Math.random() * PROJECTILE_VEL_VARIATION +
 								PROJECTILE_VEL_BASE));
     }
 }

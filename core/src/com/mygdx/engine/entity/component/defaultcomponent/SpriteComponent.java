@@ -13,12 +13,13 @@ public class SpriteComponent extends RenderComponent
 {
     private Sprite sprite;
 
-    public SpriteComponent(final Entity entity, final int renderLayer, final Texture texture)
+    public SpriteComponent(final Entity entity, final int renderLayer, final Texture texture, final Color color)
     {
         super(entity, renderLayer);
 
         this.sprite = new Sprite(texture);
         this.sprite.setOriginCenter();
+        this.sprite.setColor(color);
     }
 
     @Override
