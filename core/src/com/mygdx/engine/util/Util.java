@@ -17,11 +17,11 @@ public final class Util
     /**
      * Constant that converts radians to degrees.
      */
-    public static float RAD_TO_DEG = PI_DEG / (float)Math.PI;
+    public static final float RAD_TO_DEG = PI_DEG / (float)Math.PI;
     /**
      * Constant that converts degrees to radians.
      */
-    public static float DEG_TO_RAD = (float)Math.PI / PI_DEG;
+    public static final float DEG_TO_RAD = (float)Math.PI / PI_DEG;
 
     private Util() {}
 
@@ -38,6 +38,7 @@ public final class Util
 
     public static Color shiftColor(final Color color, final Vector3 direction, final float variation){
 
+	//noinspection MagicNumber
 	float colorDistance = (float)Math.random()*variation - variation / 2.0f;
 	direction.scl(colorDistance);
 
@@ -66,6 +67,7 @@ public final class Util
 	float a1 = new Vector2(velA).dot(line);
 	float a2 = new Vector2(velB).dot(line);
 
+	//noinspection MagicNumber
 	float p = (2.0f * (a2 - a1)) / (massA + massB);
 
 
@@ -80,5 +82,9 @@ public final class Util
 	return a.x*b.y - a.y*b.x;
     }
 
+    public static float random(final float min, final float max){
+
+	return (float)Math.random()*(max - min) + min;
+    }
 
 }

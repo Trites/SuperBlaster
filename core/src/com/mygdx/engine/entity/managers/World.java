@@ -13,7 +13,8 @@ import com.mygdx.engine.entity.defaultcomponents.RigidBody;
  * @param <C> CollisionManager
  * @param <R> RenderManager
  */
-public class World<C extends Manager<CollisionComponent> & Renderable<ShapeRenderer>, R extends Manager<RenderComponent> & Renderable<SpriteBatch>> extends EntityManager implements ComponentManager
+public class World<C extends Manager<CollisionComponent> & Renderable<ShapeRenderer>, R extends Manager<RenderComponent> & Renderable<SpriteBatch>>
+	extends EntityManager implements ComponentManager
 {
     private C collisionManager;
     private Manager<RigidBody> rigidBodyManager;

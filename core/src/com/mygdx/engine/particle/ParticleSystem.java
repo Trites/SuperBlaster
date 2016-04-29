@@ -19,8 +19,8 @@ public final class ParticleSystem extends ObjectPool<Particle>
 {
     private static ParticleSystem instance = null;
 
-    List<Particle> particles;
-    Map<String, Texture> textureMap;
+    private List<Particle> particles;
+    private Map<String, Texture> textureMap;
 
 
     private ParticleSystem(){
@@ -34,7 +34,7 @@ public final class ParticleSystem extends ObjectPool<Particle>
 	textureMap.put(texture, new Texture(texture));
     }
 
-    public static ParticleSystem GetInstance(){
+    public static ParticleSystem getInstance(){
 
 	if(instance == null){
 

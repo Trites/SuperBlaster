@@ -2,8 +2,10 @@ package com.mygdx.engine.entity;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.engine.entity.defaultcomponents.CollisionComponent;
+import com.mygdx.engine.entity.managers.CollisionManager;
 import com.mygdx.engine.entity.managers.ComponentManager;
 import com.mygdx.engine.entity.managers.Destroyable;
+import com.mygdx.engine.entity.managers.RenderManager;
 import com.mygdx.engine.entity.managers.Startable;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.events.Event;
@@ -19,7 +21,7 @@ import java.util.Map;
  */
 public class Entity implements Destroyable, Startable
 {
-    private World world;
+    private World<CollisionManager, RenderManager> world;
 
     /**
      * Invoked when a CollisionComponent reports a collision.
@@ -33,12 +35,12 @@ public class Entity implements Destroyable, Startable
     private List<Behaviour> behaviours;	//ArrayList used for iterating through the behaviours during update, ArrayList is faster for iteration than the valueset of the HashMap
     private HashSet<Class<? extends Component>> requieredComponents;
 
-    public Entity(World world, Vector2 position, Vector2 scale, float rotation) {
+    public Entity(World<CollisionManager, RenderManager> world, Vector2 position, Vector2 scale, float rotation) {
 	this(world, new Transform(position, scale, rotation));
     }
 
 
-    public Entity(World world, final Transform transform){
+    public Entity(World<CollisionManager, RenderManager> world, final Transform transform){
 
 	this.world = world;
 	this.transform = transform;
@@ -188,7 +190,7 @@ public class Entity implements Destroyable, Startable
 
     }
 
-    public World getWorld(){
+    public World<CollisionManager, RenderManager> getWorld(){
 
 	return world;
     }

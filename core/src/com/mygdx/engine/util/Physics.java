@@ -2,6 +2,9 @@ package com.mygdx.engine.util;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Util class for physics related methods.
+ */
 public final class Physics
 {
 

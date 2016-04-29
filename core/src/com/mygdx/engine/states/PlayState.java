@@ -2,6 +2,9 @@ package com.mygdx.engine.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * Base for game levels
+ */
 public class PlayState extends GameState
 {
 

@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class Event<T>
 {
-    Set<EventListener<T>> listeners;
+    private Set<EventListener<T>> listeners;
 
     public Event() {
 	this.listeners = new HashSet<>();

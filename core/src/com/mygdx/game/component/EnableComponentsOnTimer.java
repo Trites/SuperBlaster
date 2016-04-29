@@ -8,7 +8,7 @@ import com.mygdx.engine.entity.Entity;
  */
 public class EnableComponentsOnTimer extends Timer
 {
-    Class<? extends Component>[] components;
+    private Class<? extends Component>[] components;
 
     public EnableComponentsOnTimer(final Entity entity, final float time, final Class<? extends Component>[] components) {
 	super(entity, time);

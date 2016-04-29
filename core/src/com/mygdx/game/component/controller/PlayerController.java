@@ -41,6 +41,9 @@ public class PlayerController extends Behaviour
      */
     private static final float DEATH_SHAKE_DURATION = 1.5f;
 
+    /**
+     * Event that is invoked on player death.
+     */
     public Event<Transform> playerDeathEvent;
 
     private RigidBody body = null;

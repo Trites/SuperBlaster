@@ -14,7 +14,7 @@ import com.mygdx.game.particlebehaviour.FragmentParticle;
 public final class ParticleFactory
 {
 
-    public static final float TWO_PI_DEG = 360.0f;
+    private static final float TWO_PI_DEG = 360.0f;
 
     private ParticleFactory() {}
 
@@ -40,7 +40,7 @@ public final class ParticleFactory
 
 
 
- 	    ParticleSystem.GetInstance().spawn("Plasma.png", transform, data, FragmentParticle::update);
+ 	    ParticleSystem.getInstance().spawn("Plasma.png", transform, data, FragmentParticle::update);
  	}
      }
 
@@ -62,7 +62,7 @@ public final class ParticleFactory
 
 
 
-	    ParticleSystem.GetInstance().spawn("Plasma.png", transform, data, FragmentParticle::update);
+	    ParticleSystem.getInstance().spawn("Plasma.png", transform, data, FragmentParticle::update);
 	}
     }
 }

@@ -8,7 +8,7 @@ import java.util.Stack;
  */
 public abstract class ObjectPool<T>
 {
-    Stack<T> pool;
+    private Stack<T> pool;
 
     protected ObjectPool(){
 

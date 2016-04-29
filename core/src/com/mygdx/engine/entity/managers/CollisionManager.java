@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class CollisionManager extends Manager<CollisionComponent> implements Renderable<ShapeRenderer>
 {
-    static final int LAYER_COUNT = 8; //Number of collision layers, tied to bits in a byte
+    private static final int LAYER_COUNT = 8; //Number of collision layers, tied to bits in a byte
 
-    byte[] collisionMap;
-    List<List<CollisionComponent>> collisionLayers;
+    private byte[] collisionMap;
+    private List<List<CollisionComponent>> collisionLayers;
 
 
     public CollisionManager(byte[] collisionMap) {
@@ -57,18 +57,22 @@ public class CollisionManager extends Manager<CollisionComponent> implements Ren
 
 			if(((collisionMap[component.getCollisionLayer()] >> j) & 1) == 1){ //If component collides with layer j
 
-			    for(CollisionComponent other : collisionLayers.get(j) ){
-
-				if(component.intersectVisit(other)){
-
-				    component.getEntity().notifyCollision(other);
-				    other.getEntity().notifyCollision(component);
-				}
-			    }
+				collisionCheck(component, collisionLayers.get(j));
 			}
 		    }
-
 		}
+	    }
+	}
+    }
+
+    private void collisionCheck(final CollisionComponent component, final Iterable<CollisionComponent> others){
+
+	for(CollisionComponent other : others ){
+
+	    if(component.intersectVisit(other)){
+
+  		component.getEntity().notifyCollision(other);
+  		other.getEntity().notifyCollision(component);
 	    }
 	}
     }

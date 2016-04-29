@@ -26,7 +26,7 @@ public class TestLevel extends PlayState
 
     private ShapeRenderer debugRender = null;
 
-    World world = null;
+    World<CollisionManager, RenderManager> world = null;
     ParticleSystem particleSystem = null;
 
     float resetTimer;
@@ -57,7 +57,7 @@ public class TestLevel extends PlayState
 		0
 	};
 
-	particleSystem = ParticleSystem.GetInstance();
+	particleSystem = ParticleSystem.getInstance();
 	particleSystem.addTexture("Plasma.png");
 
 	world = new World(new CollisionManager(collisionMap), new RigidBodyManager(), new RenderManager());
@@ -77,6 +77,7 @@ public class TestLevel extends PlayState
     private void buildLevel(){
 
 	System.out.println("New world...");
+	//noinspection MagicNumber,MagicNumber
 	EntityBlueprints.instantiatePlayer(world, new Transform(new Vector2(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() /
 													    2.0f), new Vector2(1, 1), 0));
 	EntityBlueprints.instantiateFollowerSpawner(world, new Transform(new Vector2(0,0)));

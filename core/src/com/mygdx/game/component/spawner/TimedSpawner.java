@@ -2,21 +2,24 @@ package com.mygdx.game.component.spawner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.engine.entity.Behaviour;
 import com.mygdx.engine.entity.Entity;
 import com.mygdx.engine.entity.Transform;
 import com.mygdx.engine.entity.instantiate.EntityBlueprint;
+import com.mygdx.engine.util.Util;
+import com.mygdx.game.component.Timer;
 
-public class TimedSpawner extends Behaviour
+/**
+ * Instantiates the given blueprint repeatedly with a random delay in the given interval.
+ */
+public class TimedSpawner extends Timer
 {
     private EntityBlueprint blueprint;
     private float minTime;
     private float maxTime;
 
-    private float timer;
 
     public TimedSpawner(final Entity entity, final EntityBlueprint blueprint, final float minTime, final float maxTime) {
-	super(entity);
+	super(entity, 0.0f);
 
         this.blueprint = blueprint;
         this.minTime = minTime;
@@ -24,15 +27,10 @@ public class TimedSpawner extends Behaviour
     }
 
     @Override
-    public void update(final float deltaTime) {
+    protected void invoke() {
 
-        timer -= deltaTime;
-
-        if(timer <= 0){
-
-            instantiate();
-            timer = (float) Math.random()*(maxTime-minTime) + minTime;
-        }
+        instantiate();
+        reset(Util.random(minTime, maxTime));
     }
 
     private void instantiate(){

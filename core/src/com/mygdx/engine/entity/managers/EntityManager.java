@@ -61,7 +61,7 @@ public class EntityManager extends Manager<Entity>
 
     private void addEntityTag(final Entity entity, final String tag){
 
-	if(!tag.equals("")){
+	if(!tag.isEmpty()){
 
 	    if(tagMap.get(tag) == null)
 	   	    tagMap.put(tag, new ArrayList<>());

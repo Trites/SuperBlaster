@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector3;
  */
 public final class CameraEffects
 {
-    public static final float ONE_HALF = 0.5f;
+    private static final float ONE_HALF = 0.5f;
     private static OrthographicCamera camera = null;
     private static Vector3 cameraOrigin = null;
 

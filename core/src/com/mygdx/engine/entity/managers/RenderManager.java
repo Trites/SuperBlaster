@@ -43,7 +43,7 @@ public class RenderManager extends Manager<RenderComponent> implements Renderabl
     @Override
     public void render(final SpriteBatch renderer) {
 
-	for(final Renderable renderable : renderables){
+	for(final Renderable<SpriteBatch> renderable : renderables){
 
 	    renderable.render(renderer);
 	}

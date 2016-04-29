@@ -37,25 +37,9 @@ public abstract class Timer extends Behaviour
 
     protected abstract void invoke();
 
-    public float getTimer() {
-	return timer;
-    }
+    public void reset(final float time){
 
-    public void setTimer(final float timer) {
-	this.timer = timer;
-
+	this.timer = time;
 	tick = timer > 0.0f;
-    }
-
-    public boolean isTick() {
-	return tick;
-    }
-
-    public void setTick(final boolean tick) {
-
-	this.tick = tick;
-
-	if(timer <= 0.0f)
-	    this.tick = false;
     }
 }
