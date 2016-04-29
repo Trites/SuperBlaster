@@ -61,7 +61,7 @@ public final class EntityBlueprints
 
  	Entity entity = new Entity(world, transform);
  	entity.addComponent(new RigidBody(entity, PLAYER_MASS, PLAYER_LINEAR_DAMPENING, 0.0f));
- 	entity.addComponent(new SpriteComponent(entity, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("Player.png")));
+ 	entity.addComponent(new SpriteComponent(entity, 0, new Texture("Player.png")));
  	entity.addComponent(new PlayerController(entity));
  	entity.addComponent(new CircleCollider(entity, PLAYER_RADIUS, (byte)0));
  	entity.addComponent(new BeamCannon(entity));
@@ -77,7 +77,7 @@ public final class EntityBlueprints
 
 	Entity entity = new Entity(world, transform);
 	entity.addComponent(new RigidBody(entity, ENEMY_MASS, ENEMY_LINEAR_DAMPENING, 0.0f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("GammaSmasher.png")));
+	entity.addComponent(new SpriteComponent(entity, 0, new Texture("GammaSmasher.png")));
 	entity.addComponent(new CircleCollider(entity, FOLLOWER_RADIUS, (byte)1));
 	entity.addComponent(new KillOnTargetDeath(entity, "Player"));
 	entity.addComponent(new FollowController(entity, "Player", FOLLOWER_MAX_VELOCITY));
@@ -91,7 +91,7 @@ public final class EntityBlueprints
 
 	Entity entity = new Entity(world, transform);
 	entity.addComponent(new RigidBody(entity, ENEMY_MASS, ENEMY_LINEAR_DAMPENING, 0.0f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("StarBurster.png")));
+	entity.addComponent(new SpriteComponent(entity, 0, new Texture("StarBurster.png")));
 	entity.addComponent(new CircleCollider(entity, STARBURSTER_RADIUS, (byte)1));
 	entity.addComponent(new KillOnTargetDeath(entity, "Player"));
 	entity.addComponent(new FollowController(entity, "Player", STARBURSTER_MAX_VELOCITY));
@@ -106,7 +106,7 @@ public final class EntityBlueprints
 
 	Entity entity = new Entity(world, transform);
 	entity.addComponent(new RigidBody(entity, ENEMY_MASS, ENEMY_LINEAR_DAMPENING, 0.0f));
-	entity.addComponent(new SpriteComponent(entity, 0, new Vector2(0, 0), new Vector2(1, 1), 0, new Texture("StarFragment.png")));
+	entity.addComponent(new SpriteComponent(entity, 0, new Texture("StarFragment.png")));
 	entity.addComponent(new CircleCollider(entity, STARFRAGMENT_RADIUS, (byte)1));
 	entity.addComponent(new KillOnTargetDeath(entity, "Player"));
 	entity.addComponent(new MissileController(entity, "Player"));
