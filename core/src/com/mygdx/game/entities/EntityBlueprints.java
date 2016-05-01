@@ -29,7 +29,6 @@ import com.mygdx.game.entities.component.spawner.TimedSpawner;
  * Util class containing blueprints for all Entities in the demo.
  * Ideally this would be handled by a scripting language or GUI.
  */
-@SuppressWarnings({ "OverlyCoupledMethod", "UnusedReturnValue" })
 //Class should idealy be replaced by scripting language support that allows user to construct entities.
 //Until then this will have to do.
 //Methods should return the entities they create, even though I don't use this functionallity in the demo.
@@ -63,6 +62,7 @@ public final class EntityBlueprints
 
     private EntityBlueprints() {}
 
+    //Return value never used in demo, but it is still usefull.
     public static Entity instantiatePlayer(World<CollisionManager, RenderManager> world, Transform transform){
 
  	Entity entity = new Entity(world, transform);
@@ -115,7 +115,6 @@ public final class EntityBlueprints
 	entity.addComponent(new MissileController(entity, "Player"));
 	entity.addComponent(new DeathParticleEffectOnCollision(entity, false));
 
-	//noinspection unchecked
 	entity.addComponent(new EnableComponentsOnTimer(entity, STARFRAGMENT_INVINSIBLE_TIME, DeathParticleEffectOnCollision.class));
 	return entity;
     }
@@ -131,6 +130,7 @@ public final class EntityBlueprints
 	return entity;
     }
 
+    //Return value never used in demo, but it is still usefull.
     public static Entity instantiateFollowerSpawner(World<CollisionManager, RenderManager> world, Transform transform){
 
 	Entity entity = new Entity(world, transform);
@@ -140,6 +140,7 @@ public final class EntityBlueprints
 	return entity;
     }
 
+    //Return value never used in demo, but it is still usefull.
     public static Entity instantiateStarFragmentSpawner(World<CollisionManager, RenderManager> world, Transform transform){
 
  	Entity entity = new Entity(world, transform);

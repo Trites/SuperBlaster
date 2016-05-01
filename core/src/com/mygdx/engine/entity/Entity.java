@@ -9,6 +9,7 @@ import com.mygdx.engine.entity.managers.ComponentManager;
 import com.mygdx.engine.entity.managers.RenderManager;
 import com.mygdx.engine.entity.managers.World;
 import com.mygdx.engine.event.Event;
+import com.mygdx.engine.exception.DuplicateComponentException;
 import com.mygdx.engine.exception.MissingDependencyException;
 
 import java.util.ArrayList;
@@ -104,15 +105,14 @@ public final class Entity implements Startable, Destroyable
 	    componentMap.put(component.getClass(), component);
 	}else{
 
-	    System.out.println("DUPLICATE COMPONENT!");
+	    new DuplicateComponentException("Entity already contains a component of this type.").printStackTrace();
 	}
 
 	if(active)
 	    component.start();
     }
 
-    //Needed for class check.
-    @SuppressWarnings("TypeMayBeWeakened")
+    //Strong type needed for class check.
     public void removeComponent(Component component){
 
 	Class<? extends Component> componentType = component.getClass();

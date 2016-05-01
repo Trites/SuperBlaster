@@ -43,6 +43,8 @@ public class Component implements Destroyable, Startable
 
     public <T extends Component> T getComponent(Class<T> type) { return entity.getComponent(type); }
 
+    protected <T extends Component>  void requireComponent(Class<T> type){ entity.requireComponent(type);}
+
     protected List<Entity> findEntity(final String tag){ return entity.findEntity(tag); }
 
     @Override

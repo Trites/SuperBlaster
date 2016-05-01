@@ -1,0 +1,48 @@
+@startuml
+
+class World{
+
+	List<Entity> entities
+	Manager<CollisionComponent> collisionManager
+	Manager<RenderComponent> renderManager
+	Manager<Rigidbody> rigidbodyManager
+}
+
+abstract class Manager<T extends ManagedComponent>{
+
+	List<T> components
+}
+
+class Entity{
+
+	List<Behaviour> behaviours
+	Map<Class, Component> componentMap
+	HashSet<Class> requieredComponents
+}
+
+class CollisionManager
+
+abstract class Component
+abstract class Behaviour
+abstract class ManagedComponent
+
+abstract CollisionComponent
+
+interface Updatable
+
+Behaviour ---|> Component
+Behaviour ..|> Updatable
+ManagedComponent --|> Component
+Entity .> Component
+Entity .> Behaviour
+World ..> Entity
+
+World .> Manager
+
+CollisionManager --|> Manager
+CollisionManager .> CollisionComponent
+
+CollisionComponent --|> ManagedComponent
+
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+
+abstract class ObjectPool<T>{
+
+	Stack<T> pool
+}
+
+class ParticleSystem{
+
+	List<Particle> particles
+	Map<String, Texture> textureMap
+}
+
+class Particle
+class ParticleData
+interface ParticleBehaviour
+
+ParticleSystem ..|> ObjectPool
+ParticleSystem -> Particle
+Particle --> ParticleData
+Particle -> ParticleBehaviour
+
+@enduml

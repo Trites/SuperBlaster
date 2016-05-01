@@ -64,18 +64,25 @@ public class TestLevel extends GameState
 
     private void buildLevel(){
 
-	//noinspection MagicNumber,MagicNumber
+	//Simple division by two
 	EntityBlueprints.instantiatePlayer(world, new Transform(new Vector2(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() /
 													    2.0f), new Vector2(1, 1), 0));
 	EntityBlueprints.instantiateFollowerSpawner(world, new Transform(new Vector2(0,0)));
 	EntityBlueprints.instantiateStarFragmentSpawner(world, new Transform(new Vector2(0,0)));
-	//noinspection ConstantConditions
+
+	//Not very pretty, but we know that player has been created at this point.
+	//Otherwise we would want an error here anyway.
 	world.findEntity("Player").get(0).getComponent(PlayerController.class).playerDeathEvent.subscribe(this::resetLevel);
 	reset = false;
     }
 
     @Override
     public void update(final float deltaTime) {
+
+	handleInput();
+
+	if(pause)
+	    return;
 
 	world.update(deltaTime);
 	particleSystem.update(deltaTime);
@@ -90,10 +97,17 @@ public class TestLevel extends GameState
 	}
 
 	CameraEffects.update(deltaTime);
-	handleInput();
+
     }
 
+    private boolean pause = false;
+
     private void handleInput(){
+
+	if(Gdx.input.isKeyPressed(Keys.P)){
+
+	    pause = !pause;
+	}
 
 	if(Gdx.input.isKeyPressed(Keys.ESCAPE)){
 

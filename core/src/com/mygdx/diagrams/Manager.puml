@@ -1,0 +1,32 @@
+@startuml
+
+class World{
+
+	List<Entity> entities
+	Manager<CollisionComponent> collisionManager
+	Manager<RenderComponent> renderManager
+	Manager<Rigidbody> rigidbodyManager
+}
+
+abstract class Manager<T extends ManagedComponent>{
+
+	List<T> components
+}
+
+class CollisionManager
+class RigidBodyManager
+class RenderManager
+
+interface Renderable<T>
+
+CollisionManager .|> Renderable
+RenderManager .|> Renderable
+
+
+RigidBodyManager ..|> Manager
+CollisionManager ..|> Manager
+RenderManager ..|> Manager
+
+World .> Manager
+
+@enduml

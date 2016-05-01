@@ -1,0 +1,18 @@
+@startuml
+
+class Event<T>{
+
+	Set<EventListener<T>> listeners
+	subscrive(EventListener<T> listener)
+	unsubscrive(EventListener<T> listener)
+	invoke(T param)
+
+}
+interface EventListener<T>{
+
+	void invoke(T arg);
+}
+
+Event .> EventListener
+
+@enduml

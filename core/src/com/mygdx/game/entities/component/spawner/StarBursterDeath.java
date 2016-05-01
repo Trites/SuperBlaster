@@ -11,6 +11,9 @@ import com.mygdx.engine.entity.instantiate.EntityBlueprint;
  */
 public class StarBursterDeath extends SpawnOnCollision
 {
+    private static final int FRAGMENT_COUNT = 4;
+    private static final float ANGLE_STEP = 360.0f / FRAGMENT_COUNT;
+
     public StarBursterDeath(final Entity entity, final EntityBlueprint blueprint)
     {
 	super(entity, blueprint);
@@ -20,11 +23,9 @@ public class StarBursterDeath extends SpawnOnCollision
     protected void instantiate() {
 
 	float baseRotation = getTransform().getRotation();
-	//noinspection MagicNumber,MagicNumber
-	float angleStep = 360.0f / 4.0f;
 
-	for(int i = 0; i < 4; i++){
-	    float nextRotation = baseRotation + angleStep * i;
+	for(int i = 0; i < FRAGMENT_COUNT; i++){
+	    float nextRotation = baseRotation + ANGLE_STEP * i;
 	    blueprint.instantiate(getEntity().getWorld(), new Transform(new Vector2(getTransform().getPosition()), new Vector2(1,1), nextRotation));
 	}
     }

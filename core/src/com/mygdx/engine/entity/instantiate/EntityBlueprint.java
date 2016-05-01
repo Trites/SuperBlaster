@@ -9,7 +9,7 @@ import com.mygdx.engine.entity.managers.World;
 /**
  * Interface for instantiate method signature.
  */
-@SuppressWarnings("UnusedReturnValue")
+
 //Used as a method signature that should return value.
 public interface EntityBlueprint
 {
