@@ -52,6 +52,9 @@ public final class Entity implements Startable, Destroyable
 	world.queueAdd(this);
     }
 
+    /**
+     * Activates the Entity. Checks if there are any missing dependencies.
+     */
     @Override
     public void start(){
 
@@ -68,6 +71,10 @@ public final class Entity implements Startable, Destroyable
 	active = true;
     }
 
+    /**
+     * Updates all behaviours belonging to this entity, removing dead behaviours.
+     * @param deltaTime Delta time in miliseconds.
+     */
     public void update(final float deltaTime){
 
 
@@ -86,18 +93,33 @@ public final class Entity implements Startable, Destroyable
  	}
     }
 
+    /**
+     * Adds the behaviour to this entity, activates it if the entity is already active.
+     * @param behaviour The behaviour to be added.
+     * @param <T> T extends Behaviour
+     */
     public <T extends Behaviour> void addComponent(T behaviour){
 
 	behaviours.add(behaviour);
 	registerComponent(behaviour);
     }
 
+    /**
+     * Adds the ManagedComponent to this entity, activates it if the entity is already active.
+     * @param component The ManagedComponent to be added.
+     * @param <T> T extends ManagedComponent
+     */
     public <T extends ManagedComponent> void addComponent(T component){
 
 	component.register(world);
 	registerComponent(component);
     }
 
+    /**
+     * Adds the component to the component map, checks for duplicate components.
+     * @param component The component to be added.
+     * @param <T> T extends Component.
+     */
     private <T extends Component> void registerComponent(T component){
 
 	if(!hasComponent(component.getClass())){
@@ -112,6 +134,10 @@ public final class Entity implements Startable, Destroyable
 	    component.start();
     }
 
+    /**
+     * Removes the given component.
+     * @param component Component to be removed.
+     */
     //Strong type needed for class check.
     public void removeComponent(Component component){
 
@@ -124,6 +150,11 @@ public final class Entity implements Startable, Destroyable
 	}
     }
 
+    /**
+     * Checks if the entity has all components in the given collection.
+     * @param types The collection of component types.
+     * @return True if entity has all component types in the collection.
+     */
     public boolean hasComponents(Iterable<Class<? extends Component>> types){
 
 	for(Class<? extends Component> type : types){
@@ -135,66 +166,112 @@ public final class Entity implements Startable, Destroyable
 	return true;
     }
 
+    /**
+     * Checks if the entity has the given component type.
+     * @param type The type to check for.
+     * @param <T> T extends Component.
+     * @return True if entity has a component of the given type.
+     */
     public <T extends Component> boolean hasComponent(Class<T> type){
 
 	return componentMap.containsKey(type);
     }
 
+    /**
+     * Returns a reference to the component of the given type, if one is present in the entity.
+     * @param type The type of component to get a reference to.
+     * @param <T> T extgends Component
+     * @return A reference to a component of the given type if one is present, otherwise null.
+     */
     public <T extends Component> T getComponent(Class<T> type){
 
 	if(hasComponent(type)){
 
 	    //Type can be guarateed from the way it is added.
-	    //noinspection unchecked
 	    return (T)(componentMap.get(type));
 	}
 
 	return null;
     }
 
+    /**
+     * Looks for entities that has the given tag in the world that this entity belongs to.
+     * Calls world.findEntity(tag)
+     * @param tag The tag to look for
+     * @return A collection with all entities with the given tag.
+     */
     public List<Entity> findEntity(final String tag){
 
 	return world.findEntity(tag);
     }
 
+    /**
+     *
+     * @return Reference to the transform of this entity.
+     */
     public Transform getTransform() {
 	return transform;
     }
 
+    /**
+     * Invokes the collision event of this entity.
+     * @param data Data to be passed to the event.
+     */
     public void notifyCollision(CollisionComponent data){
 
 	collisionEvent.notify(data);
     }
 
+    /**
+     * Adds the component type to the requieredComponent list.
+     * This list is ckecked in the start method.
+     * @param type The type to be requiered.
+     */
     public void requireComponent(Class<? extends Component> type){
 
 	requieredComponents.add(type);
     }
 
-    public String getTag() {
+    /**
+     *
+     * @return The tag of this entity.
+     */
+    public final String getTag() {
 	return tag;
     }
 
+    /**
+     * Sets the tag of this entity.
+     * @param tag The new tag.
+     */
     public void setTag(final String tag) {
 
 	String oldTag = this.tag;
 	this.tag = tag;
-	world.updateTag(this, oldTag);
+	world.updateTag(this, oldTag); //Update the tag dictionary in world.
 
     }
 
+    /**
+     *
+     * @return Reference to the world that this Entity belongs to.
+     */
     public World<CollisionManager, RenderManager> getWorld(){
+
+	return world;
+    }
+
+    /**
+     *
+     * @return Reference to the ComponantManager that this Entity belongs to.
+     */
+    public ComponentManager getComponentManager(){
 
 	return world;
     }
 
     public boolean isActive() {
 	return active;
-    }
-
-    public ComponentManager getComponentManager(){
-
-	return world;
     }
 
     @Override

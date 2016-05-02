@@ -18,7 +18,8 @@ public abstract class ManagedComponent extends Component
 
     public abstract void deregister(final ComponentManager world);
 
-    @Override public void dispose() {
+    @Override
+    public void dispose() {
         super.dispose();
         deregister(getEntity().getComponentManager());
     }

@@ -35,6 +35,10 @@ public class RigidBody extends ManagedComponent
 	angularVelocity = 0.0f;
     }
 
+    /**
+     * Updates the velocity and position of the component.
+     * @param deltaTime Delta time in miliseconds.
+     */
     public void update(float deltaTime){
 
 	getTransform().setPosition(getTransform().getPosition().mulAdd(velocity, deltaTime));
@@ -44,23 +48,39 @@ public class RigidBody extends ManagedComponent
 	MathUtils.lerp(angularVelocity, 0.0f, angularDampening);
     }
 
+    /**
+     * Add velocity to the component.
+     * @param deltaV Velocity vector.
+     */
     public void addVelocity(final Vector2 deltaV){
 
 	velocity.add(deltaV);
     }
 
+    /**
+     * Limits the velocity magniture to the given value.
+     * @param maxVelocity Maximum value of the velocity vector.
+     */
     public void limitVelocity(final float maxVelocity){
 
 	if(velocity.len() > maxVelocity)
 	            velocity.sub(new Vector2(velocity).nor().scl(velocity.len() - maxVelocity));
     }
 
+    /**
+      * Registers this component in the world.
+      * @param world The world to register in,
+      */
     @Override
     public void register(final ComponentManager world) {
 
 	world.registerComponent(this);
     }
 
+    /**
+      * Deregisters this component from the world.
+      * @param world The world to deregister from,
+      */
     @Override
      public void deregister(final ComponentManager world) {
 
@@ -97,6 +117,10 @@ public class RigidBody extends ManagedComponent
 
     public Vector2 getDirection() { return new Vector2(velocity).nor(); }
 
+    /**
+     *
+     * @return velocity * mass
+     */
     public Vector2 getMomentum() { return new Vector2(velocity).scl(mass); }
 
     public void setVelocity(final Vector2 velocity) {

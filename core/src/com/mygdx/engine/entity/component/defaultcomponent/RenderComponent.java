@@ -19,12 +19,20 @@ public abstract class RenderComponent extends ManagedComponent implements Render
 	this.renderLayer = renderLayer;
     }
 
+    /**
+     * Registers this component in the world.
+     * @param world The world to register in.
+     */
     @Override
     public void register(final ComponentManager world) {
 
 	world.registerComponent(this);
     }
 
+    /**
+     * Deregisters this component in the world.
+     * @param world The world to deregister from.
+     */
     @Override
     public void deregister(final ComponentManager world) {
 

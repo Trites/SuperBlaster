@@ -47,17 +47,17 @@ public class CollisionManager extends Manager<CollisionComponent> implements Ren
 
 	super.update(deltaTime);
 
-	for(int i = 0; i < LAYER_COUNT; i++){
+	for(int i = 0; i < LAYER_COUNT; i++){ //For every collision layer
 
-	    for(CollisionComponent component : collisionLayers.get(i)){
+	    for(CollisionComponent component : collisionLayers.get(i)){ //For every component in the current layer
 
-		if(component.isActive()){
+		if(component.isActive()){ //If current component is active
 
-		    for(int j = i; j < LAYER_COUNT; j++){
+		    for(int j = i; j < LAYER_COUNT; j++){ //Iterate through every collision layer
 
-			if(((collisionMap[component.getCollisionLayer()] >> j) & 1) == 1){ //If component collides with layer j
+			if(((collisionMap[component.getCollisionLayer()] >> j) & 1) == 1){ //If current component collides with layer j
 
-				collisionCheck(component, collisionLayers.get(j));
+				collisionCheck(component, collisionLayers.get(j)); //Check collision with all components in layer j
 			}
 		    }
 		}
@@ -86,6 +86,10 @@ public class CollisionManager extends Manager<CollisionComponent> implements Ren
 	    collisionLayers.add(new ArrayList<>());
     }
 
+    /**
+     * Used to debug collision detetion.
+     * @param renderer
+     */
     public void render(final ShapeRenderer renderer){
 
 	renderer.setColor(Color.YELLOW);

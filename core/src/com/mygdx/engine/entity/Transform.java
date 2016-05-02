@@ -60,11 +60,20 @@ public class Transform
 	return new Vector2((float)Math.cos(rotation * Util.DEG_TO_RAD), (float)Math.sin(rotation * Util.DEG_TO_RAD)).nor();
     }
 
+    /**
+     * Immediately rotates the transform to face the target.
+     * @param point Target to look at.
+     */
     public void lookAt(final Vector2 point){
 
 	this.rotation = (float)(Math.atan2(point.y - getY(), point.x - getX()) * Util.RAD_TO_DEG);
     }
 
+    /**
+     * Rotates towards the given poin.
+     * @param point Target to look at.
+     * @param step The rotation speed. 1/deltaTime results in immediate rotation.
+     */
     public void turnTowards(final Vector2 point, final float step){
 
 	Vector2 target = new Vector2(point).sub(position).nor();

@@ -29,22 +29,37 @@ public final class ParticleSystem extends ObjectPool<Particle>
 	textureMap = new HashMap<>();
     }
 
+    /**
+     * Creates a texture from the given file. The texture can then be loaded by supplying the same string again.
+     * @param texture
+     */
     public void addTexture(final String texture){
 
 	textureMap.put(texture, new Texture(texture));
     }
 
+    /**
+     * Gets reference to the particle system singleton.
+     * @return The particle system.
+     */
     public static ParticleSystem getInstance(){
 
 	if(instance == null){
 
-	    //noinspection NonThreadSafeLazyInitialization
+	    //Singleton pattern is intended
 	    instance = new ParticleSystem();
 	}
 
 	return instance;
     }
 
+    /**
+     * Spawns a new particle.
+     * @param texture The texture to be loaded from the texture map.
+     * @param transform The initial transform of the particle.
+     * @param data The initial particle data.
+     * @param behaviour The update behaviour of the particle.
+     */
     public void spawn(String texture, Transform transform, ParticleData data, ParticleBehaviour behaviour){
 
 	Particle particle = checkOut();

@@ -36,11 +36,16 @@ public class TestLevel extends GameState
     @Override
     public void create() {
 
+	//The collision map that the CollisionManager will use to determine what layers should collide with each other.
+	//The layer of the different entities are determined where their CollisionComponent is added, in this demo that would be
+	//in game.entities.EntityBlueprints
+	//Each position in the array corresponds with a layer.
+	//Each 1 in the byte indicates that those layers should collide.
 	byte[] collisionMap = {
 
-		2, // 0100 0000 (Player)->(Enemy)
-		5, // 1010 0000 (Enemy)->(Player, Projectile)
-		2, // 0100 0000 (Projectile)->(Enemy)
+		2, // 0100 0000 (Player)->(Enemy) (Layer 0 collides with layer 1)
+		5, // 1010 0000 (Enemy)->(Player, Projectile) (Layer 1 collides with layer 0 and 2)
+		2, // 0100 0000 (Projectile)->(Enemy) (Layer 2 collides with layer 1)
 		0,
 		0,
 		0,
@@ -49,7 +54,7 @@ public class TestLevel extends GameState
 	};
 
 	particleSystem = ParticleSystem.getInstance();
-	particleSystem.addTexture("Plasma.png");
+	particleSystem.addTexture("Plasma.png"); //Add plasma.png to the particle systems texture map.
 
 	world = new World<>(new CollisionManager(collisionMap), new RigidBodyManager(), new RenderManager());
 	buildLevel();
@@ -64,9 +69,12 @@ public class TestLevel extends GameState
 
     private void buildLevel(){
 
+	//Create player
 	//Simple division by two
 	EntityBlueprints.instantiatePlayer(world, new Transform(new Vector2(Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() /
 													    2.0f), new Vector2(1, 1), 0));
+
+	//Instantiate spawners will keep the level populated with enemies.
 	EntityBlueprints.instantiateFollowerSpawner(world, new Transform(new Vector2(0,0)));
 	EntityBlueprints.instantiateStarFragmentSpawner(world, new Transform(new Vector2(0,0)));
 

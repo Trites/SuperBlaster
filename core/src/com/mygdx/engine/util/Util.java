@@ -25,17 +25,37 @@ public final class Util
 
     private Util() {}
 
+    /**
+     * Limits the value to the span between min and max, inclusive.
+     * @param value
+     * @param min
+     * @param max
+     * @return The new value.
+     */
     public static float clamp(final float value, final float min, final float max){
 
 	return Math.max(min, Math.min(max, value));
     }
 
+    /**
+     * Shifts the color randomly with the given magnitude.
+     * @param color The initial color.
+     * @param variation The maximum magnitude of the shift.
+     * @return The new color.
+     */
     public static Color shiftColor(final Color color, final float variation){
 
 	Vector3 direction = new Vector3((float)Math.random(), (float)Math.random(), (float)Math.random()).nor();
 	return shiftColor(color, direction, variation);
     }
 
+    /**
+     * Shifts the color in the given direction with the given magnitude.
+     * @param color THe initial color.
+     * @param direction The direction of the shift (r, g, b)
+     * @param variation The maximum magnitude of the shift.
+     * @return The new color.
+     */
     public static Color shiftColor(final Color color, final Vector3 direction, final float variation){
 
 	//noinspection MagicNumber
@@ -50,6 +70,11 @@ public final class Util
 	return newColor;
     }
 
+    /**
+     * Completely random color.
+     * @param saturation The overall saturation of the resulting color.
+     * @return A random color.
+     */
     public static Color randomColor(final float saturation){
 
 	Vector3 direction = new Vector3((float)Math.random(), (float)Math.random(), (float)Math.random()).nor();
@@ -59,6 +84,16 @@ public final class Util
 	return new Color(direction.x, direction.y, direction.z, 1.0f);
     }
 
+    /**
+     * Simulates the collision of two particles, returning the new velocity of particle A.
+     * @param posA Position of particle A.
+     * @param posB Position of particle B.
+     * @param velA Velocity of particle A.
+     * @param velB Velocity of particle B.
+     * @param massA Mass of particle A.
+     * @param massB Mass of particle B.
+     * @return The velocity of particle A after the collision.
+     */
     public static Vector2 getBounceVelocity(final Vector2 posA, final Vector2 posB, final Vector2 velA, final Vector2 velB,
     						final float massA, final float massB){
 
@@ -67,7 +102,7 @@ public final class Util
 	float a1 = new Vector2(velA).dot(line);
 	float a2 = new Vector2(velB).dot(line);
 
-	//noinspection MagicNumber
+	//Multiplication by two, should not need a constant.
 	float p = (2.0f * (a2 - a1)) / (massA + massB);
 
 
@@ -77,11 +112,23 @@ public final class Util
 	return new Vector2(velA).add(dv);
     }
 
+    /**
+     * Gets the scalar of the cross product between the two vectors as if they would have been 3D vectoes.
+     * @param a Vector A
+     * @param b Vector B
+     * @return Scalar of "2D cross product."
+     */
     public static float crossScalar(final Vector2 a, final Vector2 b){
 
 	return a.x*b.y - a.y*b.x;
     }
 
+    /**
+     * Random float between min and max, inclusive.
+     * @param min
+     * @param max
+     * @return Random float between min and max, inclusive.
+     */
     public static float random(final float min, final float max){
 
 	return (float)Math.random()*(max - min) + min;

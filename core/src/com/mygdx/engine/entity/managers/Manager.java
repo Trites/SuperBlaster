@@ -33,11 +33,21 @@ public abstract class Manager<T extends Startable & Destroyable> implements Star
     protected abstract void add(T element);
     protected abstract void remove(T element);
 
+    /**
+     * Adds the component at the start of next update.
+     * Used to avoid concurrency and null pointer errors.
+     * @param element The component to be added.
+     */
     public void queueAdd(T element){
 
         addQueue.add(element);
     }
 
+    /**
+     * Tags the component for removal at the start of the next update.
+     * Used to avoid concurrency and null pointer errors.
+     * @param element The component to be removed.
+     */
     public void queueRemoval(T element){
 
         removeQueue.add(element);

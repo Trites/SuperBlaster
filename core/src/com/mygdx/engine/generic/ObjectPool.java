@@ -15,11 +15,20 @@ public abstract class ObjectPool<T>
     	pool = new Stack<>();
     }
 
+    /**
+     * Put item back into the pool.
+     * @param item The item.
+     */
     public void checkIn(T item){
 
 	pool.push(item);
     }
 
+    /**
+     * Retrive item from the pool, creating a new one if pool is empty.
+     * Calls SpawnNew if it needs to create a new item.
+     * @return An item of type T
+     */
     public T checkOut(){
 
 	if(!pool.empty()){
